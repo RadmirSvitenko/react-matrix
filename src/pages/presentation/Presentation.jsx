@@ -1,90 +1,51 @@
-import React from "react";
 import {
-  ImageFive,
-  ImageFour,
-  ImageOne,
-  ImageSeven,
-  ImageSix,
-  ImageThree,
-  ImageTwo,
-  ImagesBox,
   PresentationMainContainer,
   PresentationOneBox,
+  PresentationSliderBrands,
   PresentationTwoBox,
-  ShadowBox,
-  SliderImage,
+  SlideBoxTitleOne,
+  TitleMatrixDiscounts,
+  TitleMatrixOne,
 } from "./styles";
-import SliderImgOne from "assets/images/slider-img-one.jpg";
-import SliderImgTwo from "assets/images/slider-img-two.jpg";
-import SliderImgThree from "assets/images/slider-img-three.jpg";
-import SliderImgFour from "assets/images/slider-img-four.jpg";
-import SliderImgFive from "assets/images/slider-img-five.jpg";
 
-import PresenImgOne from "assets/images/present-img-one.jpg";
-import PresenImgTwo from "assets/images/present-img-two.jpg";
-import PresenImgThree from "assets/images/present-img-three.jpg";
-import PresenImgFour from "assets/images/present-img-four.jpg";
-import PresenImgFive from "assets/images/present-img-five.jpg";
-import PresenImgSix from "assets/images/present-img-six.jpg";
-import PresenImgSeven from "assets/images/present-img-seven.jpg";
+import NewProducts from "components/NewProducts/NewProducts";
+import TopSales from "components/TopSales/TopSales";
+import Header from "components/Header/Header";
+import { useTranslation } from "react-i18next";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  EffectCoverflow,
-  EffectCube,
-  EffectFade,
-  Navigation,
-  Pagination,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-import "./styles.css";
-import { ImageList, ImageListItem } from "@mui/material";
 const Presentation = () => {
+  const { t } = useTranslation();
+
   return (
-    <PresentationMainContainer>
+    <PresentationMainContainer container>
       <PresentationOneBox>
-        <ImageOne src={PresenImgOne} alt="1" />
-        <ImageTwo src={PresenImgTwo} alt="2" />
-        <ImageThree src={PresenImgThree} alt="3" />
-        <ImageFour src={PresenImgFour} alt="4" />
-        <ImageFive src={PresenImgFive} alt="5" />
-        <ImageSix src={PresenImgSix} alt="6" />
-        <ImageSeven src={PresenImgSeven} alt="7" />
+        <SlideBoxTitleOne>
+          <TitleMatrixOne>{t("matrixTitle")}</TitleMatrixOne>
+          <TitleMatrixDiscounts>{t("matrixSubtitle")}</TitleMatrixDiscounts>
+        </SlideBoxTitleOne>
       </PresentationOneBox>
 
       <PresentationTwoBox>
-        <Swiper
-          autoplay={true}
-          loop
-          spaceBetween={30}
-          effect={"fade"}
-          navigation={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[EffectFade, Navigation, Pagination]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <SliderImage src={SliderImgOne} alt="Slide-One" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SliderImage src={SliderImgTwo} alt="Slide-Two" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SliderImage src={SliderImgThree} alt="Slide-Three" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SliderImage src={SliderImgFour} alt="Slide-Four" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SliderImage src={SliderImgFive} alt="Slide-Five" />
-          </SwiperSlide>
-        </Swiper>
+        <PresentationSliderBrands>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>ASUS</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Acer</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Lenovo</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>MSI</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>HP</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Macbook</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Huawei</h3>
+
+          {/* <img width={"150px"} height={"50px"} src={asusImg} alt="Asus" />
+          <img width={"150px"} height={"50px"} src={acerImg} alt="Acer" />
+          <img width={"150px"} height={"50px"} src={lenovoImg} alt="Lenovo" />
+          <img width={"150px"} height={"50px"} src={macbookImg} alt="Macbook" />
+          <img width={"150px"} height={"50px"} src={hpImg} alt="HP" />
+          <img width={"150px"} height={"50px"} src={huaweiImg} alt="Huawei" />
+          <img width={"150px"} height={"50px"} src={msiImg} alt="MSI" /> */}
+        </PresentationSliderBrands>
+        <Header />
+        <NewProducts />
+        <TopSales />
       </PresentationTwoBox>
     </PresentationMainContainer>
   );

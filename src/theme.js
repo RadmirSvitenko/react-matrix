@@ -1,13 +1,29 @@
 import { createTheme } from "@mui/material";
 const theme = createTheme({
-  Colors: {
-    primary: {
-      main: "#82118C",
+  palette: {
+    colorOrange: {
+      main: "#ffc400",
     },
 
-    secondary: {
-      main: "#39FF14",
+    colorNeon: {
+      main: "#69f0ae",
     },
+
+    colorViolet: {
+      main: "#aa00ff",
+    },
+
+    colorWhite: {
+      main: "#fff",
+    },
+  },
+
+  fonts: {
+    oswald: "oswald",
+    blackOpsOne: "Black Ops One",
+    sairaCondensed: "Saira Condensed",
+    changa: "Changa",
+    francoisOne: "Francois One",
   },
 });
 
