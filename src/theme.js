@@ -10,7 +10,7 @@ const theme = createTheme({
     },
 
     colorViolet: {
-      main: "#aa00ff",
+      main: "#7b1fa2",
     },
 
     colorWhite: {

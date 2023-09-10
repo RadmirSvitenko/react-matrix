@@ -4,10 +4,9 @@ import { styled } from "styled-components";
 export const PresentationTopSalesBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space=around",
-  alignItems: "center",
   flexDirection: "column",
   width: "100%",
-  height: "750px",
+  height: "auto",
 }));
 export const TopSalesContainer = styled(Box)(() => ({
   display: "flex",

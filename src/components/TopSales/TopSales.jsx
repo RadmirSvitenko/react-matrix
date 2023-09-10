@@ -17,11 +17,14 @@ import {
 } from "./styles";
 import TitleNewProducts from "titles/TitleNewProducts";
 import TitleTopSales from "titles/TitleTopSales";
+import { useTranslation } from "react-i18next";
 // import PropTypes from "prop-types";
 
 const TopSales = () => {
   const [TopSales, setTopSales] = useState([]);
   const [isViewAll, setIsViewAll] = useState(false);
+
+  const { t } = useTranslation();
 
   const togglewViewAll = () => {
     setIsViewAll((open) => !open);
@@ -71,7 +74,7 @@ const TopSales = () => {
         ))}
       </TopSalesContainer>
 
-      <Collapse in={isViewAll}>
+      <Collapse timeout={1500} in={isViewAll}>
         <TopSalesContainer>
           {TopSalesAdditional.map((item) => (
             <TopSalesBox>
@@ -103,7 +106,7 @@ const TopSales = () => {
           variant="outlined"
           onClick={togglewViewAll}
         >
-          {isViewAll ? "Показать все" : "Закрыть"}
+          {isViewAll ? t("buttonViewClose") : t("buttonViewAll")}
         </Button>
       </Box>
     </PresentationTopSalesBox>

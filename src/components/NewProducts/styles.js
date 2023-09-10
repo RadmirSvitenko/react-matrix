@@ -4,16 +4,16 @@ import { styled } from "styled-components";
 export const PresentationNewProductsBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space=around",
-  alignItems: "center",
   flexDirection: "column",
   width: "100%",
-  height: "750px",
+  height: "auto",
 }));
 export const NewProductContainer = styled(Box)(() => ({
   display: "flex",
   justifyContent: "space-around",
   width: "100%",
   height: "auto",
+  marginTop: "30px",
 }));
 export const NewProductBox = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.oswald,

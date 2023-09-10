@@ -28,12 +28,12 @@ const Presentation = () => {
       <PresentationTwoBox>
         <PresentationSliderBrands>
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>ASUS</h3>
-          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Acer</h3>
-          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Lenovo</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>ACER</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>LENOVO</h3>
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>MSI</h3>
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>HP</h3>
-          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Macbook</h3>
-          <h3 style={{ color: "#fff", margin: "0px 50px" }}>Huawei</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>MACBOOK</h3>
+          <h3 style={{ color: "#fff", margin: "0px 50px" }}>HUAWEI</h3>
 
           {/* <img width={"150px"} height={"50px"} src={asusImg} alt="Asus" />
           <img width={"150px"} height={"50px"} src={acerImg} alt="Acer" />

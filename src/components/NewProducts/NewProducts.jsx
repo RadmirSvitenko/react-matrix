@@ -5,20 +5,19 @@ import { productsAPI } from "requester";
 import {
   NewProductBox,
   NewProductContainer,
-  NewProductImageBox,
   NewProductPrice,
   NewProductRating,
   NewProductTitle,
-  NewProductTitleBox,
   PresentationNewProductsBox,
-  Title,
 } from "./styles";
 import TitleNewProducts from "titles/TitleNewProducts";
-// import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 const NewProducts = () => {
   const [newProducts, setNewProducts] = useState([]);
   const [isViewAll, setIsViewAll] = useState(false);
+
+  const { t } = useTranslation();
 
   const togglewViewAll = () => {
     setIsViewAll((open) => !open);
@@ -68,7 +67,7 @@ const NewProducts = () => {
         ))}
       </NewProductContainer>
 
-      <Collapse in={isViewAll}>
+      <Collapse timeout={1500} in={isViewAll}>
         <NewProductContainer>
           {newProductsAdditional.map((item) => (
             <NewProductBox>
@@ -100,7 +99,7 @@ const NewProducts = () => {
           variant="outlined"
           onClick={togglewViewAll}
         >
-          {isViewAll ? "Показать все" : "Закрыть"}
+          {isViewAll ? t("buttonViewClose") : t("buttonViewAll")}
         </Button>
       </Box>
     </PresentationNewProductsBox>

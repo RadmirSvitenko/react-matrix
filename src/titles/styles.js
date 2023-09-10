@@ -9,6 +9,7 @@ export const NewProducts = styled(Box)(({ theme }) => ({
   margin: "50px 0px",
   fontWeight: "700",
   textTransform: "uppercase",
+  textAlign: "center",
 }));
 
 export const TopSales = styled(Box)(({ theme }) => ({
@@ -19,4 +20,16 @@ export const TopSales = styled(Box)(({ theme }) => ({
   margin: "50px 0px",
   fontWeight: "700",
   textTransform: "uppercase",
+  textAlign: "center",
+}));
+
+export const TitleHeaderPresentation = styled(Box)(({ theme }) => ({
+  fontFamily: theme.fonts.blackOpsOne,
+  letterSpacing: "4px",
+  fontSize: "36px",
+  color: "#000",
+  margin: "50px 0px",
+  fontWeight: "700",
+  textTransform: "uppercase",
+  textAlign: "center",
 }));
