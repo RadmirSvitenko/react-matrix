@@ -1,12 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { styled } from "styled-components";
 import PresentBg from "assets/images/present-bg.jpg";
-import PresentBg2 from "assets/images/present-bg2.jpg";
-import PresentBg3 from "assets/images/present-bg3.jpg";
-import PresentBg4 from "assets/images/present-bg4.jpg";
-import PresentBg5 from "assets/images/present-bg5.webp";
+import authBackground from "assets/images/auth-bg.jpg";
 
-import AdPresentBg from "assets/images/ad-present-img.jpg";
 import theme from "theme";
 
 export const PresentationMainContainer = styled(Grid)(() => ({
@@ -31,34 +27,15 @@ export const PresentationTwoBox = styled(Grid)(({ theme }) => ({
   background: theme.palette.colorWhite.main,
 }));
 
-export const PresentationThreeBox = styled(Grid)(() => ({
+export const PresentationThreeBox = styled(Box)(() => ({
   width: "100%",
   height: "100vh",
   display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-end",
-  background: `url(${PresentBg3})`,
+  justifyContent: "flex-end",
+  paddingRight: "50px",
+  alignItems: "center",
+  background: `url(${authBackground})`,
   backgroundSize: "100% 100vh",
-}));
-
-export const PresentationFourBox = styled(Grid)(() => ({
-  width: "100%",
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-end",
-  background: `url(${PresentBg4})`,
-  backgroundSize: "100% 150vh",
-}));
-
-export const PresentationFiveBox = styled(Grid)(() => ({
-  width: "100%",
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-start",
-  background: `url(${PresentBg5})`,
-  backgroundSize: "100% 120vh",
 }));
 
 export const SlideBoxTitleOne = styled(Box)(() => ({

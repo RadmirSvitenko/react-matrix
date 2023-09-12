@@ -16,14 +16,19 @@ const theme = createTheme({
     colorWhite: {
       main: "#fff",
     },
+
+    colorDark: {
+      main: "#100E19",
+    },
   },
 
   fonts: {
-    oswald: "oswald",
-    blackOpsOne: "Black Ops One",
-    sairaCondensed: "Saira Condensed",
-    changa: "Changa",
-    francoisOne: "Francois One",
+    oswald: "oswald, sans-serif",
+    blackOpsOne: "Black Ops One, sans-serif",
+    sairaCondensed: "Saira Condensed, sans-serif",
+    changa: "Changa, sans-serif",
+    francoisOne: "Francois One, sans-serif",
+    valeraRound: "Varela Round, sans-serif",
   },
 });
 

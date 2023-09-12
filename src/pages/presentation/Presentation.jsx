@@ -2,6 +2,7 @@ import {
   PresentationMainContainer,
   PresentationOneBox,
   PresentationSliderBrands,
+  PresentationThreeBox,
   PresentationTwoBox,
   SlideBoxTitleOne,
   TitleMatrixDiscounts,
@@ -12,6 +13,9 @@ import NewProducts from "components/NewProducts/NewProducts";
 import TopSales from "components/TopSales/TopSales";
 import Header from "components/Header/Header";
 import { useTranslation } from "react-i18next";
+import FilterBlocksPresentation from "components/FilterBlocksPresentation/FilterBlocksPresentation";
+import OverviewPresentation from "components/OverviewPresentation/OverviewPresentation";
+import Authentification from "components/Authentification/Authentification";
 
 const Presentation = () => {
   const { t } = useTranslation();
@@ -34,19 +38,18 @@ const Presentation = () => {
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>HP</h3>
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>MACBOOK</h3>
           <h3 style={{ color: "#fff", margin: "0px 50px" }}>HUAWEI</h3>
-
-          {/* <img width={"150px"} height={"50px"} src={asusImg} alt="Asus" />
-          <img width={"150px"} height={"50px"} src={acerImg} alt="Acer" />
-          <img width={"150px"} height={"50px"} src={lenovoImg} alt="Lenovo" />
-          <img width={"150px"} height={"50px"} src={macbookImg} alt="Macbook" />
-          <img width={"150px"} height={"50px"} src={hpImg} alt="HP" />
-          <img width={"150px"} height={"50px"} src={huaweiImg} alt="Huawei" />
-          <img width={"150px"} height={"50px"} src={msiImg} alt="MSI" /> */}
         </PresentationSliderBrands>
+
         <Header />
         <NewProducts />
         <TopSales />
+        <FilterBlocksPresentation />
+        <OverviewPresentation />
       </PresentationTwoBox>
+
+      <PresentationThreeBox>
+        <Authentification />
+      </PresentationThreeBox>
     </PresentationMainContainer>
   );
 };
