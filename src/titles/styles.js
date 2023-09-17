@@ -26,8 +26,8 @@ export const TopSales = styled(Box)(({ theme }) => ({
 export const TitleHeaderPresentation = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.blackOpsOne,
   letterSpacing: "4px",
-  fontSize: "36px",
-  color: "#000",
+  fontSize: "26px",
+  color: "#fff",
   margin: "50px 0px",
   fontWeight: "700",
   textTransform: "uppercase",
@@ -52,6 +52,18 @@ export const TitleInterestingReviews = styled(Box)(({ theme }) => ({
   width: "100%",
   fontSize: "36px",
   color: theme.palette.colorOrange.main,
+  margin: "20px 0px",
+  fontWeight: "700",
+  textTransform: "uppercase",
+  textAlign: "center",
+}));
+
+export const TitleCatalog = styled(Box)(({ theme }) => ({
+  fontFamily: theme.fonts.blackOpsOne,
+  letterSpacing: "4px",
+  width: "100%",
+  fontSize: "36px",
+  color: theme.palette.colorViolet.main,
   margin: "20px 0px",
   fontWeight: "700",
   textTransform: "uppercase",

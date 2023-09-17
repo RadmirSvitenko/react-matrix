@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import CatalogReduce from "./reducers/catalogSlice";
+import CatalogReducer from "./reducers/catalogSlice";
 
 const store = configureStore({
-  catalog: CatalogReduce,
+  reducer: {
+    catalog: CatalogReducer,
+  },
 });
 
 export default store;

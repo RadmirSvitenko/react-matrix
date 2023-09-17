@@ -1,4 +1,4 @@
-import { Box, Paper, Toolbar } from "@mui/material";
+import { Box, Button, Paper, Toolbar } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
@@ -7,7 +7,7 @@ export const HeaderContainer = styled(Paper)(({ theme }) => ({
   height: "80px",
   position: "sticky",
   top: "0",
-  zIndex: "100",
+  zIndex: "1300",
 }));
 
 export const HeaderToolkit = styled(Toolbar)(({ theme }) => ({

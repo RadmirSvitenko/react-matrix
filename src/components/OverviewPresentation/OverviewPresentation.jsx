@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 import theme from "theme";
 import InterestingReviews from "titles/InterestingReviews";
 import { OverviewContainer } from "./styles";
@@ -17,6 +17,7 @@ const OverviewPresentation = () => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       />
+
       <iframe
         width="70%"
         height="500px"

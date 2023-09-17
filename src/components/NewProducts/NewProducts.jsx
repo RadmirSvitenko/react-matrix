@@ -1,7 +1,7 @@
 import { Box, Button, Collapse, Grid, Rating, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { productsAPI } from "requester";
+import { API_DUMMY_PRODUCTS, API_NOTEBOOKS, productsAPI } from "requester";
 import {
   NewProductBox,
   NewProductContainer,
@@ -24,11 +24,9 @@ const NewProducts = () => {
   };
 
   const getNewProducts = useCallback(async () => {
-    const response = await axios.get(
-      "https://dummyjson.com/products?limit=100"
-    );
+    const response = await API_DUMMY_PRODUCTS.get("products/");
     const newProductsFilter = await response.data.products.filter(
-      (item) => item.discountPercentage < 4 && item.rating < 4.95
+      (item) => item.discountPercentage < 17
     );
 
     setNewProducts(newProductsFilter);
@@ -36,8 +34,10 @@ const NewProducts = () => {
   }, []);
 
   console.log("newProducts: ", newProducts);
-  const newProductsMain = newProducts.filter((item, index) => index <= 3);
-  const newProductsAdditional = newProducts.filter((item, index) => index >= 4);
+  const newProductsMain = newProducts.filter((item, index) => index < 4);
+  const newProductsAdditional = newProducts.filter(
+    (item, index) => index >= 4 && index <= 7
+  );
 
   useEffect(() => {
     getNewProducts();

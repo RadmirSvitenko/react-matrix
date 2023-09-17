@@ -7,26 +7,51 @@ import {
   AuthorizationForm,
   AuthorizationInput,
   AuthorizationTitle,
+  RegButton,
+  RegistrationForm,
   RegistrationInput,
+  RegistrationTab,
+  RegistrationTabs,
+  RegistrationTitle,
 } from "./styles";
-import { Button, IconButton, TextField, alpha, useTheme } from "@mui/material";
+import theme from "theme";
+import { Box, IconButton } from "@mui/material";
 import { useForm } from "react-hook-form";
-import InputAdornment from "@mui/material/InputAdornment";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import Authorization from "./Authorization/Authorization";
+import { t } from "i18next";
+import Registration from "./Registration/Registration";
 
-const Authentification = () => {
-  const [value, setValue] = useState("one");
-  const [showPassword, setShowPassword] = useState(false);
-
-  const { register, handleSubmit } = useForm();
-
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
   const { t } = useTranslation();
 
-  const handleShowPassword = () => setShowPassword((show) => !show);
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ paddingTop: "20px" }}>
+          <Box>{children}</Box>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-  const authData = (d) => {
-    console.log(d);
+const Authentification = () => {
+  const [value, setValue] = useState(0);
+
+  const a11yProps = (index) => {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
   };
 
   const authHandleChange = (event, newValue) => {
@@ -35,100 +60,43 @@ const Authentification = () => {
 
   return (
     <AuthentificationContainer>
-      <AuthorizationForm onSubmit={handleSubmit(authData)}>
-        <AuthentificationTabs
-          value={value}
-          onChange={authHandleChange}
-          textColor={"theme.palette.colorOrange.main"}
-          indicatorColor={"theme.palette.colorOrange.main"}
-        >
-          <AuthentificationTab
-            label={t("authTitle")}
-            value="authorization"
-            color={"theme.palette.colorOrange.main"}
-          />
-          <AuthentificationTab label={t("regTitle")} value="registration" />
-        </AuthentificationTabs>
-
-        <AuthorizationTitle>{t("authTitle")}</AuthorizationTitle>
-        <AuthorizationInput
-          color="primary"
-          {...register("userName")}
-          type="text"
-          label={t("authLogin")}
-          variant="outlined"
-          required
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                <AccountCircle />
-              </IconButton>
-            ),
+      <AuthentificationTabs
+        value={value}
+        centered
+        onChange={authHandleChange}
+        textColor={"theme.palette.colorOrange.main"}
+      >
+        <AuthentificationTab
+          sx={{
+            fontFamily: theme.fonts.valeraRound,
+            letterSpacing: "2px",
+            fontWeight: "bold",
+            textTransform: "uppercase",
           }}
+          label={t("authTitle")}
+          {...a11yProps(0)}
         />
-        <RegistrationInput
-          {...register("password")}
-          type={showPassword ? "text" : "password"}
-          label={t("authPassword")}
-          variant="outlined"
-          onClick={handleShowPassword}
-          required
-          sx={{}}
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                {showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            ),
+        <AuthentificationTab
+          sx={{
+            fontFamily: theme.fonts.valeraRound,
+            letterSpacing: "2px",
+            fontWeight: "bold",
+            textTransform: "uppercase",
           }}
+          label={t("regTitle")}
+          {...a11yProps(1)}
         />
+      </AuthentificationTabs>
 
-        <Button variant="contained" type="submit" color="primary">
-          {t("buttonLogin")}
-        </Button>
-      </AuthorizationForm>
+      <CustomTabPanel value={value} index={0}>
+        <Authorization />
+      </CustomTabPanel>
+
+      <CustomTabPanel value={value} index={1}>
+        <Registration />
+      </CustomTabPanel>
     </AuthentificationContainer>
   );
 };
 
 export default Authentification;
-
-// <TextField
-//             value={search}
-//             onChange={handleSearchChange}
-//             color={"secondary"}
-//             sx={{
-//               position: "absolute",
-//               transform: "translate(-50%, -50%)",
-//               left: "45%",
-//               top: "50%",
-//               backgroundColor: alpha(theme.palette.common.white, 0.15),
-//               borderColor: "1px solid primary",
-//               "& .MuiInputBase-root": {
-//                 color: "secondary.main",
-//                 "&:hover": {
-//                   backgroundColor: alpha(theme.palette.common.white, 0.2),
-//                   transition: "0.8s",
-//                 },
-//               },
-//             }}
-//             id="outlined-basic"
-//             label="Поиск по каталогу"
-//             variant="outlined"
-//             InputProps={{
-//               endAdornment: (
-//                 <InputAdornment>
-//                   <IconButton type="submit">
-//                     <Search color="secondary" />
-//                   </IconButton>
-//                   <IconButton type="button" onClick={handleClearChange}>
-//                     <Clear color="secondary" />
-//                   </IconButton>
-//                 </InputAdornment>
-//               ),
-//               color: "secondary",
-//               style: {
-//                 border: "1px solid orange",
-//               },
-//             }}
-//           />

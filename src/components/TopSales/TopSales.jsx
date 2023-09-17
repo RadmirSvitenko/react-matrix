@@ -1,7 +1,7 @@
 import { Box, Button, Collapse, Grid, Rating, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { productsAPI } from "requester";
+import { API_DUMMY_PRODUCTS, API_NOTEBOOKS, productsAPI } from "requester";
 import {
   NewProductBox,
   NewProductContainer,
@@ -31,11 +31,9 @@ const TopSales = () => {
   };
 
   const getTopSales = useCallback(async () => {
-    const response = await axios.get(
-      "https://dummyjson.com/products?limit=100"
-    );
+    const response = await API_DUMMY_PRODUCTS.get("products/");
     const TopSalesFilter = await response.data.products.filter(
-      (item) => item.discountPercentage < 4 && item.rating < 4.95
+      (item) => item.stock < 80
     );
 
     setTopSales(TopSalesFilter);
@@ -43,8 +41,10 @@ const TopSales = () => {
   }, []);
 
   console.log("TopSales: ", TopSales);
-  const TopSalesMain = TopSales.filter((item, index) => index <= 3);
-  const TopSalesAdditional = TopSales.filter((item, index) => index >= 4);
+  const TopSalesMain = TopSales.filter((item, index) => index < 4);
+  const TopSalesAdditional = TopSales.filter(
+    (item, index) => index >= 4 && index <= 7
+  );
 
   useEffect(() => {
     getTopSales();

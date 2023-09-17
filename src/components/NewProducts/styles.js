@@ -14,6 +14,7 @@ export const NewProductContainer = styled(Box)(() => ({
   width: "100%",
   height: "auto",
   marginTop: "30px",
+  flexWrap: "wrap",
 }));
 export const NewProductBox = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.oswald,

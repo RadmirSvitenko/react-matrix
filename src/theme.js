@@ -5,6 +5,15 @@ const theme = createTheme({
       main: "#ffc400",
     },
 
+    primary: {
+      main: "#ffc400",
+    },
+
+    colorBadge: {
+      main: "#232323",
+      dark: "#232323",
+    },
+
     colorNeon: {
       main: "#69f0ae",
     },
@@ -19,6 +28,10 @@ const theme = createTheme({
 
     colorDark: {
       main: "#100E19",
+    },
+
+    colorLime: {
+      main: "#76ff03",
     },
   },
 

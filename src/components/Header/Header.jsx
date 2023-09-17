@@ -1,25 +1,54 @@
-import React, { useState } from "react";
+import React, { Fragment, createRef, useState } from "react";
 import {
   HeaderContainer,
   HeaderIconsBox,
-  HeaderSloganBox,
+  HeaderLogIn,
   HeaderToolkit,
 } from "./styles";
-import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
-import { AccountCircleOutlined, LanguageOutlined } from "@mui/icons-material";
+import {
+  Autocomplete,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Menu,
+  MenuItem,
+  NativeSelect,
+  Select,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import { LanguageOutlined } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import Logotype from "assets/images/logotype.png";
 import { Link } from "react-router-dom";
 import theme from "theme";
+import TitleMatrixHeader from "titles/TitleMatrixHeader";
+import { Transition } from "@react-spring/web";
+import Authentification from "components/Authentification/Authentification";
+import AccountLogInButton from "mini_components/AccountLogInButton/AccountLogInButton";
 
 const Header = () => {
   const [language, setLanguage] = useState("en");
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const { t, i18n } = useTranslation();
+  const open = Boolean(anchorEl);
 
-  const handleChangeLanguage = (event) => {
-    setLanguage(event.target.value);
-    i18n.changeLanguage(event.target.value);
+  const { i18n } = useTranslation();
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleChangeLanguage = (lang) => {
+    setLanguage(lang);
+    i18n.changeLanguage(lang);
+    handleClose();
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   return (
@@ -29,39 +58,40 @@ const Header = () => {
           <img width="80px" height="80px" src={Logotype} alt="Logotype" />
         </Link>
 
-        <HeaderSloganBox>{t("matrixSlogan")}</HeaderSloganBox>
-
+        <TitleMatrixHeader />
         <HeaderIconsBox>
-          <Select
-            defaultValue="en"
-            margin="none"
-            variant="outlined"
-            select
-            value={language}
-            onChange={handleChangeLanguage}
-          >
-            <MenuItem value={"en"}>EN</MenuItem>
-            <MenuItem value={"ru"}>RU</MenuItem>
-          </Select>
+          <AccountLogInButton />
 
-          <IconButton>
-            <AccountCircleOutlined
-              fontSize="large"
-              sx={{
-                color: theme.palette.colorOrange.main,
-              }}
-            />
-          </IconButton>
-
-          <IconButton>
-            <LanguageOutlined
-              fontSize="large"
-              sx={{
-                color: theme.palette.colorNeon.main,
-              }}
-            />
-          </IconButton>
+          <Tooltip title="Language">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              sx={{ ml: 2 }}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <LanguageOutlined
+                fontSize="large"
+                sx={{
+                  color: theme.palette.colorNeon.main,
+                }}
+              />
+            </IconButton>
+          </Tooltip>
         </HeaderIconsBox>
+
+        <Menu
+          value={language}
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+        >
+          <MenuItem onClick={() => handleChangeLanguage("en")}>EN</MenuItem>
+          <MenuItem onClick={() => handleChangeLanguage("ru")}>RU</MenuItem>
+        </Menu>
       </HeaderToolkit>
     </HeaderContainer>
   );
