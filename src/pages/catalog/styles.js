@@ -1,4 +1,3 @@
-import { Cookie } from "@mui/icons-material";
 import { Box, Grid, Tab, Tabs } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
@@ -43,12 +42,12 @@ export const CatalogProductInfo = styled(Box)(() => ({
   justifyContent: "space-evenly",
   flexDirection: "column",
   borderRadius: "25px",
+  padding: "0",
   "&:hover": {
     background: "rgba(0,0,0,0.5)",
     opacity: 1,
     transition: "0.4s",
-    borderRadius: "20px",
-    padding: "0px 25px",
+    padding: "15px",
   },
 }));
 
@@ -72,9 +71,10 @@ export const CustomTabCatalog = styled(Tab)(({ theme }) => ({
 
 export const CatalogProductTitle = styled(Box)(() => ({
   fontFamily: theme.fonts.francoisOne,
-  letterSpacing: "2px",
+  letterSpacing: "3px",
   textTransform: "uppercase",
   fontWeight: "bold",
+  fontSize: "20px",
   color: theme.palette.colorWhite.main,
   textAlign: "center",
 }));
@@ -92,6 +92,7 @@ export const CatalogProductPrice = styled(Box)(() => ({
   letterSpacing: "2px",
   textTransform: "uppercase",
   fontWeight: "bold",
+  fontSize: "20px",
   color: theme.palette.colorLime.main,
 }));
 
@@ -101,4 +102,5 @@ export const CatalogProductAbout = styled(Box)(() => ({
   textTransform: "uppercase",
   fontWeight: "bold",
   color: "red",
+  cursor: "pointer",
 }));

@@ -9,7 +9,8 @@ const initialState = {
 };
 
 export const getProducts = createAsyncThunk("productsList/get", async () => {
-  const response = await API_DUMMY_PRODUCTS.get("products?limit=100");
+  // const response = await API_DUMMY_PRODUCTS.get("products?limit=100");
+  const response = await API_NOTEBOOKS.get("notebooks/?page=2");
   return response.data;
 });
 
@@ -23,7 +24,7 @@ const catalogSlice = createSlice({
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.isLoadingPage = false;
-      state.catalogList = action.payload.products;
+      state.catalogList = action.payload.results;
     });
     builder.addCase(getProducts.rejected, (state, action) => {
       state.error = action.error;

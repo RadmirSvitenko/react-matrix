@@ -10,6 +10,7 @@ import {
   NewProductTitle,
   PresentationTopSalesBox,
   TopSalesBox,
+  TopSalesBrand,
   TopSalesContainer,
   TopSalesPrice,
   TopSalesRating,
@@ -31,9 +32,9 @@ const TopSales = () => {
   };
 
   const getTopSales = useCallback(async () => {
-    const response = await API_DUMMY_PRODUCTS.get("products/");
-    const TopSalesFilter = await response.data.products.filter(
-      (item) => item.stock < 80
+    const response = await API_NOTEBOOKS.get("notebooks/");
+    const TopSalesFilter = await response.data.results.filter(
+      (item) => item.stock < 180
     );
 
     setTopSales(TopSalesFilter);
@@ -65,10 +66,10 @@ const TopSales = () => {
             />
 
             <TopSalesTitle variant="h5">{item.title}</TopSalesTitle>
-            <Box sx={{ display: "flex" }}>
-              <Rating name="read-only" value={item.rating} readOnly />
-              <TopSalesRating>{item.rating}</TopSalesRating>
-            </Box>
+            <Grid display={"flex"}>
+              <TopSalesBrand>{item.brand}</TopSalesBrand>
+              <Rating sx={{ margin: "0 10px" }} readOnly value={5} />
+            </Grid>
             <TopSalesPrice>${item.price}</TopSalesPrice>
           </TopSalesBox>
         ))}
@@ -86,10 +87,10 @@ const TopSales = () => {
               />
 
               <TopSalesTitle variant="h5">{item.title}</TopSalesTitle>
-              <Box sx={{ display: "flex" }}>
-                <Rating name="read-only" value={item.rating} readOnly />
-                <TopSalesRating>{item.rating}</TopSalesRating>
-              </Box>
+              <Grid display={"flex"}>
+                <TopSalesBrand>{item.brand}</TopSalesBrand>
+                <Rating sx={{ margin: "0 10px" }} readOnly value={5} />
+              </Grid>
               <TopSalesPrice>${item.price}</TopSalesPrice>
             </TopSalesBox>
           ))}

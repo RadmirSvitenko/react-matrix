@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { API_DUMMY_PRODUCTS, API_NOTEBOOKS } from "requester";
 import {
   CatalogContainer,
-  CatalogFilterContainer,
   CatalogProductAbout,
   CatalogProductBox,
   CatalogProductBrand,
-  CatalogProductImage,
   CatalogProductInfo,
   CatalogProductList,
   CatalogProductPrice,
@@ -14,14 +11,17 @@ import {
   CustomTabCatalog,
   CustomTabsCatalog,
 } from "./styles";
-import Header from "components/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "reducers/catalogSlice";
-import { Box, CircularProgress, Rating, Typography } from "@mui/material";
+import { Box, Button, Rating } from "@mui/material";
 import TitleCatalogProducts from "titles/TitleCatalogProducts";
 import { useTranslation } from "react-i18next";
 import theme from "theme";
 import LoadingPage from "mini_components/LoadingPage/LoadingPage";
+import { useNavigate } from "react-router-dom";
+import HeaderCatalog from "components/HeaderCatalog/HeaderCatalog";
+import SwitcherPages from "mini_components/SwitcherPages/SwitcherPages";
+import FiltersCatalog from "components/FiltersCatalog/FiltersCatalog";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,6 +47,11 @@ const Catalog = () => {
   const [switchTab, setSwitchTab] = useState(0);
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const toDetails = (product) => {
+    navigate(`/products/${product.id}`);
+  };
 
   const handleSwitch = (index) => {
     return {
@@ -74,13 +79,13 @@ const Catalog = () => {
     getNotebooks();
   }, [getNotebooks]);
 
-  if (isLoadingPage === true) {
+  if (isLoadingPage) {
     return <LoadingPage />;
   }
 
   return (
     <CatalogContainer>
-      <Header />
+      <HeaderCatalog />
 
       <CustomTabsCatalog centered value={switchTab} onChange={handleChange}>
         <CustomTabCatalog
@@ -105,12 +110,15 @@ const Catalog = () => {
           label={t("tabTitleCategory")}
           {...handleSwitch(1)}
         />
+
+        {/* <Button variant="text" onClick={toggleDrawer(anchor, true)}>
+          Filters
+        </Button> */}
       </CustomTabsCatalog>
 
       <CustomTabPanel value={switchTab} index={0}>
         <CatalogProductList>
           <TitleCatalogProducts />
-
           {products?.map((item) => (
             <CatalogProductBox>
               {/* <CatalogProductImage
@@ -126,15 +134,17 @@ const Catalog = () => {
                 alt={item.title}
                 style={{ borderRadius: "25px" }}
               />
-              <CatalogProductInfo>
+              <CatalogProductInfo onClick={() => toDetails(item)}>
                 <CatalogProductTitle>{item.title}</CatalogProductTitle>
-                <Rating readOnly value={item.rating} />
+                <Rating readOnly value={5} />
                 <CatalogProductBrand>{item.brand}</CatalogProductBrand>
                 <CatalogProductPrice>${item.price}</CatalogProductPrice>
                 <CatalogProductAbout>Узнать подробнее</CatalogProductAbout>
               </CatalogProductInfo>
             </CatalogProductBox>
           ))}
+          <FiltersCatalog getProducts={getProducts} />
+          <SwitcherPages />
         </CatalogProductList>
       </CustomTabPanel>
     </CatalogContainer>

@@ -53,10 +53,11 @@ export const NewProductPrice = styled(Box)(({ theme }) => ({
   color: "limegreen",
 }));
 
-export const NewProductRating = styled(Box)(({ theme }) => ({
+export const NewProductBrand = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.oswald,
-  letterSpacing: "2px",
-  fontSize: "16px",
+  letterSpacing: "1px",
+  fontSize: "18px",
   fontWeight: "bold",
-  margin: "0px 10px",
+  textTransform: "uppercase",
+  color: theme.palette.colorViolet.main,
 }));

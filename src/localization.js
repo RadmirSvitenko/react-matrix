@@ -32,6 +32,7 @@ i18n
           buttonReg: "REGISTER",
           tabTitleCatalog: "CATALOG",
           tabTitleCategory: "CATEGORY",
+          labelCatalogSearch: "Search notebooks...",
         },
       },
 
@@ -62,6 +63,7 @@ i18n
           buttonReg: "Зарегистрироваться",
           tabTitleCatalog: "КАТАЛОГ",
           tabTitleCategory: "КАТЕГОРИИ",
+          labelCatalogSearch: "Найти ноутбуки...",
         },
       },
     },

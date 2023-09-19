@@ -52,10 +52,11 @@ export const TopSalesPrice = styled(Box)(({ theme }) => ({
   color: "limegreen",
 }));
 
-export const TopSalesRating = styled(Box)(({ theme }) => ({
+export const TopSalesBrand = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.oswald,
-  letterSpacing: "2px",
-  fontSize: "16px",
+  letterSpacing: "1px",
+  fontSize: "18px",
   fontWeight: "bold",
-  margin: "0px 10px",
+  textTransform: "uppercase",
+  color: theme.palette.colorViolet.main,
 }));

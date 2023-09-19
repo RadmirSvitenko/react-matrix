@@ -1,10 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const CartDetails = (props) => {
+const CartDetails = () => {
   return <div>CartDetails</div>;
 };
-
-CartDetails.propTypes = {};
 
 export default CartDetails;

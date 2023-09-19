@@ -28,6 +28,7 @@ import TitleMatrixHeader from "titles/TitleMatrixHeader";
 import { Transition } from "@react-spring/web";
 import Authentification from "components/Authentification/Authentification";
 import AccountLogInButton from "mini_components/AccountLogInButton/AccountLogInButton";
+import ModalCart from "components/ModalCart/ModalCart";
 
 const Header = () => {
   const [language, setLanguage] = useState("en");

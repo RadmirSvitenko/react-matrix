@@ -1,9 +1,10 @@
 import { Box, Button, Collapse, Grid, Rating, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { API_DUMMY_PRODUCTS, API_NOTEBOOKS, productsAPI } from "requester";
+import { API_DUMMY_PRODUCTS, API_NOTEBOOKS } from "requester";
 import {
   NewProductBox,
+  NewProductBrand,
   NewProductContainer,
   NewProductPrice,
   NewProductRating,
@@ -24,9 +25,9 @@ const NewProducts = () => {
   };
 
   const getNewProducts = useCallback(async () => {
-    const response = await API_DUMMY_PRODUCTS.get("products/");
-    const newProductsFilter = await response.data.products.filter(
-      (item) => item.discountPercentage < 17
+    const response = await API_NOTEBOOKS.get("notebooks/?page=3");
+    const newProductsFilter = await response.data.results.filter(
+      (item) => item.stock > 90
     );
 
     setNewProducts(newProductsFilter);
@@ -34,6 +35,7 @@ const NewProducts = () => {
   }, []);
 
   console.log("newProducts: ", newProducts);
+
   const newProductsMain = newProducts.filter((item, index) => index < 4);
   const newProductsAdditional = newProducts.filter(
     (item, index) => index >= 4 && index <= 7
@@ -58,10 +60,14 @@ const NewProducts = () => {
             />
 
             <NewProductTitle variant="h5">{item.title}</NewProductTitle>
-            <Box sx={{ display: "flex" }}>
-              <Rating name="read-only" value={item.rating} readOnly />
-              <NewProductRating>{item.rating}</NewProductRating>
-            </Box>
+            <Grid display={"flex"}>
+              <NewProductBrand>{item.brand}</NewProductBrand>
+              <Rating
+                sx={{ margin: "0 10px" }}
+                readOnly
+                value={3 ? item.avg_rating === null : item.avg_rating}
+              />
+            </Grid>
             <NewProductPrice>${item.price}</NewProductPrice>
           </NewProductBox>
         ))}
@@ -79,10 +85,14 @@ const NewProducts = () => {
               />
 
               <NewProductTitle variant="h5">{item.title}</NewProductTitle>
-              <Box sx={{ display: "flex" }}>
-                <Rating name="read-only" value={item.rating} readOnly />
-                <NewProductRating>{item.rating}</NewProductRating>
-              </Box>
+              <Grid display={"flex"}>
+                <NewProductBrand>{item.brand}</NewProductBrand>
+                <Rating
+                  sx={{ margin: "0 10px" }}
+                  readOnly
+                  value={3 ? item.avg_rating === null : item.avg_rating}
+                />
+              </Grid>
               <NewProductPrice>${item.price}</NewProductPrice>
             </NewProductBox>
           ))}
