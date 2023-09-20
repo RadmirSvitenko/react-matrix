@@ -39,6 +39,9 @@ const ModalCart = ({ open, onClose }) => {
       keepMounted
       open={open}
       onClose={onClose}
+      sx={{
+        zIndex: "3000",
+      }}
     >
       <DialogTitle>
         <Grid width={"100%"} display={"flex"} justifyContent={"space-between"}>

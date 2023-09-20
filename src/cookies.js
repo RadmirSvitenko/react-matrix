@@ -1,5 +1,5 @@
 import Cookies from "universal-cookie";
-import { COOKIE_KEYS } from "constants";
+import { COOKIE_KEYS } from "cookieStore";
 
 const cookies = new Cookies();
 const { TOKEN, REFRESH } = COOKIE_KEYS;

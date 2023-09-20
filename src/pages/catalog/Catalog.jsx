@@ -44,24 +44,11 @@ function CustomTabPanel(props) {
 }
 
 const Catalog = () => {
-  const [switchTab, setSwitchTab] = useState(0);
-
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const toDetails = (product) => {
     navigate(`/products/${product.id}`);
-  };
-
-  const handleSwitch = (index) => {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  };
-
-  const handleChange = (event, newValue) => {
-    setSwitchTab(newValue);
   };
 
   const dispatch = useDispatch();
@@ -87,36 +74,16 @@ const Catalog = () => {
     <CatalogContainer>
       <HeaderCatalog />
 
-      <CustomTabsCatalog centered value={switchTab} onChange={handleChange}>
-        <CustomTabCatalog
-          sx={{
-            fontFamily: theme.fonts.valeraRound,
-            letterSpacing: "2px",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            color: theme.palette.colorOrange.main,
-          }}
-          label={t("tabTitleCatalog")}
-          {...handleSwitch(0)}
-        />
-        <CustomTabCatalog
-          sx={{
-            fontFamily: theme.fonts.valeraRound,
-            letterSpacing: "2px",
-            fontWeight: "bold",
-            textTransform: "uppercase",
-            color: theme.palette.colorOrange.main,
-          }}
-          label={t("tabTitleCategory")}
-          {...handleSwitch(1)}
-        />
-
-        {/* <Button variant="text" onClick={toggleDrawer(anchor, true)}>
-          Filters
-        </Button> */}
-      </CustomTabsCatalog>
-
-      <CustomTabPanel value={switchTab} index={0}>
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          height: "100vh",
+          flexWrap: "nowrap",
+          justifyContent: "space-between",
+        }}
+      >
+        <FiltersCatalog getProducts={getProducts} />
         <CatalogProductList>
           <TitleCatalogProducts />
           {products?.map((item) => (
@@ -143,10 +110,9 @@ const Catalog = () => {
               </CatalogProductInfo>
             </CatalogProductBox>
           ))}
-          <FiltersCatalog getProducts={getProducts} />
           <SwitcherPages />
         </CatalogProductList>
-      </CustomTabPanel>
+      </Box>
     </CatalogContainer>
   );
 };

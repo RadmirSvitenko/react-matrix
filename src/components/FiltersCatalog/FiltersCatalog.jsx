@@ -49,13 +49,9 @@ const FiltersCatalog = ({ getProducts }) => {
     setDrawerPosotion({ ...drawerPosition, [anchor]: open });
   };
 
-  const listDrawer = (anchor) => (
+  return (
     <Grid container width={"300px"}>
-      <Box
-        sx={{ width: "300px", padding: "10px" }}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-      >
+      <Box sx={{ width: "300px", padding: "10px" }}>
         <FilterTitle textAlign={"center"}>Brands</FilterTitle>
         <Divider />
 
@@ -125,70 +121,7 @@ const FiltersCatalog = ({ getProducts }) => {
             />
           </FilterVariand>
         </FilterVariandBox>
-
-        {/* <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Accordion 1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>Accordion 2</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion disabled>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography>Disabled Accordion</Typography>
-          </AccordionSummary>
-        </Accordion> */}
       </Box>
-    </Grid>
-  );
-
-  return (
-    <Grid>
-      {["left"].map((anchor) => (
-        <Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            sx={{
-              zIndex: "3000",
-            }}
-            variant="temporary"
-            anchor={anchor}
-            open={drawerPosition[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {listDrawer(anchor)}
-          </Drawer>
-        </Fragment>
-      ))}
     </Grid>
   );
 };

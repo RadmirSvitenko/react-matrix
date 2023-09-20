@@ -11,6 +11,8 @@ import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import theme from "theme";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { API_NOTEBOOKS } from "requester";
+import { setTokenFromCookies } from "cookies";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,8 +23,14 @@ const Authorization = () => {
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
-  const authData = (d) => {
+  const authData = async (d) => {
     console.log(d);
+
+    const response = await API_NOTEBOOKS.post("login/", {
+      password: d.password,
+      username: d.userName,
+    });
+    console.log("response: ", response);
   };
 
   return (

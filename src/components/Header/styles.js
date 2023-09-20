@@ -7,7 +7,6 @@ export const HeaderContainer = styled(Paper)(({ theme }) => ({
   height: "80px",
   position: "sticky",
   top: "0",
-  zIndex: "1300",
 }));
 
 export const HeaderToolkit = styled(Toolbar)(({ theme }) => ({
