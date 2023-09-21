@@ -52,6 +52,7 @@ const Catalog = () => {
   };
 
   const dispatch = useDispatch();
+  const filters = usese;
 
   const products = useSelector((state) => state.catalog.catalogList);
   const isLoadingPage = useSelector((state) => state.catalog.isLoadingPage);

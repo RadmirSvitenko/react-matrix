@@ -26,6 +26,7 @@ export const FilterCardBox = styled(Grid)(() => ({
   width: "350px",
   height: "350px",
   position: "relative",
+  zIndex: "0",
 }));
 
 export const FilterCardMedia = styled(CardMedia)(() => ({

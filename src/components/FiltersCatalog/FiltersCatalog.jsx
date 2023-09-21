@@ -22,12 +22,15 @@ import React, { Fragment, useState } from "react";
 import { API_NOTEBOOKS } from "requester";
 import { FilterTitle, FilterVariand, FilterVariandBox } from "./styles";
 import theme from "theme";
+import { useTranslation } from "react-i18next";
 
 const FiltersCatalog = ({ getProducts }) => {
   const [filterPrice, setFilterPrice] = useState([0, 3000]);
   const [drawerPosition, setDrawerPosotion] = useState({
     left: false,
   });
+
+  const { t } = useTranslation();
 
   const handleFilterPrice = (event, newValue) => {
     setFilterPrice(newValue);
@@ -52,7 +55,9 @@ const FiltersCatalog = ({ getProducts }) => {
   return (
     <Grid container width={"300px"}>
       <Box sx={{ width: "300px", padding: "10px" }}>
-        <FilterTitle textAlign={"center"}>Brands</FilterTitle>
+        <FilterTitle textAlign={"center"}>
+          {t("catalogFilterBrandsTitle")}
+        </FilterTitle>
         <Divider />
 
         <FilterVariandBox>
@@ -81,24 +86,31 @@ const FiltersCatalog = ({ getProducts }) => {
           </FilterVariand>
         </FilterVariandBox>
 
-        <FilterTitle textAlign={"center"}>Category</FilterTitle>
+        <FilterTitle textAlign={"center"}>
+          {t("catalogFilterCategoryTitle")}
+        </FilterTitle>
         <Divider />
 
         <FilterVariandBox>
           <FilterVariand>
-            For work <Checkbox onClick={handleChangeByBrand} />
+            {t("catalogFilterCategoryForWork")}
+            <Checkbox onClick={handleChangeByBrand} />
           </FilterVariand>
 
           <FilterVariand>
-            For study <Checkbox onClick={handleChangeByBrand} />
+            {t("catalogFilterCategoryForStudy")}
+            <Checkbox onClick={handleChangeByBrand} />
           </FilterVariand>
 
           <FilterVariand>
-            For gaming <Checkbox onClick={handleChangeByBrand} />
+            {t("catalogFilterCategoryForGaming")}
+            <Checkbox onClick={handleChangeByBrand} />
           </FilterVariand>
         </FilterVariandBox>
 
-        <FilterTitle textAlign={"center"}>Price</FilterTitle>
+        <FilterTitle textAlign={"center"}>
+          {t("catalogFilterPriceTitle")}
+        </FilterTitle>
         <Divider />
 
         <FilterVariandBox>

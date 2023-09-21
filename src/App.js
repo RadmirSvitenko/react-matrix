@@ -9,8 +9,11 @@ import { Provider } from "react-redux";
 import theme from "./theme";
 import store from "store";
 import ProductDetails from "pages/productDetails/ProductDetails";
+import { getTokenFromCookies } from "cookies";
 
 function App() {
+  const token = getTokenFromCookies();
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -18,11 +21,14 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Presentation />} />
-            <Route element={<MainLayout />}>
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/products/:id" element={<ProductDetails />} />
-              <Route path="/cart" element={<CartDetails />} />
-            </Route>
+            {(token && (
+              <Route element={<MainLayout />}>
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path="/products/:id" element={<ProductDetails />} />
+                <Route path="/cart" element={<CartDetails />} />
+              </Route>
+            )) ||
+              alert("Так не пойдет =)")}
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

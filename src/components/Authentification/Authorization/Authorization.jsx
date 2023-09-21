@@ -10,9 +10,11 @@ import { IconButton } from "@mui/material";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import theme from "theme";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
+import { appendErrors, useForm } from "react-hook-form";
 import { API_NOTEBOOKS } from "requester";
 import { setTokenFromCookies } from "cookies";
+import { ErrorMessage } from "@hookform/error-message";
+import { getTokenFromCookies } from "cookies";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,18 +32,20 @@ const Authorization = () => {
       password: d.password,
       username: d.userName,
     });
-    console.log("response: ", response);
+
+    setTokenFromCookies(response.data.token);
   };
 
   return (
     <AuthorizationForm onSubmit={handleSubmit(authData)}>
       <AuthorizationTitle>{t("authTitle")}</AuthorizationTitle>
       <AuthorizationInput
-        {...register("userName")}
+        {...register("userName", {
+          required: "This is requaired field",
+        })}
         type="text"
         label={t("authLogin")}
         variant="outlined"
-        required
         sx={{
           color: "#fff",
         }}
@@ -61,7 +65,10 @@ const Authorization = () => {
         }}
       />
       <AuthorizationInput
-        {...register("password")}
+        {...register("password", {
+          required: "This is requaired field",
+          minLength: 8,
+        })}
         type={showPassword ? "text" : "password"}
         label={t("authPassword")}
         variant="outlined"
