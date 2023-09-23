@@ -7,7 +7,7 @@ export const HeaderContainer = styled(Paper)(({ theme }) => ({
   height: "80px",
   top: "0",
   position: "sticky",
-  zIndex: "3000",
+  zIndex: "1200",
 }));
 
 export const HeaderToolkit = styled(Toolbar)(({ theme }) => ({
@@ -45,8 +45,13 @@ export const CatalogSearch = styled(TextField)(({ theme }) => ({
       transition: "0.5s",
     },
 
+    "&:hover fieldset": {
+      borderColor: theme.palette.colorOrange.main,
+      transition: "0.5s",
+    },
+
     "&.Mui-focused fieldset": {
-      borderColor: theme.palette.colorWhite.main,
+      borderColor: theme.palette.colorOrange.main,
       transition: "0.5s",
     },
     "& .MuiInputLabel-outlined": {

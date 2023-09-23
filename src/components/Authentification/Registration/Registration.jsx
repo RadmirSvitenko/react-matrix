@@ -31,15 +31,13 @@ const Authorization = () => {
   return (
     <RegistrationForm onSubmit={handleSubmit(authData)}>
       <RegistrationTitle>{t("regTitle")}</RegistrationTitle>
+
       <RegistrationInput
-        {...register("userName")}
+        {...register("username")}
         type="text"
         label={t("authLogin")}
         variant="outlined"
         required
-        sx={{
-          color: "#fff",
-        }}
         InputProps={{
           endAdornment: (
             <IconButton>
@@ -61,7 +59,6 @@ const Authorization = () => {
         label={t("regPassword")}
         variant="outlined"
         required
-        sx={{}}
         InputProps={{
           endAdornment: (
             <IconButton onClick={handleShowPassword}>
@@ -92,7 +89,36 @@ const Authorization = () => {
         label={t("regPasswordRepeat")}
         variant="outlined"
         required
-        sx={{}}
+        InputProps={{
+          endAdornment: (
+            <IconButton onClick={handleShowPassword}>
+              {showPassword ? (
+                <Visibility
+                  sx={{
+                    color: theme.palette.colorOrange.main,
+                  }}
+                />
+              ) : (
+                <VisibilityOff
+                  sx={{
+                    color: theme.palette.colorOrange.main,
+                  }}
+                />
+              )}
+            </IconButton>
+          ),
+        }}
+        InputLabelProps={{
+          style: { color: theme.palette.colorOrange.main },
+        }}
+      />
+
+      <RegistrationInput
+        {...register("email")}
+        type="email"
+        label={t("regMail")}
+        variant="outlined"
+        required
         InputProps={{
           endAdornment: (
             <IconButton onClick={handleShowPassword}>

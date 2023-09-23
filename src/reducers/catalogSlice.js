@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export const getProducts = createAsyncThunk("productsList/get", async () => {
-  // const response = await API_DUMMY_PRODUCTS.get("products?limit=100");
   const response = await API_NOTEBOOKS.get("notebooks/?page=1");
   return response.data;
 });

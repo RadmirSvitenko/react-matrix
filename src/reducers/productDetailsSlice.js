@@ -17,7 +17,7 @@ export const getProductDetails = createAsyncThunk(
 );
 
 const productDetailsSlice = createSlice({
-  name: "catalogSlice",
+  name: "productDetailsSlice",
   initialState,
 
   extraReducers: (builder) => {

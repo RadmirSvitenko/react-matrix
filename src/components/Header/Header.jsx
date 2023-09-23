@@ -49,10 +49,18 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleToUpPage = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <HeaderContainer>
       <HeaderToolkit>
-        <Link>
+        <Link onClick={handleToUpPage}>
           <img width="80px" height="80px" src={Logotype} alt="Logotype" />
         </Link>
 

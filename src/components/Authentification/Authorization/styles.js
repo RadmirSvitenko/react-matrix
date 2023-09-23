@@ -31,26 +31,10 @@ export const AuthorizationInput = styled(TextField)(({ theme }) => ({
       borderColor: theme.palette.colorOrange.main,
       transition: "0.5s",
     },
-
-    "&.Mui-focused fieldset": {
-      borderColor: theme.palette.colorWhite.main,
+    "&:hover fieldset": {
+      borderColor: "#fff",
       transition: "0.5s",
     },
-    "& .MuiInputLabel-outlined": {
-      color: theme.palette.colorWhite.main,
-    },
-  },
-}));
-
-export const RegistrationInput = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    color: theme.palette.colorOrange.main,
-
-    "& fieldset": {
-      borderColor: theme.palette.colorOrange.main,
-      transition: "0.5s",
-    },
-
     "&.Mui-focused fieldset": {
       borderColor: theme.palette.colorWhite.main,
       transition: "0.5s",

@@ -10,6 +10,7 @@ import theme from "./theme";
 import store from "store";
 import ProductDetails from "pages/productDetails/ProductDetails";
 import { getTokenFromCookies } from "cookies";
+import BlockedAccessAuth from "components/BlockedAccessAuth/BlockedAccessAuth";
 
 function App() {
   const token = getTokenFromCookies();
@@ -21,14 +22,15 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Presentation />} />
-            {(token && (
+            {!token ? (
+              <Route path="/access-auth" element={<BlockedAccessAuth />} />
+            ) : (
               <Route element={<MainLayout />}>
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/products/:id" element={<ProductDetails />} />
                 <Route path="/cart" element={<CartDetails />} />
               </Route>
-            )) ||
-              alert("Так не пойдет =)")}
+            )}
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

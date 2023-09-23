@@ -15,6 +15,7 @@ import { API_NOTEBOOKS } from "requester";
 import { setTokenFromCookies } from "cookies";
 import { ErrorMessage } from "@hookform/error-message";
 import { getTokenFromCookies } from "cookies";
+import Catalog from "pages/catalog/Catalog";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +23,8 @@ const Authorization = () => {
   const { register, handleSubmit } = useForm();
 
   const { t } = useTranslation();
+
+  const token = getTokenFromCookies();
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
@@ -108,6 +111,7 @@ const Authorization = () => {
             transition: "0.5s",
           },
         }}
+        // href={"/catalog"}
         variant="contained"
         type="submit"
       >

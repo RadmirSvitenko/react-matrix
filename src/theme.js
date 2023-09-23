@@ -42,6 +42,7 @@ const theme = createTheme({
     changa: "Changa, sans-serif",
     francoisOne: "Francois One, sans-serif",
     valeraRound: "Varela Round, sans-serif",
+    nunito: "Nunito, sans-serif",
   },
 });
 

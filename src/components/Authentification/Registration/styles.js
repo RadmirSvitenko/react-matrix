@@ -32,6 +32,11 @@ export const RegistrationInput = styled(TextField)(({ theme }) => ({
       transition: "0.5s",
     },
 
+    "&:hover fieldset": {
+      borderColor: "#fff",
+      transition: "0.5s",
+    },
+
     "&.Mui-focused fieldset": {
       borderColor: theme.palette.colorWhite.main,
       transition: "0.5s",
