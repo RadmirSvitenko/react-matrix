@@ -1,9 +1,12 @@
 import { useTranslation } from "react-i18next";
 import {
   CharacteristicsContainer,
+  CharacteristicsDescriptionTitle,
   CharacteristicsInfo,
   CharacteristicsInfoBox,
   CharacteristicsTitle,
+  CustomTD,
+  MoveToPayment,
 } from "./styles";
 
 const Characteristics = ({ notebook }) => {
@@ -19,26 +22,22 @@ const Characteristics = ({ notebook }) => {
           </tr>
 
           <tr>
-            <td>
-              <CharacteristicsInfo>{t("productDetailsID")}</CharacteristicsInfo>
-            </td>
-
-            <td>
-              <CharacteristicsInfo>{notebook.id}</CharacteristicsInfo>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleMainCharacteristics")}
+              </CharacteristicsDescriptionTitle>
             </td>
           </tr>
 
           <tr>
             <td>
-              <CharacteristicsInfo>
-                {t("productDetailsStock")}
-              </CharacteristicsInfo>
+              <CharacteristicsInfo>{t("productDetailsID")}</CharacteristicsInfo>
             </td>
-            <td>
-              <CharacteristicsInfo>{notebook.stock}</CharacteristicsInfo>
+
+            <td align="center">
+              <CharacteristicsInfo>{notebook.id}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -49,7 +48,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.brand}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -60,15 +58,24 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.model}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
-                {t("productDetailsDiagonal")}
+                {t("productDetailsBaseOperatinSystem")}
               </CharacteristicsInfo>
             </td>
             <td>
-              <CharacteristicsInfo>{notebook.diagonal}</CharacteristicsInfo>
+              <CharacteristicsInfo>
+                {notebook.baseOperatingSystem}
+              </CharacteristicsInfo>
+            </td>
+          </tr>
+
+          <tr>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleDisplayCharacteristics")}
+              </CharacteristicsDescriptionTitle>
             </td>
           </tr>
 
@@ -84,7 +91,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -97,7 +103,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -108,7 +113,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.screenMatrix}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -121,7 +125,16 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsDiagonal")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>{notebook.diagonal}</CharacteristicsInfo>
+            </td>
+          </tr>
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -134,7 +147,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -145,7 +157,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.matrixType}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -156,7 +167,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.aspectRatio}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -171,6 +181,14 @@ const Characteristics = ({ notebook }) => {
           </tr>
 
           <tr>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleEquipmentCharacteristics")}
+              </CharacteristicsDescriptionTitle>
+            </td>
+          </tr>
+
+          <tr>
             <td>
               <CharacteristicsInfo>
                 {t("productDetailsRAM")}
@@ -180,20 +198,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.ram}</CharacteristicsInfo>
             </td>
           </tr>
-
-          <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsBaseOperatinSystem")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>
-                {notebook.baseOperatingSystem}
-              </CharacteristicsInfo>
-            </td>
-          </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -204,7 +208,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.cpuType}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -215,7 +218,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.cpuName}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -226,7 +228,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.cpuCore}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -237,7 +238,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.cpuFrequency}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -250,7 +250,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -265,6 +264,27 @@ const Characteristics = ({ notebook }) => {
           </tr>
 
           <tr>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleCommunicationsCharacteristics")}
+              </CharacteristicsDescriptionTitle>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsKeyboardLanguage")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>
+                {notebook.keyboardLanguage}
+              </CharacteristicsInfo>
+            </td>
+          </tr>
+
+          <tr>
             <td>
               <CharacteristicsInfo>
                 {t("productDetailsWiFiVersion")}
@@ -274,7 +294,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.wifiVersion}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -287,7 +306,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -300,7 +318,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -313,7 +330,6 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -324,7 +340,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>{notebook.webCam}</CharacteristicsInfo>
             </td>
           </tr>
-
           <tr>
             <td>
               <CharacteristicsInfo>
@@ -337,13 +352,10 @@ const Characteristics = ({ notebook }) => {
           </tr>
 
           <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsGuarantee")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>{notebook.Guarantee}</CharacteristicsInfo>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleStorageCharacteristics")}
+              </CharacteristicsDescriptionTitle>
             </td>
           </tr>
 
@@ -357,54 +369,6 @@ const Characteristics = ({ notebook }) => {
               <CharacteristicsInfo>
                 {notebook.energyIntensityBatteries}
               </CharacteristicsInfo>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsMaterialCorps")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>
-                {notebook.materialCorps}
-              </CharacteristicsInfo>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsColorCorps")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>{notebook.colorsCorps}</CharacteristicsInfo>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsShockproofCorps")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>
-                {notebook.shockproofCorps}
-              </CharacteristicsInfo>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <CharacteristicsInfo>
-                {t("productDetailsItemWeight")}
-              </CharacteristicsInfo>
-            </td>
-            <td>
-              <CharacteristicsInfo>{notebook.itemWeight}</CharacteristicsInfo>
             </td>
           </tr>
 
@@ -433,15 +397,63 @@ const Characteristics = ({ notebook }) => {
           </tr>
 
           <tr>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleCorpusCharacteristics")}
+              </CharacteristicsDescriptionTitle>
+            </td>
+          </tr>
+
+          <tr>
             <td>
               <CharacteristicsInfo>
-                {t("productDetailsKeyboardLanguage")}
+                {t("productDetailsMaterialCorps")}
               </CharacteristicsInfo>
             </td>
             <td>
               <CharacteristicsInfo>
-                {notebook.keyboardLanguage}
+                {notebook.materialCorps}
               </CharacteristicsInfo>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsColorCorps")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>{notebook.colorsCorps}</CharacteristicsInfo>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsShockproofCorps")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>
+                {notebook.shockproofCorps}
+              </CharacteristicsInfo>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsItemWeight")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>{notebook.itemWeight}</CharacteristicsInfo>
+            </td>
+          </tr>
+
+          <tr>
+            <td colSpan={2}>
+              <CharacteristicsDescriptionTitle>
+                {t("productDetailsTitleDocumentsCharacteristics")}
+              </CharacteristicsDescriptionTitle>
             </td>
           </tr>
 
@@ -462,7 +474,62 @@ const Characteristics = ({ notebook }) => {
               </CharacteristicsInfo>
             </td>
           </tr>
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsStock")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>{notebook.stock}</CharacteristicsInfo>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <CharacteristicsInfo>
+                {t("productDetailsGuarantee")}
+              </CharacteristicsInfo>
+            </td>
+            <td>
+              <CharacteristicsInfo>{notebook.Guarantee}</CharacteristicsInfo>
+            </td>
+          </tr>
         </table>
+        <img
+          width={"400px"}
+          height={"400px"}
+          src={notebook.images[0]}
+          alt={notebook.title}
+        />
+
+        <img
+          width={"400px"}
+          height={"400px"}
+          src={notebook.images[2]}
+          alt={notebook.title}
+        />
+
+        <img
+          width={"400px"}
+          height={"400px"}
+          src={notebook.images[3]}
+          alt={notebook.title}
+        />
+
+        <img
+          width={"400px"}
+          height={"400px"}
+          src={notebook.images[4]}
+          alt={notebook.title}
+        />
+
+        <img
+          width={"400px"}
+          height={"400px"}
+          src={notebook.images[5]}
+          alt={notebook.title}
+        />
       </CharacteristicsInfoBox>
     </CharacteristicsContainer>
   );

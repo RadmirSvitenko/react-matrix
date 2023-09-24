@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
   CatalogContainer,
+  CatalogPaginationContainer,
   CatalogProductAbout,
   CatalogProductBox,
   CatalogProductBrand,
@@ -8,12 +9,10 @@ import {
   CatalogProductList,
   CatalogProductPrice,
   CatalogProductTitle,
-  CustomTabCatalog,
-  CustomTabsCatalog,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "reducers/catalogSlice";
-import { Box, Button, Rating } from "@mui/material";
+import { filterProductsByBrands, getProducts } from "reducers/catalogSlice";
+import { Box, Button, Grid, Pagination, Rating, Stack } from "@mui/material";
 import TitleCatalogProducts from "titles/TitleCatalogProducts";
 import { useTranslation } from "react-i18next";
 import theme from "theme";
@@ -23,27 +22,10 @@ import HeaderCatalog from "components/HeaderCatalog/HeaderCatalog";
 import SwitcherPages from "mini_components/SwitcherPages/SwitcherPages";
 import FiltersCatalog from "components/FiltersCatalog/FiltersCatalog";
 
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box>
-          <Box>{children}</Box>
-        </Box>
-      )}
-    </div>
-  );
-}
-
 const Catalog = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  console.log("currentPage: ", currentPage);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -59,12 +41,24 @@ const Catalog = () => {
   console.log("products: ", products);
 
   const getNotebooks = useCallback(async () => {
-    dispatch(getProducts());
-  }, []);
+    dispatch(getProducts(currentPage));
+  }, [currentPage]);
+
+  // const getFilterNotebooksByBrands = useCallback(async () => {
+  //   dispatch(filterProductsByBrands());
+  // }, [filterProductsByBrands]);
+
+  const handleSwitchPageCatalog = (e, value) => {
+    setCurrentPage(value);
+  };
 
   useEffect(() => {
     getNotebooks();
-  }, [getNotebooks]);
+  }, [currentPage]);
+
+  // useEffect(() => {
+  //   getFilterNotebooksByBrands();
+  // }, [filterProductsByBrands]);
 
   if (isLoadingPage) {
     return <LoadingPage />;
@@ -84,16 +78,11 @@ const Catalog = () => {
         }}
       >
         <FiltersCatalog getProducts={getProducts} />
+
         <CatalogProductList>
           <TitleCatalogProducts />
           {products?.map((item) => (
             <CatalogProductBox>
-              {/* <CatalogProductImage
-                sx={{
-                  backgroundImage: `url(${item.images[0]})`,
-                }}
-              ></CatalogProductImage> */}
-
               <img
                 width={"270px"}
                 height={"270px"}
@@ -110,7 +99,20 @@ const Catalog = () => {
               </CatalogProductInfo>
             </CatalogProductBox>
           ))}
-          <SwitcherPages />
+
+          <CatalogPaginationContainer>
+            <Stack spacing={2}>
+              <Pagination
+                onChange={handleSwitchPageCatalog}
+                count={40}
+                page={currentPage}
+                siblingCount={2}
+                color="primary"
+                showFirstButton
+                showLastButton
+              />
+            </Stack>
+          </CatalogPaginationContainer>
         </CatalogProductList>
       </Box>
     </CatalogContainer>

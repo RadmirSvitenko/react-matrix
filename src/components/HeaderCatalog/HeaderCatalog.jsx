@@ -125,7 +125,7 @@ const HeaderCatalog = () => {
           </IconButton>
 
           <IconButton onClick={toggleModalCart}>
-            <Badge color="success" badgeContent={5}>
+            <Badge color="success" badgeContent={0}>
               <ShoppingCartRounded
                 fontSize="large"
                 sx={{

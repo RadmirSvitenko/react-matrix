@@ -6,12 +6,35 @@ const initialState = {
   isLoadingPage: false,
   error: false,
   catalogList: [],
+  catalogListFilterByBrand: [],
 };
 
-export const getProducts = createAsyncThunk("productsList/get", async () => {
-  const response = await API_NOTEBOOKS.get("notebooks/?page=1");
-  return response.data;
-});
+export const getProducts = createAsyncThunk(
+  "productsList/get",
+  async (currenPage) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/?page=${currenPage}`);
+    return response.data;
+  }
+);
+
+export const filterProductsByBrandsTest = createAsyncThunk(
+  "productsList/get",
+  async (brand) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/`);
+    const data = response.data.results.filter((item) => item.brand === brand);
+    console.log("filterBrandTest: ", data);
+    return data;
+  }
+);
+
+export const filterProductsByBrands = createAsyncThunk(
+  "productsList/get",
+  async (brand) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/?brand=${brand}`);
+    console.log("filterBrand", response.data.results);
+    return response.data.results;
+  }
+);
 
 const catalogSlice = createSlice({
   name: "catalogSlice",

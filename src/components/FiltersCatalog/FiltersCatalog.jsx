@@ -1,8 +1,5 @@
 import { ExpandMore, Inbox, Mail } from "@mui/icons-material";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   Button,
   Checkbox,
@@ -18,17 +15,21 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { API_NOTEBOOKS } from "requester";
 import { FilterTitle, FilterVariand, FilterVariandBox } from "./styles";
 import theme from "theme";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import {
+  filterProductsByBrands,
+  filterProductsByBrandsTest,
+} from "reducers/catalogSlice";
 
-const FiltersCatalog = ({ getProducts }) => {
-  const [filterPrice, setFilterPrice] = useState([0, 3000]);
-  const [drawerPosition, setDrawerPosotion] = useState({
-    left: false,
-  });
+const FiltersCatalog = () => {
+  const [filterPrice, setFilterPrice] = useState([100, 2500]);
+
+  const dispatch = useDispatch();
 
   const { t } = useTranslation();
 
@@ -36,20 +37,12 @@ const FiltersCatalog = ({ getProducts }) => {
     setFilterPrice(newValue);
   };
 
-  const handleChangeByBrand = async () => {
-    const response = await API_NOTEBOOKS("notebooks/");
-    const data = response.data.results.filter((item) => item.brand === "Apple");
-    console.log("data: ", data);
+  const handleFilterNotebooksByBrand = async (brand) => {
+    dispatch(filterProductsByBrands(brand));
   };
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setDrawerPosotion({ ...drawerPosition, [anchor]: open });
+  const filterProductsByBrandsTest = async (brand) => {
+    dispatch(filterProductsByBrandsTest(brand));
   };
 
   return (
@@ -62,27 +55,44 @@ const FiltersCatalog = ({ getProducts }) => {
 
         <FilterVariandBox>
           <FilterVariand>
-            APPLE <Checkbox onClick={handleChangeByBrand} />
+            APPLE{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("Apple")} />
           </FilterVariand>
 
           <FilterVariand>
-            ASUS <Checkbox onClick={handleChangeByBrand} />
+            ASUS{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("ASUS")} />
           </FilterVariand>
 
           <FilterVariand>
-            ACER <Checkbox onClick={handleChangeByBrand} />
+            ACER{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("Acer")} />
           </FilterVariand>
 
           <FilterVariand>
-            LENOVO <Checkbox onClick={handleChangeByBrand} />
+            LENOVO{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("Lenovo")} />
           </FilterVariand>
 
           <FilterVariand>
-            HP <Checkbox onClick={handleChangeByBrand} />
+            DELL{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("Dell")} />
           </FilterVariand>
 
           <FilterVariand>
-            MSI <Checkbox onClick={handleChangeByBrand} />
+            HP <Checkbox onChange={() => handleFilterNotebooksByBrand("HP")} />
+          </FilterVariand>
+
+          <FilterVariand>
+            INFINIX{" "}
+            <Checkbox
+              onChange={() => handleFilterNotebooksByBrand("INFINIX")}
+            />
+          </FilterVariand>
+
+          <FilterVariand>
+            MSI{" "}
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("MSI")} />
           </FilterVariand>
         </FilterVariandBox>
 
@@ -94,17 +104,17 @@ const FiltersCatalog = ({ getProducts }) => {
         <FilterVariandBox>
           <FilterVariand>
             {t("catalogFilterCategoryForWork")}
-            <Checkbox onClick={handleChangeByBrand} />
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("work")} />
           </FilterVariand>
 
           <FilterVariand>
             {t("catalogFilterCategoryForStudy")}
-            <Checkbox onClick={handleChangeByBrand} />
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("study")} />
           </FilterVariand>
 
           <FilterVariand>
             {t("catalogFilterCategoryForGaming")}
-            <Checkbox onClick={handleChangeByBrand} />
+            <Checkbox onChange={() => handleFilterNotebooksByBrand("gaming")} />
           </FilterVariand>
         </FilterVariandBox>
 
@@ -129,7 +139,6 @@ const FiltersCatalog = ({ getProducts }) => {
               sx={{
                 color: theme.palette.colorOrange.main,
               }}
-              // getAriaValueText={valuetext}
             />
           </FilterVariand>
         </FilterVariandBox>

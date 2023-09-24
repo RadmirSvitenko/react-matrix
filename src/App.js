@@ -11,6 +11,7 @@ import store from "store";
 import ProductDetails from "pages/productDetails/ProductDetails";
 import { getTokenFromCookies } from "cookies";
 import BlockedAccessAuth from "components/BlockedAccessAuth/BlockedAccessAuth";
+import Payment from "pages/payment/Payment";
 
 function App() {
   const token = getTokenFromCookies();
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/products/:id" element={<ProductDetails />} />
                 <Route path="/cart" element={<CartDetails />} />
+                <Route path="/payment" element={<Payment />} />
               </Route>
             )}
           </Routes>

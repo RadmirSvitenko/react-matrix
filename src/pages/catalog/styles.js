@@ -104,3 +104,11 @@ export const CatalogProductAbout = styled(Box)(() => ({
   color: "red",
   cursor: "pointer",
 }));
+
+export const CatalogPaginationContainer = styled(Grid)(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  padding: "50px 0px",
+}));

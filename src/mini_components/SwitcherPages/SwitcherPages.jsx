@@ -20,7 +20,7 @@ const SwitcherPages = () => {
         <Pagination
           onChange={handleSwitchPageCatalog}
           count={17}
-          page={1}
+          page={currentPage}
           defaultPage={1}
           color="primary"
         />
