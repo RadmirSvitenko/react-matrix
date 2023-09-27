@@ -33,7 +33,7 @@ const Authorization = () => {
 
     const response = await API_NOTEBOOKS.post("login/", {
       password: d.password,
-      username: d.userName,
+      username: d.username,
     });
 
     setTokenFromCookies(response.data.token);
@@ -43,9 +43,7 @@ const Authorization = () => {
     <AuthorizationForm onSubmit={handleSubmit(authData)}>
       <AuthorizationTitle>{t("authTitle")}</AuthorizationTitle>
       <AuthorizationInput
-        {...register("userName", {
-          required: "This is requaired field",
-        })}
+        {...register("username")}
         type="text"
         label={t("authLogin")}
         variant="outlined"
@@ -68,10 +66,7 @@ const Authorization = () => {
         }}
       />
       <AuthorizationInput
-        {...register("password", {
-          required: "This is requaired field",
-          minLength: 8,
-        })}
+        {...register("password")}
         type={showPassword ? "text" : "password"}
         label={t("authPassword")}
         variant="outlined"

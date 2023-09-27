@@ -5,13 +5,25 @@ const initialState = {
   isLoading: false,
   isLoadingPage: false,
   error: false,
-  detailsCard: [],
+  detailsCard: null,
 };
 
 export const getProductDetails = createAsyncThunk(
   "productsDetails/get",
   async (id) => {
     const response = await API_NOTEBOOKS.get(`notebooks/${id}`);
+    return response.data;
+  }
+);
+
+export const postProductDetails = createAsyncThunk(
+  "productsDetails/post",
+  async (params) => {
+    const response = await API_NOTEBOOKS.post(
+      `notebooks/${params.id}/cart/add/`,
+      JSON.stringify(params.notebook)
+    );
+    console.log("postProductDetails", response.data);
     return response.data;
   }
 );
@@ -24,10 +36,12 @@ const productDetailsSlice = createSlice({
     builder.addCase(getProductDetails.pending, (state) => {
       state.isLoadingPage = true;
     });
+
     builder.addCase(getProductDetails.fulfilled, (state, action) => {
       state.isLoadingPage = false;
       state.detailsCard = action.payload;
     });
+
     builder.addCase(getProductDetails.rejected, (state, action) => {
       state.error = action.error;
       state.isLoading = false;

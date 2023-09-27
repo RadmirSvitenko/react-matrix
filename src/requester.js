@@ -14,7 +14,8 @@ API_NOTEBOOKS.interceptors.request.use(async (config) => {
   const token = getTokenFromCookies();
 
   if (token) {
-    customConfig.headers.Authorization = token;
+    // customConfig.headers.Authorization = token;
+    customConfig.headers.Authorization = `Token ${token}`;
   }
   return customConfig;
 });

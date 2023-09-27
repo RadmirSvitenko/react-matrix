@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
@@ -46,4 +46,11 @@ export const AboutProductInfoBox = styled(Box)(() => ({
   flexWrap: "wrap",
   lineHeight: "40px",
   padding: "50px 0px",
+}));
+
+export const AddToCart = styled(Button)(() => ({
+  margin: "20px 0px",
+  backgroundColor: theme.palette.colorViolet.main,
+  color: "#fff",
+  transition: "0.5s",
 }));

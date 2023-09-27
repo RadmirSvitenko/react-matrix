@@ -496,40 +496,6 @@ const Characteristics = ({ notebook }) => {
             </td>
           </tr>
         </table>
-        <img
-          width={"400px"}
-          height={"400px"}
-          src={notebook.images[0]}
-          alt={notebook.title}
-        />
-
-        <img
-          width={"400px"}
-          height={"400px"}
-          src={notebook.images[2]}
-          alt={notebook.title}
-        />
-
-        <img
-          width={"400px"}
-          height={"400px"}
-          src={notebook.images[3]}
-          alt={notebook.title}
-        />
-
-        <img
-          width={"400px"}
-          height={"400px"}
-          src={notebook.images[4]}
-          alt={notebook.title}
-        />
-
-        <img
-          width={"400px"}
-          height={"400px"}
-          src={notebook.images[5]}
-          alt={notebook.title}
-        />
       </CharacteristicsInfoBox>
     </CharacteristicsContainer>
   );

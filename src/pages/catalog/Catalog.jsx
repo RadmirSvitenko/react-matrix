@@ -11,7 +11,7 @@ import {
   CatalogProductTitle,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { filterProductsByBrands, getProducts } from "reducers/catalogSlice";
+import { getProducts } from "reducers/catalogSlice";
 import { Box, Button, Grid, Pagination, Rating, Stack } from "@mui/material";
 import TitleCatalogProducts from "titles/TitleCatalogProducts";
 import { useTranslation } from "react-i18next";
@@ -36,17 +36,14 @@ const Catalog = () => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.catalog.catalogList);
+  const count = useSelector((state) => state.catalog.count);
   const isLoadingPage = useSelector((state) => state.catalog.isLoadingPage);
 
   console.log("products: ", products);
 
   const getNotebooks = useCallback(async () => {
-    dispatch(getProducts(currentPage));
-  }, [currentPage]);
-
-  // const getFilterNotebooksByBrands = useCallback(async () => {
-  //   dispatch(filterProductsByBrands());
-  // }, [filterProductsByBrands]);
+    dispatch(getProducts({ page: currentPage }));
+  }, [dispatch, currentPage]);
 
   const handleSwitchPageCatalog = (e, value) => {
     setCurrentPage(value);
@@ -54,15 +51,7 @@ const Catalog = () => {
 
   useEffect(() => {
     getNotebooks();
-  }, [currentPage]);
-
-  // useEffect(() => {
-  //   getFilterNotebooksByBrands();
-  // }, [filterProductsByBrands]);
-
-  if (isLoadingPage) {
-    return <LoadingPage />;
-  }
+  }, [getNotebooks]);
 
   return (
     <CatalogContainer>
@@ -77,7 +66,10 @@ const Catalog = () => {
           justifyContent: "space-between",
         }}
       >
-        <FiltersCatalog getProducts={getProducts} />
+        <FiltersCatalog
+          getProducts={getProducts}
+          setCurrentPage={setCurrentPage}
+        />
 
         <CatalogProductList>
           <TitleCatalogProducts />
@@ -92,7 +84,7 @@ const Catalog = () => {
               />
               <CatalogProductInfo onClick={() => toDetails(item)}>
                 <CatalogProductTitle>{item.title}</CatalogProductTitle>
-                <Rating readOnly value={5} />
+                <Rating readOnly value={item.avg_rating || 3} />
                 <CatalogProductBrand>{item.brand}</CatalogProductBrand>
                 <CatalogProductPrice>${item.price}</CatalogProductPrice>
                 <CatalogProductAbout>Узнать подробнее</CatalogProductAbout>
@@ -104,7 +96,7 @@ const Catalog = () => {
             <Stack spacing={2}>
               <Pagination
                 onChange={handleSwitchPageCatalog}
-                count={40}
+                count={Math.floor(count / 10)}
                 page={currentPage}
                 siblingCount={2}
                 color="primary"

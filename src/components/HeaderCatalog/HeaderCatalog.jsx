@@ -28,15 +28,19 @@ import Authentification from "components/Authentification/Authentification";
 import AccountLogInButton from "mini_components/AccountLogInButton/AccountLogInButton";
 import AccountIconButton from "mini_components/AccountIconButton/AccountIconButton";
 import ModalCart from "components/ModalCart/ModalCart";
-import axios from "axios";
-import { API_DUMMY, API_DUMMY_PRODUCTS } from "requester";
+import { getProducts, searchProducts } from "reducers/catalogSlice";
+import { useDispatch } from "react-redux";
 
 const HeaderCatalog = () => {
   const [language, setLanguage] = useState("en");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openCart, setOpenCart] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   // const [userIcon, setUserIcon] = useState();
   // console.log("userIcon: ", userIcon);
+
+  const dispatch = useDispatch();
 
   const numberUser = Math.floor(Math.random() * 10);
   console.log("numberUser: ", numberUser);
@@ -57,6 +61,16 @@ const HeaderCatalog = () => {
   };
   const toggleModalCart = () => {
     setOpenCart((open) => !open);
+  };
+
+  const handleSearchNotebooks = (e) => {
+    setSearchValue(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    dispatch(getProducts({ page: 1, search: searchValue }));
   };
 
   const handleChangeLanguage = (lang) => {
@@ -88,27 +102,31 @@ const HeaderCatalog = () => {
           <img width="80px" height="80px" src={Logotype} alt="Logotype" />
         </Link>
 
-        <CatalogSearch
-          sx={{
-            flexGrow: 1,
-            margin: "0px 300px",
-          }}
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                <Search
-                  sx={{
-                    color: theme.palette.colorNeon.main,
-                  }}
-                />
-              </IconButton>
-            ),
-          }}
-          InputLabelProps={{
-            style: { color: theme.palette.colorNeon.main },
-          }}
-          label={t("labelCatalogSearch")}
-        />
+        <form onSubmit={handleSubmit}>
+          <CatalogSearch
+            value={searchValue}
+            onChange={handleSearchNotebooks}
+            sx={{
+              flexGrow: 1,
+              margin: "0px 300px",
+            }}
+            InputProps={{
+              endAdornment: (
+                <IconButton type="submit">
+                  <Search
+                    sx={{
+                      color: theme.palette.colorNeon.main,
+                    }}
+                  />
+                </IconButton>
+              ),
+            }}
+            InputLabelProps={{
+              style: { color: theme.palette.colorNeon.main },
+            }}
+            label={t("labelCatalogSearch")}
+          />
+        </form>
 
         <HeaderIconsBox>
           <IconButton>

@@ -6,33 +6,23 @@ const initialState = {
   isLoadingPage: false,
   error: false,
   catalogList: [],
+  count: 0,
   catalogListFilterByBrand: [],
 };
 
 export const getProducts = createAsyncThunk(
   "productsList/get",
-  async (currenPage) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/?page=${currenPage}`);
+  async (params) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/`, { params });
     return response.data;
   }
 );
 
-export const filterProductsByBrandsTest = createAsyncThunk(
-  "productsList/get",
-  async (brand) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/`);
-    const data = response.data.results.filter((item) => item.brand === brand);
-    console.log("filterBrandTest: ", data);
-    return data;
-  }
-);
-
-export const filterProductsByBrands = createAsyncThunk(
-  "productsList/get",
-  async (brand) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/?brand=${brand}`);
-    console.log("filterBrand", response.data.results);
-    return response.data.results;
+export const searchProducts = createAsyncThunk(
+  "productsList/search",
+  async (params) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/`, { params });
+    return response.data;
   }
 );
 
@@ -47,6 +37,7 @@ const catalogSlice = createSlice({
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.isLoadingPage = false;
       state.catalogList = action.payload.results;
+      state.count = action.payload.count;
     });
     builder.addCase(getProducts.rejected, (state, action) => {
       state.error = action.error;

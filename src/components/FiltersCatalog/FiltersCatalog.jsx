@@ -24,10 +24,13 @@ import { useDispatch } from "react-redux";
 import {
   filterProductsByBrands,
   filterProductsByBrandsTest,
+  getProducts,
 } from "reducers/catalogSlice";
 
-const FiltersCatalog = () => {
+const FiltersCatalog = ({ setCurrentPage }) => {
   const [filterPrice, setFilterPrice] = useState([100, 2500]);
+  const [filterChecked, setFilterChecked] = useState("");
+  console.log("filtersChecked: ", filterChecked);
 
   const dispatch = useDispatch();
 
@@ -37,12 +40,15 @@ const FiltersCatalog = () => {
     setFilterPrice(newValue);
   };
 
-  const handleFilterNotebooksByBrand = async (brand) => {
-    dispatch(filterProductsByBrands(brand));
-  };
+  const handleFilterChange = async (event) => {
+    const { name, checked } = event.target;
+    console.log("checked: ", checked);
+    console.log("name: ", name);
+    await dispatch(getProducts({ page: 1, brand: name }));
+    setCurrentPage(1);
+    setFilterChecked(name);
 
-  const filterProductsByBrandsTest = async (brand) => {
-    dispatch(filterProductsByBrandsTest(brand));
+    console.log("inside");
   };
 
   return (
@@ -56,43 +62,74 @@ const FiltersCatalog = () => {
         <FilterVariandBox>
           <FilterVariand>
             APPLE{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("Apple")} />
+            <Checkbox
+              name="Apple"
+              checked={filterChecked === "Apple"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
             ASUS{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("ASUS")} />
+            <Checkbox
+              name="ASUS"
+              checked={filterChecked === "ASUS"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
             ACER{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("Acer")} />
+            <Checkbox
+              name="Acer"
+              checked={filterChecked === "Acer"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
             LENOVO{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("Lenovo")} />
+            <Checkbox
+              name="Lenovo"
+              checked={filterChecked === "Lenovo"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
             DELL{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("Dell")} />
+            <Checkbox
+              name="Dell"
+              checked={filterChecked === "Dell"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
-            HP <Checkbox onChange={() => handleFilterNotebooksByBrand("HP")} />
+            HP{" "}
+            <Checkbox
+              name="HP"
+              checked={filterChecked === "HP"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
 
           <FilterVariand>
             INFINIX{" "}
             <Checkbox
-              onChange={() => handleFilterNotebooksByBrand("INFINIX")}
+              name="INFINIX"
+              checked={filterChecked === "INFINIX"}
+              onChange={handleFilterChange}
             />
           </FilterVariand>
 
           <FilterVariand>
             MSI{" "}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("MSI")} />
+            <Checkbox
+              name="MSI"
+              checked={filterChecked === "MSI"}
+              onChange={handleFilterChange}
+            />
           </FilterVariand>
         </FilterVariandBox>
 
@@ -104,17 +141,17 @@ const FiltersCatalog = () => {
         <FilterVariandBox>
           <FilterVariand>
             {t("catalogFilterCategoryForWork")}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("work")} />
+            <Checkbox onChange={() => handleFilterChange("work")} />
           </FilterVariand>
 
           <FilterVariand>
             {t("catalogFilterCategoryForStudy")}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("study")} />
+            <Checkbox onChange={() => handleFilterChange("study")} />
           </FilterVariand>
 
           <FilterVariand>
             {t("catalogFilterCategoryForGaming")}
-            <Checkbox onChange={() => handleFilterNotebooksByBrand("gaming")} />
+            <Checkbox onChange={() => handleFilterChange("gaming")} />
           </FilterVariand>
         </FilterVariandBox>
 

@@ -14,14 +14,32 @@ import {
   AboutProductInfoBox,
   AboutProductSliderBox,
   AboutProductTitle,
+  AddToCart,
 } from "./styles";
 import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Add } from "@mui/icons-material";
 import theme from "theme";
+import { useDispatch } from "react-redux";
+import {
+  getProductDetails,
+  postProductDetails,
+} from "reducers/productDetailsSlice";
+import { useNavigate } from "react-router-dom";
 
 const AboutProduct = ({ notebook }) => {
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+
+  // const handleAddNotebooksToCart = async () => {
+  //   const storage = localStorage.setItem("notebooks", JSON.stringify(notebook));
+  //   console.log("storage: ", storage);
+  // };
+
+  const handleAddNotebooksToCart = async () => {
+    await dispatch(postProductDetails({ notebook: notebook, id: notebook.id }));
+  };
 
   return (
     <AboutProductContainer>
@@ -40,7 +58,7 @@ const AboutProduct = ({ notebook }) => {
           modules={[EffectCube, Pagination]}
           className="mySwiper"
         >
-          {/* <SwiperSlide>
+          <SwiperSlide>
             <img src={notebook.images[0]} alt={notebook.title} />
           </SwiperSlide>
           <SwiperSlide>
@@ -54,7 +72,7 @@ const AboutProduct = ({ notebook }) => {
           </SwiperSlide>
           <SwiperSlide>
             <img src={notebook.images[4]} alt={notebook.title} />
-          </SwiperSlide> */}
+          </SwiperSlide>
         </Swiper>
       </AboutProductSliderBox>
       <AboutProductInfoBox>
@@ -149,13 +167,11 @@ const AboutProduct = ({ notebook }) => {
               </AboutProductInfo>
             </td>
           </tr>
+
           <tr>
-            <Button
+            <AddToCart
+              onClick={handleAddNotebooksToCart}
               sx={{
-                margin: "20px 0px",
-                backgroundColor: theme.palette.colorViolet.main,
-                color: "#fff",
-                transition: "0.5s",
                 ":hover": {
                   transition: "0.5s",
                   backgroundColor: theme.palette.colorOrange.main,
@@ -164,7 +180,7 @@ const AboutProduct = ({ notebook }) => {
               variant="contained"
             >
               {t("addToCart")} <Add />
-            </Button>
+            </AddToCart>
           </tr>
         </table>
       </AboutProductInfoBox>

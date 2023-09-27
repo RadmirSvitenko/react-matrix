@@ -11,27 +11,33 @@ import {
 } from "@mui/material";
 import { Transition } from "@react-spring/web";
 import CartDetails from "pages/cartDetails/CartDetails";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { getUserCart } from "reducers/cartSlice";
+import { API_NOTEBOOKS } from "requester";
 
 const ModalCart = ({ open, onClose }) => {
-  const [openDialog, setOpenDialog] = useState(false);
+  const [cart, setCart] = useState([]);
+  console.log("cart: ", cart);
+
   const { t } = useTranslation();
 
   const navigate = useNavigate();
 
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
+  const dispatch = useDispatch();
+
+  // const cart = useSelector((state) => state.cartSlice.userCart);
+
+  const getDataModalCart = async () => {
+    const cartData = await dispatch(getUserCart());
+    setCart(cartData.payload);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleModalDialog = () => {
-    setOpenDialog((openDialog = !openDialog));
-  };
+  useEffect(() => {
+    getDataModalCart();
+  }, []);
 
   return (
     <Dialog
@@ -56,7 +62,11 @@ const ModalCart = ({ open, onClose }) => {
           width: "500px",
           height: "500px",
         }}
-      ></DialogContent>
+      >
+        {cart.map(({ notebook }) => (
+          <h1>{notebook.title}</h1>
+        ))}
+      </DialogContent>
       <DialogActions>
         <Typography>Count: 0</Typography>
       </DialogActions>

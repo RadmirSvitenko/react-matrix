@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import AboutProduct from "./aboutProduct/AboutProduct";
 import Characteristics from "./characteristics/Characteristics";
+import Reviews from "./reviews/Reviews";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,7 +67,7 @@ const ProductDetails = () => {
     getNotebooksDetails();
   }, [getNotebooksDetails]);
 
-  if (isLoadingPage) {
+  if (!notebook || isLoadingPage) {
     return <LoadingPage />;
   }
 
@@ -96,7 +97,7 @@ const ProductDetails = () => {
         <Characteristics notebook={notebook} />
       </CustomTabPanel>
       <CustomTabPanel value={detailsTab} index={2}>
-        Item Three
+        <Reviews />
       </CustomTabPanel>
     </ProductDetailsContainer>
   );

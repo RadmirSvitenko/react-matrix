@@ -69,3 +69,15 @@ export const TitleCatalog = styled(Box)(({ theme }) => ({
   textTransform: "uppercase",
   textAlign: "center",
 }));
+
+export const TitleReviews = styled(Box)(({ theme }) => ({
+  fontFamily: theme.fonts.blackOpsOne,
+  letterSpacing: "4px",
+  width: "100%",
+  fontSize: "36px",
+  color: theme.palette.colorViolet.main,
+  margin: "30px 0px",
+  fontWeight: "700",
+  textTransform: "uppercase",
+  textAlign: "center",
+}));
