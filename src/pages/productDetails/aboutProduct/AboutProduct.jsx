@@ -1,6 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFlip, Pagination, Navigation, EffectCube } from "swiper/modules";
+import {
+  EffectFlip,
+  Pagination,
+  Navigation,
+  EffectCube,
+  Autoplay,
+} from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
@@ -45,8 +51,11 @@ const AboutProduct = ({ notebook }) => {
     <AboutProductContainer>
       <AboutProductSliderBox>
         <Swiper
-          autoplay={true}
+          autoplay={{
+            delay: 5000,
+          }}
           effect={"cube"}
+          loop
           grabCursor={true}
           cubeEffect={{
             shadow: true,
@@ -55,7 +64,7 @@ const AboutProduct = ({ notebook }) => {
             shadowScale: 0.94,
           }}
           pagination={true}
-          modules={[EffectCube, Pagination]}
+          modules={[EffectCube, Pagination, Autoplay]}
           className="mySwiper"
         >
           <SwiperSlide>

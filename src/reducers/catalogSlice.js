@@ -21,7 +21,7 @@ export const getProducts = createAsyncThunk(
 export const searchProducts = createAsyncThunk(
   "productsList/search",
   async (params) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/`, { params });
+    const response = await API_NOTEBOOKS.get(`notebooks/?search=`, { params });
     return response.data;
   }
 );

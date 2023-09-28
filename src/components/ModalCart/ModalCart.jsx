@@ -6,21 +6,68 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  IconButton,
   Slide,
   Typography,
 } from "@mui/material";
 import { Transition } from "@react-spring/web";
 import CartDetails from "pages/cartDetails/CartDetails";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserCart } from "reducers/cartSlice";
+import {
+  getUserCart,
+  postDeleteProdoctModalcart,
+  postDeleteProductModalcart,
+} from "reducers/cartSlice";
 import { API_NOTEBOOKS } from "requester";
+import {
+  ButtonToPayment,
+  ButtonToPaymentBox,
+  ModalCustomDialog,
+  ModalCustomDialogContent,
+  ModalcartActionInfo,
+  ModalcartBrand,
+  ModalcartCpuName,
+  ModalcartFucntionBox,
+  ModalcartFunction,
+  ModalcartImageBox,
+  ModalcartInfo,
+  ModalcartInfoBox,
+  ModalcartModel,
+  ModalcartNumberOfCoresProcessor,
+  ModalcartPrice,
+  ModalcartProductContainer,
+  ModalcartRam,
+  ModalcartTitle,
+  PaymentBox,
+} from "./styles";
+import theme from "theme";
+import { Add, Delete, DeleteForever, Remove } from "@mui/icons-material";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-flip";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./styles.css";
+
+import { EffectFlip, Pagination, Navigation } from "swiper/modules";
+import { postProductDetails } from "reducers/productDetailsSlice";
 
 const ModalCart = ({ open, onClose }) => {
   const [cart, setCart] = useState([]);
+  // const [totalQuantity, setTotalQuantity] = useState();
+  // const [totalPrice, setTotalPrice] = useState();
+  // const [actualPrice, setActualPrice] = useState();
+
   console.log("cart: ", cart);
+  // console.log("actualPrice: ", actualPrice);
+  // console.log("totalQuantity: ", totalQuantity);
+  // console.log("totalPrice: ", totalPrice);
 
   const { t } = useTranslation();
 
@@ -28,21 +75,42 @@ const ModalCart = ({ open, onClose }) => {
 
   const dispatch = useDispatch();
 
-  // const cart = useSelector((state) => state.cartSlice.userCart);
-
-  const getDataModalCart = async () => {
+  const getDataModalCart = useCallback(async () => {
     const cartData = await dispatch(getUserCart());
     setCart(cartData.payload);
+  }, [dispatch]);
+
+  const handleDeleteProductModalcart = async (id, notebook) => {
+    await dispatch(
+      postDeleteProductModalcart({
+        id: id,
+        notebook: notebook,
+      })
+    );
   };
+
+  const handleAddProductModalcart = async (id, notebook) => {
+    await dispatch(
+      postProductDetails({
+        id: id,
+        notebook: notebook,
+      })
+    );
+  };
+
+  let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
+
+  let totalPrice = cart.reduce((acc, actualPrice) => acc + actualPrice, 0);
 
   useEffect(() => {
     getDataModalCart();
-  }, []);
+  }, [getDataModalCart]);
 
   return (
-    <Dialog
+    <ModalCustomDialog
       TransitionComponent={Slide}
       keepMounted
+      maxWidth={"800px"}
       open={open}
       onClose={onClose}
       sx={{
@@ -51,26 +119,112 @@ const ModalCart = ({ open, onClose }) => {
     >
       <DialogTitle>
         <Grid width={"100%"} display={"flex"} justifyContent={"space-between"}>
-          <Box>Cart</Box>
-          <Button onClick={() => navigate("/cart")} variant="text">
-            Details
+          <Box>{t("modalcartTitle")}</Box>
+          <Button
+            onClick={() => navigate("/cart")}
+            disabled={cart.length < 1 ? true : false}
+            variant="outlined"
+          >
+            {t("modalcartButtonDetails")}
           </Button>
         </Grid>
       </DialogTitle>
-      <DialogContent
-        sx={{
-          width: "500px",
-          height: "500px",
-        }}
-      >
-        {cart.map(({ notebook }) => (
-          <h1>{notebook.title}</h1>
+      <ModalCustomDialogContent>
+        {cart.map(({ notebook, quantity }) => (
+          <ModalcartProductContainer>
+            <ModalcartImageBox>
+              <img
+                width={"250px"}
+                height={"250px"}
+                src={notebook.images[0]}
+                alt={notebook.title}
+              />
+            </ModalcartImageBox>
+
+            <ModalcartInfoBox>
+              <ModalcartTitle>{notebook.title}</ModalcartTitle>
+              <ModalcartInfo>
+                {t("productDetailsBrand")}: {notebook.brand}
+              </ModalcartInfo>
+              <ModalcartInfo>
+                {t("productDetailsModel")}: {notebook.model}
+              </ModalcartInfo>
+              <ModalcartInfo>
+                {t("productDetailsCPUName")}: {notebook.cpuName}
+              </ModalcartInfo>
+              <ModalcartInfo>
+                {t("productDetailsNumberOfCoresProcessor")}:{" "}
+                {notebook.numberOfCoresProcessor}
+              </ModalcartInfo>
+              <ModalcartInfo>
+                {t("productDetailsRAM")}: {notebook.ram}
+              </ModalcartInfo>
+              <ModalcartInfo
+                sx={{
+                  color: theme.palette.colorViolet.main,
+                  fontSize: "26px",
+                }}
+              >
+                ${notebook.price * quantity}
+              </ModalcartInfo>
+            </ModalcartInfoBox>
+
+            <ModalcartFucntionBox>
+              <ModalcartFunction>
+                <IconButton
+                  onClick={() =>
+                    handleAddProductModalcart(notebook.id, notebook)
+                  }
+                >
+                  <Add
+                    sx={{
+                      color: "#fff",
+                    }}
+                  />
+                </IconButton>
+                {quantity}
+                <IconButton
+                  onClick={() =>
+                    handleDeleteProductModalcart(notebook.id, notebook)
+                  }
+                >
+                  <Remove
+                    sx={{
+                      color: "#fff",
+                    }}
+                  />
+                </IconButton>
+              </ModalcartFunction>
+            </ModalcartFucntionBox>
+          </ModalcartProductContainer>
         ))}
-      </DialogContent>
+      </ModalCustomDialogContent>
       <DialogActions>
-        <Typography>Count: 0</Typography>
+        <PaymentBox>
+          <Button
+            onClick={() => navigate("/payment")}
+            disabled={cart.length < 1 ? true : false}
+            variant="outlined"
+          >
+            {t("modalcartButtonPayment")}
+          </Button>
+        </PaymentBox>
+
+        <Grid display={"flex"} flexDirection={"column"}>
+          <ModalcartActionInfo>
+            {t("modalcartTotalQuantity")}: {totalQuantity}
+          </ModalcartActionInfo>
+
+          <ModalcartActionInfo>
+            {t("modalcartTotalPrice")}: $
+            {cart.reduce(
+              (acc, { notebook, quantity }) => acc + notebook.price * quantity,
+              0
+            )}
+          </ModalcartActionInfo>
+        </Grid>
       </DialogActions>
-    </Dialog>
+    </ModalCustomDialog>
   );
 };
 

@@ -1,10 +1,8 @@
 import { ExpandMore, Inbox, Mail } from "@mui/icons-material";
 import {
   Box,
-  Button,
   Checkbox,
   Divider,
-  Drawer,
   Grid,
   List,
   ListItem,
@@ -21,34 +19,39 @@ import { FilterTitle, FilterVariand, FilterVariandBox } from "./styles";
 import theme from "theme";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import {
-  filterProductsByBrands,
-  filterProductsByBrandsTest,
-  getProducts,
-} from "reducers/catalogSlice";
+import { getProducts } from "reducers/catalogSlice";
 
 const FiltersCatalog = ({ setCurrentPage }) => {
   const [filterPrice, setFilterPrice] = useState([100, 2500]);
   const [filterChecked, setFilterChecked] = useState("");
   console.log("filtersChecked: ", filterChecked);
+  console.log("filterPrice: ", filterPrice);
 
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
 
-  const handleFilterPrice = (event, newValue) => {
+  // const handleFilterPrice = async () => {};
+
+  const handleChangeFilterPrice = async (event, newValue) => {
     setFilterPrice(newValue);
+    await dispatch(
+      getProducts({
+        page: 1,
+        min_price: filterPrice[0],
+        max_price: filterPrice[1],
+      })
+    );
+    setCurrentPage(1);
   };
 
-  const handleFilterChange = async (event) => {
+  const handleChangeFilterBrands = async (event) => {
     const { name, checked } = event.target;
     console.log("checked: ", checked);
     console.log("name: ", name);
     await dispatch(getProducts({ page: 1, brand: name }));
     setCurrentPage(1);
     setFilterChecked(name);
-
-    console.log("inside");
   };
 
   return (
@@ -65,7 +68,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="Apple"
               checked={filterChecked === "Apple"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -74,7 +77,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="ASUS"
               checked={filterChecked === "ASUS"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -83,7 +86,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="Acer"
               checked={filterChecked === "Acer"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -92,7 +95,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="Lenovo"
               checked={filterChecked === "Lenovo"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -101,7 +104,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="Dell"
               checked={filterChecked === "Dell"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -110,7 +113,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="HP"
               checked={filterChecked === "HP"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -119,7 +122,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="INFINIX"
               checked={filterChecked === "INFINIX"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
           </FilterVariand>
 
@@ -128,30 +131,8 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Checkbox
               name="MSI"
               checked={filterChecked === "MSI"}
-              onChange={handleFilterChange}
+              onChange={handleChangeFilterBrands}
             />
-          </FilterVariand>
-        </FilterVariandBox>
-
-        <FilterTitle textAlign={"center"}>
-          {t("catalogFilterCategoryTitle")}
-        </FilterTitle>
-        <Divider />
-
-        <FilterVariandBox>
-          <FilterVariand>
-            {t("catalogFilterCategoryForWork")}
-            <Checkbox onChange={() => handleFilterChange("work")} />
-          </FilterVariand>
-
-          <FilterVariand>
-            {t("catalogFilterCategoryForStudy")}
-            <Checkbox onChange={() => handleFilterChange("study")} />
-          </FilterVariand>
-
-          <FilterVariand>
-            {t("catalogFilterCategoryForGaming")}
-            <Checkbox onChange={() => handleFilterChange("gaming")} />
           </FilterVariand>
         </FilterVariandBox>
 
@@ -169,7 +150,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
             <Slider
               aria-label="Filter Price"
               value={filterPrice}
-              onChange={handleFilterPrice}
+              onChange={handleChangeFilterPrice}
               valueLabelDisplay="auto"
               max={2500}
               min={100}

@@ -14,6 +14,18 @@ export const getUserCart = createAsyncThunk("getUserCart/get", async () => {
   return response.data.results;
 });
 
+export const postDeleteProductModalcart = createAsyncThunk(
+  "postDeleteProductModalcart/post",
+  async (params) => {
+    const response = await API_NOTEBOOKS.post(
+      `notebooks/${params.id}/cart/remove/`,
+      JSON.stringify(params.notebook)
+    );
+    console.log("postDeleteProductModalcart", response.data);
+    return response.data;
+  }
+);
+
 const cartSlice = createSlice({
   name: "productDetailsSlice",
   initialState,

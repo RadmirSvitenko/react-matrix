@@ -37,11 +37,12 @@ export const HeaderSloganBox = styled(Box)(({ theme }) => ({
 }));
 
 export const CatalogSearch = styled(TextField)(({ theme }) => ({
+  width: "350px",
   "& .MuiOutlinedInput-root": {
-    color: theme.palette.colorNeon.main,
+    color: theme.palette.colorOrange.main,
 
     "& fieldset": {
-      borderColor: theme.palette.colorNeon.main,
+      borderColor: theme.palette.colorOrange.main,
       transition: "0.5s",
     },
 

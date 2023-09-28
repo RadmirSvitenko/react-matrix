@@ -66,10 +66,7 @@ const Catalog = () => {
           justifyContent: "space-between",
         }}
       >
-        <FiltersCatalog
-          getProducts={getProducts}
-          setCurrentPage={setCurrentPage}
-        />
+        <FiltersCatalog setCurrentPage={setCurrentPage} />
 
         <CatalogProductList>
           <TitleCatalogProducts />

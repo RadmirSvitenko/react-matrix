@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   CatalogSearch,
   HeaderContainer,
@@ -14,6 +14,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import {
+  Close,
   LanguageOutlined,
   Search,
   ShoppingCartRounded,
@@ -30,26 +31,27 @@ import AccountIconButton from "mini_components/AccountIconButton/AccountIconButt
 import ModalCart from "components/ModalCart/ModalCart";
 import { getProducts, searchProducts } from "reducers/catalogSlice";
 import { useDispatch } from "react-redux";
+import { getUserCart } from "reducers/cartSlice";
 
 const HeaderCatalog = () => {
   const [language, setLanguage] = useState("en");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openCart, setOpenCart] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
-  // const [userIcon, setUserIcon] = useState();
-  // console.log("userIcon: ", userIcon);
+  const [cart, setCart] = useState([]);
+  console.log("searchValue: ", searchValue);
 
   const dispatch = useDispatch();
 
   const numberUser = Math.floor(Math.random() * 10);
   console.log("numberUser: ", numberUser);
 
-  // const getIconUser = async () => {
-  //   const response = await API_DUMMY.get(`users/5`);
-  //   const user = await response.data;
-  //   setUserIcon(user);
-  // };
+  const getTotatQuantityCart = async () => {
+    const cartData = await dispatch(getUserCart());
+    setCart(cartData.payload);
+  };
+
+  let cartQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const open = Boolean(anchorEl);
 
@@ -59,8 +61,13 @@ const HeaderCatalog = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const toggleModalCart = () => {
     setOpenCart((open) => !open);
+  };
+
+  const handleClearSearchValue = () => {
+    setSearchValue("");
   };
 
   const handleSearchNotebooks = (e) => {
@@ -91,9 +98,9 @@ const HeaderCatalog = () => {
     });
   };
 
-  // useEffect(() => {
-  //   getIconUser();
-  // }, []);
+  useEffect(() => {
+    getTotatQuantityCart();
+  }, []);
 
   return (
     <HeaderContainer>
@@ -108,21 +115,23 @@ const HeaderCatalog = () => {
             onChange={handleSearchNotebooks}
             sx={{
               flexGrow: 1,
-              margin: "0px 300px",
             }}
             InputProps={{
               endAdornment: (
-                <IconButton type="submit">
-                  <Search
-                    sx={{
-                      color: theme.palette.colorNeon.main,
-                    }}
-                  />
+                <IconButton
+                  type="submit"
+                  sx={{ color: theme.palette.colorOrange.main }}
+                >
+                  {searchValue.length >= 1 ? (
+                    <Close onClick={handleClearSearchValue} />
+                  ) : (
+                    <Search />
+                  )}
                 </IconButton>
               ),
             }}
             InputLabelProps={{
-              style: { color: theme.palette.colorNeon.main },
+              style: { color: theme.palette.colorOrange.main },
             }}
             label={t("labelCatalogSearch")}
           />
@@ -143,7 +152,7 @@ const HeaderCatalog = () => {
           </IconButton>
 
           <IconButton onClick={toggleModalCart}>
-            <Badge color="success" badgeContent={0}>
+            <Badge color="success" badgeContent={cartQuantity}>
               <ShoppingCartRounded
                 fontSize="large"
                 sx={{
