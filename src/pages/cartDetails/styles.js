@@ -1,41 +1,41 @@
-import { Box, Dialog, DialogContent, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
-export const ModalCustomDialog = styled(Dialog)(() => ({
+export const CartDetailsProductContainer = styled(Grid)(() => ({
+  width: "100%",
+  height: "100vh",
+}));
+
+export const CartDetailsAllProducts = styled(Grid)(() => ({
+  width: "70%",
+  padding: "50px",
   display: "flex",
+  alignItems: "center",
   justifyContent: "center",
-  alignItems: "center",
-}));
-
-export const ModalCustomDialogContent = styled(DialogContent)(() => ({
-  display: "flex",
-  alignItems: "center",
   flexDirection: "column",
-  width: "900px",
+  flexWrap: "wrap",
 }));
 
-export const ModalcartProductContainer = styled(Grid)(() => ({
+export const CartDetailsCountProducts = styled(Grid)(() => ({
+  width: "25%",
+  height: "80vh",
+  background: "#000",
+}));
+
+export const CartDetailsProductBox = styled(Grid)(() => ({
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
-  width: "100%",
-  margin: "20px 0px",
-  borderRadius: "20px",
-  backgroundColor: "rgba(0, 0, 0, 0.05)",
 }));
 
-export const ModalcartImageBox = styled(Box)(() => ({
+export const CartDetailsImageBox = styled(Box)(() => ({
   borderRadius: "20px",
-  width: "250px",
-  height: "250px",
-  display: "flex",
-  position: "relative",
-  padding: "0px",
-  margin: "0px",
+  width: "500px",
+  height: "500px",
 }));
 
-export const ModalcartInfoBox = styled(Box)(() => ({
+export const CartDetailsInfoBox = styled(Box)(() => ({
   display: "flex",
   width: "auto",
   padding: "0px 20px",
@@ -45,7 +45,7 @@ export const ModalcartInfoBox = styled(Box)(() => ({
   justifyContent: "space-evenly",
 }));
 
-export const ModalcartFucntionBox = styled(Box)(() => ({
+export const CartDetailsFucntionBox = styled(Box)(() => ({
   display: "flex",
   width: "150px",
   height: "250px",
@@ -54,7 +54,7 @@ export const ModalcartFucntionBox = styled(Box)(() => ({
   justifyContent: "center",
 }));
 
-export const ModalcartTitle = styled(Box)(() => ({
+export const CartDetailsTitle = styled(Box)(() => ({
   fontFamily: theme.fonts.oswald,
   display: "flex",
   fontSize: "20px",
@@ -63,13 +63,13 @@ export const ModalcartTitle = styled(Box)(() => ({
   fontWeight: "600",
 }));
 
-export const ModalcartInfo = styled(Box)(() => ({
+export const CartDetailsInfo = styled(Box)(() => ({
   fontFamily: theme.fonts.valeraRound,
   fontSize: "16px",
   fontWeight: "600",
 }));
 
-export const ModalcartFunction = styled(Box)(() => ({
+export const CartDetailsFunction = styled(Box)(() => ({
   fontFamily: theme.fonts.valeraRound,
   fontSize: "20px",
   fontWeight: "800",
@@ -80,7 +80,7 @@ export const ModalcartFunction = styled(Box)(() => ({
   color: "#fff",
 }));
 
-export const ModalcartActionInfo = styled(Box)(() => ({
+export const CartDetailsActionInfo = styled(Box)(() => ({
   fontFamily: theme.fonts.valeraRound,
   fontSize: "18px",
   fontWeight: "700",
@@ -97,4 +97,11 @@ export const PaymentBox = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   flexGrow: "1",
+}));
+
+export const CartDetailsSlideBox = styled(Box)(() => ({
+  marginBottom: "50px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 }));

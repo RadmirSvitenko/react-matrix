@@ -30,7 +30,7 @@ const Catalog = () => {
   const navigate = useNavigate();
 
   const toDetails = (product) => {
-    navigate(`/products/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const dispatch = useDispatch();

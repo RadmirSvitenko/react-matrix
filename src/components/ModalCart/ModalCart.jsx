@@ -46,28 +46,17 @@ import {
 import theme from "theme";
 import { Add, Delete, DeleteForever, Remove } from "@mui/icons-material";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/effect-flip";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import "./styles.css";
-
-import { EffectFlip, Pagination, Navigation } from "swiper/modules";
 import { postProductDetails } from "reducers/productDetailsSlice";
 
 const ModalCart = ({ open, onClose }) => {
   const [cart, setCart] = useState([]);
-  // const [totalQuantity, setTotalQuantity] = useState();
-  // const [totalPrice, setTotalPrice] = useState();
-  // const [actualPrice, setActualPrice] = useState();
 
   console.log("cart: ", cart);
-  // console.log("actualPrice: ", actualPrice);
-  // console.log("totalQuantity: ", totalQuantity);
-  // console.log("totalPrice: ", totalPrice);
 
   const { t } = useTranslation();
 
@@ -97,10 +86,6 @@ const ModalCart = ({ open, onClose }) => {
       })
     );
   };
-
-  let totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
-
-  let totalPrice = cart.reduce((acc, actualPrice) => acc + actualPrice, 0);
 
   useEffect(() => {
     getDataModalCart();
@@ -212,7 +197,8 @@ const ModalCart = ({ open, onClose }) => {
 
         <Grid display={"flex"} flexDirection={"column"}>
           <ModalcartActionInfo>
-            {t("modalcartTotalQuantity")}: {totalQuantity}
+            {t("modalcartTotalQuantity")}:{" "}
+            {cart.reduce((acc, { quantity }) => acc + quantity, 0)}
           </ModalcartActionInfo>
 
           <ModalcartActionInfo>

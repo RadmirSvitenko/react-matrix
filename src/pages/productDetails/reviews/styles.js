@@ -28,7 +28,7 @@ export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
 
 export const ReviewsContainer = styled(Grid)(() => ({
   width: "100%",
-  height: "100%",
+  height: "100vh",
   display: "flex",
   justifyContent: "flex-start",
   flexDirection: "column",
