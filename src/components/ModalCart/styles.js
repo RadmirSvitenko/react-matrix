@@ -51,7 +51,7 @@ export const ModalcartFucntionBox = styled(Box)(() => ({
   height: "250px",
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-around",
 }));
 
 export const ModalcartTitle = styled(Box)(() => ({

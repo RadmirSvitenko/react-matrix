@@ -8,11 +8,20 @@ import {
   CatalogProductInfo,
   CatalogProductList,
   CatalogProductPrice,
+  CatalogProductStock,
   CatalogProductTitle,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "reducers/catalogSlice";
-import { Box, Button, Grid, Pagination, Rating, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Pagination,
+  Rating,
+  Stack,
+} from "@mui/material";
 import TitleCatalogProducts from "titles/TitleCatalogProducts";
 import { useTranslation } from "react-i18next";
 import theme from "theme";
@@ -21,11 +30,16 @@ import { useNavigate } from "react-router-dom";
 import HeaderCatalog from "components/HeaderCatalog/HeaderCatalog";
 import SwitcherPages from "mini_components/SwitcherPages/SwitcherPages";
 import FiltersCatalog from "components/FiltersCatalog/FiltersCatalog";
+import { getTokenFromCookies } from "cookies";
+import { AddShoppingCart, Badge } from "@mui/icons-material";
+import { postProductDetails } from "reducers/productDetailsSlice";
+import { getUserCart } from "reducers/cartSlice";
 
 const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("currentPage: ", currentPage);
+  const [cart, setCart] = useState([]);
 
+  const token = getTokenFromCookies();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -41,9 +55,27 @@ const Catalog = () => {
 
   console.log("products: ", products);
 
+  const getTotatQuantityCart = useCallback(async () => {
+    const cartData = await dispatch(getUserCart());
+    console.log("testTotalHeaderQuantity: ", cartData);
+    setCart(cartData.payload);
+  }, [dispatch]);
+
+  console.log("HeaderCart: ", cart);
+
+  const totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
+  console.log("totalQuantity: ", totalQuantity);
+
   const getNotebooks = useCallback(async () => {
     dispatch(getProducts({ page: currentPage }));
+    getTotatQuantityCart();
   }, [dispatch, currentPage]);
+
+  const handleAddNotebooksToCart = async (notebook, id) => {
+    console.log("resultAddCatalog", id);
+    await dispatch(postProductDetails({ notebook, id }));
+    getTotatQuantityCart();
+  };
 
   const handleSwitchPageCatalog = (e, value) => {
     setCurrentPage(value);
@@ -55,7 +87,7 @@ const Catalog = () => {
 
   return (
     <CatalogContainer>
-      <HeaderCatalog />
+      <HeaderCatalog totalQuantity={totalQuantity} />
 
       <Box
         sx={{
@@ -73,18 +105,40 @@ const Catalog = () => {
           {products?.map((item) => (
             <CatalogProductBox>
               <img
-                width={"270px"}
-                height={"270px"}
+                width={"250px"}
+                height={"250px"}
                 src={item.images[0]}
                 alt={item.title}
-                style={{ borderRadius: "25px" }}
               />
-              <CatalogProductInfo onClick={() => toDetails(item)}>
+
+              <CatalogProductInfo>
                 <CatalogProductTitle>{item.title}</CatalogProductTitle>
-                <Rating readOnly value={item.avg_rating || 3} />
-                <CatalogProductBrand>{item.brand}</CatalogProductBrand>
-                <CatalogProductPrice>${item.price}</CatalogProductPrice>
-                <CatalogProductAbout>Узнать подробнее</CatalogProductAbout>
+                <Grid display={"flex"} justifyContent={"space-around"}>
+                  <Rating readOnly value={item.avg_rating || 3} />
+                  <CatalogProductBrand>{item.brand}</CatalogProductBrand>
+                </Grid>
+
+                <Grid display={"flex"} justifyContent={"space-around"}>
+                  <CatalogProductStock>
+                    {t("productDetailsStock")}: {item.stock}
+                  </CatalogProductStock>
+                  <CatalogProductPrice>${item.price}</CatalogProductPrice>
+                </Grid>
+
+                <Grid display={"flex"} justifyContent={"space-around"}>
+                  <CatalogProductAbout onClick={() => toDetails(item)}>
+                    {t("catalogButtonLearnMore")}
+                  </CatalogProductAbout>
+                  <IconButton
+                    onClick={() => handleAddNotebooksToCart(item, item.id)}
+                  >
+                    <AddShoppingCart
+                      sx={{
+                        color: theme.palette.colorOrange.main,
+                      }}
+                    />
+                  </IconButton>
+                </Grid>
               </CatalogProductInfo>
             </CatalogProductBox>
           ))}

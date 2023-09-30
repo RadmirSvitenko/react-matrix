@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { getProducts } from "reducers/catalogSlice";
 
 const FiltersCatalog = ({ setCurrentPage }) => {
-  const [filterPrice, setFilterPrice] = useState([100, 2500]);
+  const [filterPrice, setFilterPrice] = useState([100, 3000]);
   const [filterChecked, setFilterChecked] = useState("");
   console.log("filtersChecked: ", filterChecked);
   console.log("filterPrice: ", filterPrice);
@@ -35,6 +35,9 @@ const FiltersCatalog = ({ setCurrentPage }) => {
 
   const handleChangeFilterPrice = async (event, newValue) => {
     setFilterPrice(newValue);
+  };
+
+  const handleChangeFilterPriceRequest = async () => {
     await dispatch(
       getProducts({
         page: 1,
@@ -55,7 +58,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
   };
 
   return (
-    <Grid container width={"300px"}>
+    <Grid position={"sticky"} container width={"300px"}>
       <Box sx={{ width: "300px", padding: "10px" }}>
         <FilterTitle textAlign={"center"}>
           {t("catalogFilterBrandsTitle")}
@@ -151,8 +154,9 @@ const FiltersCatalog = ({ setCurrentPage }) => {
               aria-label="Filter Price"
               value={filterPrice}
               onChange={handleChangeFilterPrice}
+              onMouseUp={handleChangeFilterPriceRequest}
               valueLabelDisplay="auto"
-              max={2500}
+              max={3000}
               min={100}
               sx={{
                 color: theme.palette.colorOrange.main,

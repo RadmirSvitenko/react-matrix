@@ -10,7 +10,12 @@ import {
   RegistrationTitle,
 } from "./styles";
 import { IconButton } from "@mui/material";
-import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Mail,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import theme from "theme";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -121,20 +126,12 @@ const Authorization = () => {
         required
         InputProps={{
           endAdornment: (
-            <IconButton onClick={handleShowPassword}>
-              {showPassword ? (
-                <Visibility
-                  sx={{
-                    color: theme.palette.colorOrange.main,
-                  }}
-                />
-              ) : (
-                <VisibilityOff
-                  sx={{
-                    color: theme.palette.colorOrange.main,
-                  }}
-                />
-              )}
+            <IconButton>
+              <Mail
+                sx={{
+                  color: theme.palette.colorOrange.main,
+                }}
+              />
             </IconButton>
           ),
         }}

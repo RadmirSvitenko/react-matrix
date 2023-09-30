@@ -33,25 +33,15 @@ import { getProducts, searchProducts } from "reducers/catalogSlice";
 import { useDispatch } from "react-redux";
 import { getUserCart } from "reducers/cartSlice";
 
-const HeaderCatalog = () => {
+const HeaderCatalog = ({ totalQuantity }) => {
   const [language, setLanguage] = useState("en");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openCart, setOpenCart] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [cart, setCart] = useState([]);
+
   console.log("searchValue: ", searchValue);
 
   const dispatch = useDispatch();
-
-  const numberUser = Math.floor(Math.random() * 10);
-  console.log("numberUser: ", numberUser);
-
-  const getTotatQuantityCart = async () => {
-    const cartData = await dispatch(getUserCart());
-    setCart(cartData.payload);
-  };
-
-  let cartQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const open = Boolean(anchorEl);
 
@@ -70,9 +60,10 @@ const HeaderCatalog = () => {
     setSearchValue("");
   };
 
-  const handleSearchNotebooks = (e) => {
+  const handleSearchNotebooks = async (e) => {
     setSearchValue(e.target.value);
     console.log(e.target.value);
+    await dispatch(searchProducts(searchValue));
   };
 
   const handleSubmit = async (event) => {
@@ -97,10 +88,6 @@ const HeaderCatalog = () => {
       behavior: "smooth",
     });
   };
-
-  useEffect(() => {
-    getTotatQuantityCart();
-  }, []);
 
   return (
     <HeaderContainer>
@@ -142,7 +129,6 @@ const HeaderCatalog = () => {
             <Avatar
               sizes="medium"
               alt="Avatar"
-              // src={userIcon.image}
               sx={{
                 backgroundColor: theme.palette.colorOrange.main,
               }}
@@ -152,7 +138,7 @@ const HeaderCatalog = () => {
           </IconButton>
 
           <IconButton onClick={toggleModalCart}>
-            <Badge color="success" badgeContent={cartQuantity}>
+            <Badge color="success" badgeContent={totalQuantity}>
               <ShoppingCartRounded
                 fontSize="large"
                 sx={{

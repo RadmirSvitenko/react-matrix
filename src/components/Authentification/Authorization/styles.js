@@ -26,6 +26,8 @@ export const AuthorizationForm = styled("form")(({ theme }) => ({
 export const AuthorizationInput = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     color: theme.palette.colorOrange.main,
+    fontWeight: "600",
+    letterSpacing: "2px",
 
     "& fieldset": {
       borderColor: theme.palette.colorOrange.main,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AuthButton,
   AuthorizationForm,
@@ -19,7 +19,6 @@ import Catalog from "pages/catalog/Catalog";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
-
   const { register, handleSubmit } = useForm();
 
   const { t } = useTranslation();

@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Transition } from "@react-spring/web";
-import CartDetails from "pages/cartDetails/CartDetails";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +20,6 @@ import {
   postDeleteProdoctModalcart,
   postDeleteProductModalcart,
 } from "reducers/cartSlice";
-import { API_NOTEBOOKS } from "requester";
 import {
   ButtonToPayment,
   ButtonToPaymentBox,
@@ -69,13 +67,14 @@ const ModalCart = ({ open, onClose }) => {
     setCart(cartData.payload);
   }, [dispatch]);
 
-  const handleDeleteProductModalcart = async (id, notebook) => {
+  const handleRemoveProductModalcart = async (id, notebook) => {
     await dispatch(
       postDeleteProductModalcart({
         id: id,
         notebook: notebook,
       })
     );
+    await getDataModalCart();
   };
 
   const handleAddProductModalcart = async (id, notebook) => {
@@ -85,11 +84,12 @@ const ModalCart = ({ open, onClose }) => {
         notebook: notebook,
       })
     );
+    await getDataModalCart();
   };
 
   useEffect(() => {
     getDataModalCart();
-  }, [getDataModalCart]);
+  }, []);
 
   return (
     <ModalCustomDialog
@@ -105,13 +105,6 @@ const ModalCart = ({ open, onClose }) => {
       <DialogTitle>
         <Grid width={"100%"} display={"flex"} justifyContent={"space-between"}>
           <Box>{t("modalcartTitle")}</Box>
-          <Button
-            onClick={() => navigate("/cart")}
-            disabled={cart.length < 1 ? true : false}
-            variant="outlined"
-          >
-            {t("modalcartButtonDetails")}
-          </Button>
         </Grid>
       </DialogTitle>
       <ModalCustomDialogContent>
@@ -147,15 +140,28 @@ const ModalCart = ({ open, onClose }) => {
               <ModalcartInfo
                 sx={{
                   color: theme.palette.colorViolet.main,
-                  fontSize: "26px",
                 }}
               >
-                ${notebook.price * quantity}
+                ${notebook.price}
               </ModalcartInfo>
             </ModalcartInfoBox>
 
             <ModalcartFucntionBox>
               <ModalcartFunction>
+                <IconButton
+                  onClick={() =>
+                    handleRemoveProductModalcart(notebook.id, notebook)
+                  }
+                >
+                  <Remove
+                    sx={{
+                      color: "#fff",
+                    }}
+                  />
+                </IconButton>
+
+                {quantity}
+
                 <IconButton
                   onClick={() =>
                     handleAddProductModalcart(notebook.id, notebook)
@@ -167,19 +173,15 @@ const ModalCart = ({ open, onClose }) => {
                     }}
                   />
                 </IconButton>
-                {quantity}
-                <IconButton
-                  onClick={() =>
-                    handleDeleteProductModalcart(notebook.id, notebook)
-                  }
-                >
-                  <Remove
-                    sx={{
-                      color: "#fff",
-                    }}
-                  />
-                </IconButton>
               </ModalcartFunction>
+
+              <ModalcartInfo
+                sx={{
+                  color: theme.palette.colorViolet.main,
+                }}
+              >
+                ${notebook.price * quantity}
+              </ModalcartInfo>
             </ModalcartFucntionBox>
           </ModalcartProductContainer>
         ))}

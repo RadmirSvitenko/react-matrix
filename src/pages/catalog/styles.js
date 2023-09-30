@@ -4,7 +4,6 @@ import theme from "theme";
 
 export const CatalogContainer = styled(Grid)(() => ({
   width: "100%",
-  height: "100vh",
 }));
 
 export const CatalogProductList = styled(Grid)(() => ({
@@ -13,6 +12,7 @@ export const CatalogProductList = styled(Grid)(() => ({
   justifyContent: "space-evenly",
   width: "100%",
   height: "auto",
+  backgroundColor: "rgba(0,0,0,0.05)",
 }));
 
 export const CatalogProductBox = styled(Box)(() => ({
@@ -21,33 +21,21 @@ export const CatalogProductBox = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  width: "270px",
-  height: "270px",
-  marginBottom: "50px",
+  width: "250px",
   margin: "30px 10px",
-  position: "relative",
 }));
 
 export const CatalogProductInfo = styled(Box)(() => ({
-  background: "rgba(0,0,0,0)",
-  position: "absolute",
-  height: "270px",
-  width: "270px",
+  height: "auto",
+  minHeight: "200px",
   transition: "0.4s",
-  color: "#fff",
-  zIndex: 2,
-  opacity: 0,
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-evenly",
   flexDirection: "column",
-  borderRadius: "25px",
   padding: "0",
-  "&:hover": {
-    background: "rgba(0,0,0,0.5)",
-    opacity: 1,
-    transition: "0.4s",
-    padding: "15px",
+  background: "#fff",
+  ":hover": {
+    boxShadow: "-1px 2px 10px 15px rgba(34, 60, 80, 0.3)",
   },
 }));
 
@@ -75,7 +63,7 @@ export const CatalogProductTitle = styled(Box)(() => ({
   textTransform: "uppercase",
   fontWeight: "bold",
   fontSize: "20px",
-  color: theme.palette.colorWhite.main,
+  color: theme.palette.colorViolet.main,
   textAlign: "center",
 }));
 
@@ -84,7 +72,7 @@ export const CatalogProductBrand = styled(Box)(() => ({
   letterSpacing: "2px",
   textTransform: "uppercase",
   fontWeight: "bold",
-  color: theme.palette.colorNeon.main,
+  color: "#000",
 }));
 
 export const CatalogProductPrice = styled(Box)(() => ({
@@ -92,7 +80,6 @@ export const CatalogProductPrice = styled(Box)(() => ({
   letterSpacing: "2px",
   textTransform: "uppercase",
   fontWeight: "bold",
-  fontSize: "20px",
   color: theme.palette.colorLime.main,
 }));
 
@@ -101,8 +88,17 @@ export const CatalogProductAbout = styled(Box)(() => ({
   letterSpacing: "2px",
   textTransform: "uppercase",
   fontWeight: "bold",
-  color: "red",
+  color: theme.palette.colorViolet.main,
+  alignItems: "flex-end",
   cursor: "pointer",
+}));
+
+export const CatalogProductStock = styled(Box)(() => ({
+  fontFamily: theme.fonts.oswald,
+  letterSpacing: "2px",
+  textTransform: "uppercase",
+  fontWeight: "bold",
+  color: "#000",
 }));
 
 export const CatalogPaginationContainer = styled(Grid)(() => ({

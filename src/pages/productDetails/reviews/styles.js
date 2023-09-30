@@ -28,11 +28,20 @@ export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
 
 export const ReviewsContainer = styled(Grid)(() => ({
   width: "100%",
-  height: "100vh",
   display: "flex",
-  justifyContent: "flex-start",
-  flexDirection: "column",
+  justifyContent: "center",
   alignItems: "center",
+  flexDirection: "column",
+}));
+
+export const ReviewsFieldBox = styled(Grid)(() => ({
+  width: "500px",
+  height: "300px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  outline: "2px solid #000",
 }));
 
 export const ReviewsButton = styled(Button)(() => ({
@@ -44,4 +53,14 @@ export const ReviewsButton = styled(Button)(() => ({
     transition: "0.4s",
     background: theme.palette.colorOrange.main,
   },
+}));
+
+export const ReviewsAllCommentsBox = styled(Grid)(() => ({
+  width: "500px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  outline: "2px solid #000",
+  margin: "100px 0px",
 }));

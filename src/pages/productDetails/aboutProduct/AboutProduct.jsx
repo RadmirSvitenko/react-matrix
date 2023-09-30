@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   EffectFlip,
@@ -32,16 +32,12 @@ import {
   postProductDetails,
 } from "reducers/productDetailsSlice";
 import { useNavigate } from "react-router-dom";
+import { getUserCart } from "reducers/cartSlice";
 
 const AboutProduct = ({ notebook }) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
-
-  // const handleAddNotebooksToCart = async () => {
-  //   const storage = localStorage.setItem("notebooks", JSON.stringify(notebook));
-  //   console.log("storage: ", storage);
-  // };
 
   const handleAddNotebooksToCart = async () => {
     await dispatch(postProductDetails({ notebook: notebook, id: notebook.id }));

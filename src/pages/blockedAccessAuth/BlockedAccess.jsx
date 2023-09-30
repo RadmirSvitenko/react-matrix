@@ -2,7 +2,7 @@ import React from "react";
 import { BlockedAccessAuthContainer } from "./styles";
 import Authentification from "components/Authentification/Authentification";
 
-const BlockedAccessAuth = () => {
+const BlockedAccess = () => {
   return (
     <BlockedAccessAuthContainer>
       <Authentification />
@@ -10,4 +10,4 @@ const BlockedAccessAuth = () => {
   );
 };
 
-export default BlockedAccessAuth;
+export default BlockedAccess;

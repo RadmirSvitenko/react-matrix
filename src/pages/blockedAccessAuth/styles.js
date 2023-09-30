@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import styled from "styled-components";
-import accesAuthBG from "assets/images/access-auth-bg.jpg";
+import accesAuthBG from "assets/images/auth-bg.jpg";
 
 export const BlockedAccessAuthContainer = styled(Grid)(() => ({
   display: "flex",

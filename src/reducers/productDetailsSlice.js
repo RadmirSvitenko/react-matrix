@@ -28,6 +28,22 @@ export const postProductDetails = createAsyncThunk(
   }
 );
 
+export const getProductDetailsCommentaries = createAsyncThunk(
+  "productsDetailsCommentaries/get",
+  async (id) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/${id}/comments/`);
+    return response.data;
+  }
+);
+
+export const postProductDetailsCommentaries = createAsyncThunk(
+  "productsDetailsCommentaries/post",
+  async (id) => {
+    const response = await API_NOTEBOOKS.post(`notebooks/${id}/comments/`);
+    return response.data;
+  }
+);
+
 const productDetailsSlice = createSlice({
   name: "productDetailsSlice",
   initialState,

@@ -97,7 +97,7 @@ const ProductDetails = () => {
         <Characteristics notebook={notebook} />
       </CustomTabPanel>
       <CustomTabPanel value={detailsTab} index={2}>
-        <Reviews />
+        <Reviews notebook={notebook} />
       </CustomTabPanel>
     </ProductDetailsContainer>
   );
