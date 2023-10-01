@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "styled-components";
+import theme from "theme";
 
 export const PresentationTopSalesBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -14,7 +15,22 @@ export const TopSalesContainer = styled(Box)(() => ({
   width: "100%",
   height: "auto",
   marginTop: "30px",
+  flexWrap: "wrap",
+  [theme.breakpoints.down("sm")]: {
+    marginTop: "0px",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    marginTop: "0px",
+    padding: "0px 100px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    marginTop: "0px",
+    padding: "0px 100px",
+  },
 }));
+
 export const TopSalesBox = styled(Box)(({ theme }) => ({
   fontFamily: theme.fonts.oswald,
   letterSpacing: "2px",
@@ -26,6 +42,10 @@ export const TopSalesBox = styled(Box)(({ theme }) => ({
   maxHeight: "500px",
   marginBottom: "50px",
   margin: "0px 10px",
+  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
+    margin: "10px",
+  },
 }));
 
 export const TopSalesImageBox = styled(Box)(() => ({
@@ -41,6 +61,10 @@ export const TopSalesTitle = styled(Box)(({ theme }) => ({
   fontSize: "20px",
   fontWeight: "700",
   textTransform: "uppercase",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+    textAlign: "center",
+  },
 }));
 
 export const TopSalesPrice = styled(Box)(({ theme }) => ({

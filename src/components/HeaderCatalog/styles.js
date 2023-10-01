@@ -37,7 +37,9 @@ export const HeaderSloganBox = styled(Box)(({ theme }) => ({
 }));
 
 export const CatalogSearch = styled(TextField)(({ theme }) => ({
-  width: "350px",
+  minWidth: "350px",
+  display: "flex",
+
   "& .MuiOutlinedInput-root": {
     color: theme.palette.colorOrange.main,
 

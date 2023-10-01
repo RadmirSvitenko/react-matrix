@@ -26,12 +26,8 @@ import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Add } from "@mui/icons-material";
 import theme from "theme";
-import { useDispatch } from "react-redux";
-import {
-  getProductDetails,
-  postProductDetails,
-} from "reducers/productDetailsSlice";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { postProductDetails } from "reducers/productDetailsSlice";
 import { getUserCart } from "reducers/cartSlice";
 
 const AboutProduct = ({ notebook }) => {

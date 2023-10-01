@@ -5,6 +5,7 @@ import {
   CatalogProductAbout,
   CatalogProductBox,
   CatalogProductBrand,
+  CatalogProductContainer,
   CatalogProductInfo,
   CatalogProductList,
   CatalogProductPrice,
@@ -37,7 +38,6 @@ import { getUserCart } from "reducers/cartSlice";
 
 const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [cart, setCart] = useState([]);
 
   const token = getTokenFromCookies();
   const { t } = useTranslation();
@@ -52,29 +52,17 @@ const Catalog = () => {
   const products = useSelector((state) => state.catalog.catalogList);
   const count = useSelector((state) => state.catalog.count);
   const isLoadingPage = useSelector((state) => state.catalog.isLoadingPage);
+  const userCart = useSelector((state) => state.cartSlice.userCart);
 
   console.log("products: ", products);
 
-  const getTotatQuantityCart = useCallback(async () => {
-    const cartData = await dispatch(getUserCart());
-    console.log("testTotalHeaderQuantity: ", cartData);
-    setCart(cartData.payload);
-  }, [dispatch]);
-
-  console.log("HeaderCart: ", cart);
-
-  const totalQuantity = cart.reduce((acc, { quantity }) => acc + quantity, 0);
-  console.log("totalQuantity: ", totalQuantity);
-
   const getNotebooks = useCallback(async () => {
     dispatch(getProducts({ page: currentPage }));
-    getTotatQuantityCart();
   }, [dispatch, currentPage]);
 
   const handleAddNotebooksToCart = async (notebook, id) => {
     console.log("resultAddCatalog", id);
     await dispatch(postProductDetails({ notebook, id }));
-    getTotatQuantityCart();
   };
 
   const handleSwitchPageCatalog = (e, value) => {
@@ -87,17 +75,9 @@ const Catalog = () => {
 
   return (
     <CatalogContainer>
-      <HeaderCatalog totalQuantity={totalQuantity} />
+      <HeaderCatalog />
 
-      <Box
-        sx={{
-          display: "flex",
-          width: "100%",
-          height: "100vh",
-          flexWrap: "nowrap",
-          justifyContent: "space-between",
-        }}
-      >
+      <CatalogProductContainer>
         <FiltersCatalog setCurrentPage={setCurrentPage} />
 
         <CatalogProductList>
@@ -157,7 +137,7 @@ const Catalog = () => {
             </Stack>
           </CatalogPaginationContainer>
         </CatalogProductList>
-      </Box>
+      </CatalogProductContainer>
     </CatalogContainer>
   );
 };

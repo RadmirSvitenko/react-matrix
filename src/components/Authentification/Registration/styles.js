@@ -21,6 +21,10 @@ export const RegistrationForm = styled("form")(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "space-evenly",
+  [theme.breakpoints.down("sm")]: {
+    width: "280px",
+    height: "400px",
+  },
 }));
 
 export const RegistrationInput = styled(TextField)(({ theme }) => ({

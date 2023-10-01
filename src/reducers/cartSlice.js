@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { API_NOTEBOOKS } from "requester";
 
 const initialState = {
   isLoading: false,
   isLoadingPage: false,
   error: false,
-  userCart: null,
+  userCart: [],
 };
 
 export const getUserCart = createAsyncThunk("getUserCart/get", async () => {
@@ -37,7 +39,7 @@ const cartSlice = createSlice({
 
     builder.addCase(getUserCart.fulfilled, (state, action) => {
       state.isLoadingPage = false;
-      state.userCart = action.payload.results;
+      state.userCart = action.payload;
     });
 
     builder.addCase(getUserCart.rejected, (state, action) => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import {
   CatalogSearch,
   HeaderContainer,
@@ -8,14 +8,26 @@ import {
 import {
   Avatar,
   Badge,
+  Box,
+  Button,
+  Divider,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
+  SwipeableDrawer,
   Tooltip,
 } from "@mui/material";
 import {
   Close,
+  Inbox,
   LanguageOutlined,
+  Mail,
+  MenuRounded,
   Search,
   ShoppingCartRounded,
 } from "@mui/icons-material";
@@ -30,14 +42,19 @@ import AccountLogInButton from "mini_components/AccountLogInButton/AccountLogInB
 import AccountIconButton from "mini_components/AccountIconButton/AccountIconButton";
 import ModalCart from "components/ModalCart/ModalCart";
 import { getProducts, searchProducts } from "reducers/catalogSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserCart } from "reducers/cartSlice";
 
-const HeaderCatalog = ({ totalQuantity }) => {
+const HeaderCatalog = () => {
+  const userCart = useSelector((state) => state.cartSlice.userCart);
+
   const [language, setLanguage] = useState("en");
   const [anchorEl, setAnchorEl] = useState(null);
   const [openCart, setOpenCart] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [mobileDrawer, setMobileDrawer] = useState({
+    left: false,
+  });
 
   console.log("searchValue: ", searchValue);
 
@@ -47,6 +64,22 @@ const HeaderCatalog = ({ totalQuantity }) => {
 
   const { i18n } = useTranslation();
   const { t } = useTranslation();
+
+  const getTotatQuantityCart = useCallback(async () => {
+    const cartData = await dispatch(getUserCart());
+    console.log("testTotalHeaderQuantity: ", cartData);
+  }, [dispatch]);
+
+  console.log("HeaderuserCart: ", userCart);
+
+  const totalQuantity = userCart.reduce(
+    (acc, { quantity }) => acc + quantity,
+    0
+  );
+
+  const handleOpenMobileMenu = (anchor, open) => (event) => {
+    setMobileDrawer({ ...mobileDrawer, [anchor]: open });
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -89,42 +122,15 @@ const HeaderCatalog = ({ totalQuantity }) => {
     });
   };
 
-  return (
-    <HeaderContainer>
-      <HeaderToolkit>
-        <Link onClick={handleToUpPage}>
-          <img width="80px" height="80px" src={Logotype} alt="Logotype" />
-        </Link>
-
-        <form onSubmit={handleSubmit}>
-          <CatalogSearch
-            value={searchValue}
-            onChange={handleSearchNotebooks}
-            sx={{
-              flexGrow: 1,
-            }}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  type="submit"
-                  sx={{ color: theme.palette.colorOrange.main }}
-                >
-                  {searchValue.length >= 1 ? (
-                    <Close onClick={handleClearSearchValue} />
-                  ) : (
-                    <Search />
-                  )}
-                </IconButton>
-              ),
-            }}
-            InputLabelProps={{
-              style: { color: theme.palette.colorOrange.main },
-            }}
-            label={t("labelCatalogSearch")}
-          />
-        </form>
-
-        <HeaderIconsBox>
+  const list = (anchor) => (
+    <Box
+      sx={{ width: "250px" }}
+      role="presentation"
+      onKeyDown={handleOpenMobileMenu(anchor, false)}
+      onClick={handleOpenMobileMenu(anchor, false)}
+    >
+      <List>
+        <Box display={"flex"} justifyContent={"space-between"}>
           <IconButton>
             <Avatar
               sizes="medium"
@@ -136,9 +142,86 @@ const HeaderCatalog = ({ totalQuantity }) => {
               R
             </Avatar>
           </IconButton>
+        </Box>
+      </List>
+      <Divider />
+    </Box>
+  );
 
+  useEffect(() => {
+    getTotatQuantityCart();
+  }, [getTotatQuantityCart]);
+
+  return (
+    <HeaderContainer>
+      <HeaderToolkit>
+        {["left"].map((anchor) => (
+          <Fragment key={anchor}>
+            {[theme.breakpoints.down("sm")] ? (
+              <IconButton onClick={handleOpenMobileMenu((anchor, true))}>
+                <MenuRounded fontSize="large" />
+              </IconButton>
+            ) : [theme.breakpoints.down("md")] ? (
+              <Box onClick={handleToUpPage}>
+                <img width="80px" height="80px" src={Logotype} alt="Logotype" />
+              </Box>
+            ) : (
+              false
+            )}
+
+            <SwipeableDrawer
+              anchor={anchor}
+              open={mobileDrawer[anchor]}
+              onClose={handleOpenMobileMenu(anchor, false)}
+              onOpen={handleOpenMobileMenu(anchor, true)}
+            >
+              {list(anchor)}
+            </SwipeableDrawer>
+          </Fragment>
+        ))}
+
+        <Box
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <CatalogSearch
+              value={searchValue}
+              onChange={handleSearchNotebooks}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    type="submit"
+                    sx={{ color: theme.palette.colorOrange.main }}
+                  >
+                    {searchValue.length >= 1 ? (
+                      <Close onClick={handleClearSearchValue} />
+                    ) : (
+                      <Search />
+                    )}
+                  </IconButton>
+                ),
+              }}
+              InputLabelProps={{
+                style: { color: theme.palette.colorOrange.main },
+              }}
+              label={t("labelCatalogSearch")}
+            />
+          </form>
+        </Box>
+
+        <HeaderIconsBox>
           <IconButton onClick={toggleModalCart}>
-            <Badge color="success" badgeContent={totalQuantity}>
+            <Badge
+              color="success"
+              badgeContent={userCart.reduce(
+                (acc, { quantity }) => acc + quantity,
+                0
+              )}
+            >
               <ShoppingCartRounded
                 fontSize="large"
                 sx={{

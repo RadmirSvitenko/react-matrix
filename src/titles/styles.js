@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
+import theme from "theme";
 
-export const NewProducts = styled(Box)(({ theme }) => ({
+export const NewProducts = styled(Box)(() => ({
   fontFamily: theme.fonts.blackOpsOne,
   letterSpacing: "4px",
   fontSize: "36px",
@@ -10,6 +11,10 @@ export const NewProducts = styled(Box)(({ theme }) => ({
   fontWeight: "700",
   textTransform: "uppercase",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "26px",
+    margin: "30px 0px",
+  },
 }));
 
 export const TopSales = styled(Box)(({ theme }) => ({
@@ -21,9 +26,13 @@ export const TopSales = styled(Box)(({ theme }) => ({
   fontWeight: "700",
   textTransform: "uppercase",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "26px",
+    margin: "30px 0px",
+  },
 }));
 
-export const TitleHeaderPresentation = styled(Box)(({ theme }) => ({
+export const TitleHeaderPresentation = styled(Box)(() => ({
   fontFamily: theme.fonts.blackOpsOne,
   letterSpacing: "4px",
   fontSize: "26px",
@@ -32,6 +41,13 @@ export const TitleHeaderPresentation = styled(Box)(({ theme }) => ({
   fontWeight: "700",
   textTransform: "uppercase",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    fontSize: "16px",
+  },
 }));
 
 export const TitleOurOffers = styled(Box)(({ theme }) => ({
@@ -44,6 +60,10 @@ export const TitleOurOffers = styled(Box)(({ theme }) => ({
   fontWeight: "700",
   textTransform: "uppercase",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "26px",
+    margin: "30px 0px",
+  },
 }));
 
 export const TitleInterestingReviews = styled(Box)(({ theme }) => ({
@@ -56,6 +76,10 @@ export const TitleInterestingReviews = styled(Box)(({ theme }) => ({
   fontWeight: "700",
   textTransform: "uppercase",
   textAlign: "center",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "26px",
+    margin: "30px 0px",
+  },
 }));
 
 export const TitleCatalog = styled(Box)(({ theme }) => ({

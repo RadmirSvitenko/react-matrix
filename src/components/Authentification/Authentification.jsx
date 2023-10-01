@@ -72,16 +72,23 @@ const Authentification = () => {
             letterSpacing: "2px",
             fontWeight: "bold",
             textTransform: "uppercase",
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "12px",
+            },
           }}
           label={t("authTitle")}
           {...a11yProps(0)}
         />
+
         <AuthentificationTab
           sx={{
             fontFamily: theme.fonts.valeraRound,
             letterSpacing: "2px",
             fontWeight: "bold",
             textTransform: "uppercase",
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "12px",
+            },
           }}
           label={t("regTitle")}
           {...a11yProps(1)}

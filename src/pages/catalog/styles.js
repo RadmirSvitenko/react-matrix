@@ -12,7 +12,17 @@ export const CatalogProductList = styled(Grid)(() => ({
   justifyContent: "space-evenly",
   width: "100%",
   height: "auto",
-  backgroundColor: "rgba(0,0,0,0.05)",
+}));
+
+export const CatalogProductContainer = styled(Grid)(() => ({
+  display: "flex",
+  width: "100%",
+  height: "100vh",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  [theme.breakpoints.down("sm")]: {
+    flexWrap: "wrap",
+  },
 }));
 
 export const CatalogProductBox = styled(Box)(() => ({

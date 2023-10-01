@@ -20,6 +20,7 @@ export const FilterBox = styled(Grid)(() => ({
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
+  flexWrap: "wrap",
 }));
 
 export const FilterCardBox = styled(Grid)(() => ({
@@ -27,6 +28,17 @@ export const FilterCardBox = styled(Grid)(() => ({
   height: "350px",
   position: "relative",
   zIndex: "0",
+  [theme.breakpoints.down("sm")]: {
+    margin: "20px 0px",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    margin: "20px 0px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    margin: "20px 0px",
+  },
 }));
 
 export const FilterCardMedia = styled(CardMedia)(() => ({
@@ -53,6 +65,29 @@ export const FilterCardContent = styled(CardContent)(() => ({
   justifyContent: "center",
   flexDirection: "column",
   "&:hover": {
+    background: "rgba(0,0,0,0.5)",
+    opacity: 1,
+    transition: "0.4s",
+    borderRadius: "20px",
+    padding: "0px 25px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    background: "rgba(0,0,0,0.5)",
+    opacity: 1,
+    transition: "0.4s",
+    borderRadius: "20px",
+    padding: "0px 25px",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    background: "rgba(0,0,0,0.5)",
+    opacity: 1,
+    transition: "0.4s",
+    borderRadius: "20px",
+    padding: "0px 25px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
     background: "rgba(0,0,0,0.5)",
     opacity: 1,
     transition: "0.4s",

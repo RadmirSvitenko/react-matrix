@@ -2,11 +2,17 @@ import { Grid, Tab, Tabs } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
-export const AuthentificationContainer = styled(Grid)(({ theme }) => ({
+export const AuthentificationContainer = styled(Grid)(() => ({
   width: "400px",
   height: "500px",
   outline: theme.palette.colorNeon.main,
   borderRadius: "20px",
+  [theme.breakpoints.down("sm")]: {
+    width: "280px",
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
 }));
 
 export const AuthentificationTabs = styled(Tabs)(({ theme }) => ({

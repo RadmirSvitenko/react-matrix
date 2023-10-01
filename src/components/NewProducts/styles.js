@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "styled-components";
+import theme from "theme";
 
 export const PresentationNewProductsBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -15,8 +16,21 @@ export const NewProductContainer = styled(Box)(() => ({
   height: "auto",
   marginTop: "30px",
   flexWrap: "wrap",
+  [theme.breakpoints.down("sm")]: {
+    marginTop: "0px",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    marginTop: "0px",
+    padding: "0px 100px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    marginTop: "0px",
+    padding: "0px 100px",
+  },
 }));
-export const NewProductBox = styled(Box)(({ theme }) => ({
+export const NewProductBox = styled(Box)(() => ({
   fontFamily: theme.fonts.oswald,
   letterSpacing: "2px",
   display: "flex",
@@ -27,6 +41,18 @@ export const NewProductBox = styled(Box)(({ theme }) => ({
   maxHeight: "500px",
   marginBottom: "50px",
   margin: "0px 10px",
+  [theme.breakpoints.down("sm")]: {
+    alignItems: "center",
+    margin: "10px",
+  },
+
+  [theme.breakpoints.down("md")]: {
+    marginTop: "0px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    marginTop: "0px",
+  },
 }));
 
 export const NewProductImageBox = styled(Box)(() => ({
@@ -42,6 +68,10 @@ export const NewProductTitle = styled(Box)(({ theme }) => ({
   fontSize: "20px",
   fontWeight: "700",
   textTransform: "uppercase",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+    textAlign: "center",
+  },
 }));
 
 export const NewProductPrice = styled(Box)(({ theme }) => ({

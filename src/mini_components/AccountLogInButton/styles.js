@@ -9,6 +9,13 @@ export const HeaderLogIn = styled(Button)(() => ({
   fontSize: "14px",
   color: theme.palette.colorWhite.main,
   background: theme.palette.colorOrange.main,
+  [theme.breakpoints.down("md")]: {
+    width: "100px",
+  },
+
+  [theme.breakpoints.down("lg")]: {
+    width: "100px",
+  },
 }));
 
 export const AuthDialog = styled(Dialog)(() => ({
@@ -20,7 +27,7 @@ export const AuthDialog = styled(Dialog)(() => ({
 export const AuthDialogContent = styled(DialogContent)(() => ({
   display: "flex",
   width: "600px",
-  height: "600px",
+  height: "auto",
   justifyContent: "center",
   alignItems: "center",
   background: "#232323",

@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  getDataModalCart,
   getUserCart,
   postDeleteProdoctModalcart,
   postDeleteProductModalcart,
@@ -53,6 +54,8 @@ import { postProductDetails } from "reducers/productDetailsSlice";
 
 const ModalCart = ({ open, onClose }) => {
   const [cart, setCart] = useState([]);
+
+  const userCart = useSelector((state) => state.cartSlice.userCart);
 
   console.log("cart: ", cart);
 
@@ -108,7 +111,7 @@ const ModalCart = ({ open, onClose }) => {
         </Grid>
       </DialogTitle>
       <ModalCustomDialogContent>
-        {cart.map(({ notebook, quantity }) => (
+        {userCart.map(({ notebook, quantity }) => (
           <ModalcartProductContainer>
             <ModalcartImageBox>
               <img
@@ -190,7 +193,7 @@ const ModalCart = ({ open, onClose }) => {
         <PaymentBox>
           <Button
             onClick={() => navigate("/payment")}
-            disabled={cart.length < 1 ? true : false}
+            disabled={userCart.length < 1 ? true : false}
             variant="outlined"
           >
             {t("modalcartButtonPayment")}
@@ -200,12 +203,12 @@ const ModalCart = ({ open, onClose }) => {
         <Grid display={"flex"} flexDirection={"column"}>
           <ModalcartActionInfo>
             {t("modalcartTotalQuantity")}:{" "}
-            {cart.reduce((acc, { quantity }) => acc + quantity, 0)}
+            {userCart.reduce((acc, { quantity }) => acc + quantity, 0)}
           </ModalcartActionInfo>
 
           <ModalcartActionInfo>
             {t("modalcartTotalPrice")}: $
-            {cart.reduce(
+            {userCart.reduce(
               (acc, { notebook, quantity }) => acc + notebook.price * quantity,
               0
             )}

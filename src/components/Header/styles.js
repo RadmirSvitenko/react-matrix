@@ -17,6 +17,11 @@ export const HeaderToolkit = styled(Toolbar)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   background: theme.palette.colorViolet.main,
+  [theme.breakpoints.down("sm")]: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
 }));
 
 export const HeaderIconsBox = styled(Box)(() => ({

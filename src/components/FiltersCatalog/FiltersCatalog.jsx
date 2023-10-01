@@ -58,8 +58,17 @@ const FiltersCatalog = ({ setCurrentPage }) => {
   };
 
   return (
-    <Grid position={"sticky"} container width={"300px"}>
-      <Box sx={{ width: "300px", padding: "10px" }}>
+    <Grid
+      position={"sticky"}
+      container
+      width={"300px"}
+      sx={{
+        [theme.breakpoints.down("sm")]: {
+          width: "100%",
+        },
+      }}
+    >
+      <Box sx={{ width: "100%", padding: "10px" }}>
         <FilterTitle textAlign={"center"}>
           {t("catalogFilterBrandsTitle")}
         </FilterTitle>

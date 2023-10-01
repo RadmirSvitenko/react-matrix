@@ -21,13 +21,17 @@ export const AuthorizationForm = styled("form")(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "space-evenly",
+  [theme.breakpoints.down("sm")]: {
+    width: "280px",
+    height: "280px",
+  },
 }));
 
 export const AuthorizationInput = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     color: theme.palette.colorOrange.main,
-    fontWeight: "600",
-    letterSpacing: "2px",
+    // fontWeight: "600",
+    // letterSpacing: "2px",
 
     "& fieldset": {
       borderColor: theme.palette.colorOrange.main,
