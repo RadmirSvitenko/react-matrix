@@ -76,9 +76,10 @@ const AboutProduct = ({ notebook }) => {
           </SwiperSlide>
         </Swiper>
       </AboutProductSliderBox>
+
       <AboutProductInfoBox>
         <AboutProductTitle>{notebook.title}</AboutProductTitle>
-        <table align="justify">
+        <table>
           <tr>
             <td>
               <AboutProductInfo>

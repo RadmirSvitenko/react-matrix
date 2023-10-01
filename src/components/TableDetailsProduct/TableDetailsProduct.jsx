@@ -8,6 +8,7 @@ import {
 } from "./styles";
 import { Grid } from "@mui/material";
 import { t } from "i18next";
+import theme from "theme";
 
 const TableDetailsProduct = ({ notebook }) => {
   return (
@@ -33,7 +34,7 @@ const TableDetailsProduct = ({ notebook }) => {
               <CharacteristicsInfo>{t("productDetailsID")}</CharacteristicsInfo>
             </td>
 
-            <td align="center">
+            <td>
               <CharacteristicsInfo>{notebook.id}</CharacteristicsInfo>
             </td>
           </tr>

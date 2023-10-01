@@ -12,7 +12,7 @@ export const ModalCustomDialogContent = styled(DialogContent)(() => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
-  width: "900px",
+  width: "100%",
 }));
 
 export const ModalcartProductContainer = styled(Grid)(() => ({
@@ -23,6 +23,16 @@ export const ModalcartProductContainer = styled(Grid)(() => ({
   margin: "20px 0px",
   borderRadius: "20px",
   backgroundColor: "rgba(0, 0, 0, 0.05)",
+
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+    flexWrap: "wrap",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    flexWrap: "wrap",
+  },
 }));
 
 export const ModalcartImageBox = styled(Box)(() => ({
@@ -43,6 +53,14 @@ export const ModalcartInfoBox = styled(Box)(() => ({
   height: "250px",
   flexDirection: "column",
   justifyContent: "space-evenly",
+  [theme.breakpoints.down("md")]: {
+    height: "auto",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    height: "auto",
+    flexWrap: "wrap",
+  },
 }));
 
 export const ModalcartFucntionBox = styled(Box)(() => ({
@@ -52,6 +70,13 @@ export const ModalcartFucntionBox = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "space-around",
+  [theme.breakpoints.down("md")]: {
+    height: "150px",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    height: "150px",
+  },
 }));
 
 export const ModalcartTitle = styled(Box)(() => ({
@@ -67,6 +92,13 @@ export const ModalcartInfo = styled(Box)(() => ({
   fontFamily: theme.fonts.valeraRound,
   fontSize: "16px",
   fontWeight: "600",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "20px",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+  },
 }));
 
 export const ModalcartFunction = styled(Box)(() => ({
@@ -78,6 +110,13 @@ export const ModalcartFunction = styled(Box)(() => ({
   background: "#000",
   borderRadius: "20px",
   color: "#fff",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "26px",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "26px",
+  },
 }));
 
 export const ModalcartActionInfo = styled(Box)(() => ({
@@ -86,6 +125,11 @@ export const ModalcartActionInfo = styled(Box)(() => ({
   fontWeight: "700",
   letterSpacing: "1px",
   margin: "10px",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "14px",
+    alignItems: "center",
+    marginLeft: "30px",
+  },
 }));
 
 export const PaymentBox = styled(Box)(() => ({
@@ -97,4 +141,11 @@ export const PaymentBox = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   flexGrow: "1",
+}));
+
+export const ModalCustomDialogAction = styled(Box)(() => ({
+  display: "flex",
+  [theme.breakpoints.down("sm")]: {
+    flexWrap: "wrap",
+  },
 }));

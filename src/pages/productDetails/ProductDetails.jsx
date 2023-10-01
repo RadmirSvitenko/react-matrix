@@ -4,13 +4,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "reducers/productDetailsSlice";
-import { ProductDetailsContainer } from "./styles";
+import {
+  CustomTabProductDetails,
+  CustomTabsProductDetails,
+  ProductDetailsContainer,
+} from "./styles";
 import HeaderCatalog from "components/HeaderCatalog/HeaderCatalog";
 import { useTranslation } from "react-i18next";
 
 import AboutProduct from "./aboutProduct/AboutProduct";
 import Characteristics from "./characteristics/Characteristics";
 import Reviews from "./reviews/Reviews";
+import theme from "theme";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,19 +80,29 @@ const ProductDetails = () => {
     <ProductDetailsContainer>
       <HeaderCatalog />
 
-      <Box>
-        <Tabs
+      <Box
+        sx={{
+          [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "column",
+          },
+        }}
+      >
+        <CustomTabsProductDetails
           indicatorColor="secondary"
           textColor="secondary"
           centered
+          variant="fullWidth"
           value={detailsTab}
           onChange={handleChangeTabs}
           aria-label="basic tabs example"
+          orientation={theme.breakpoints.down("sm") ? "vertical" : "horizontal"}
         >
           <Tab label={t("cardDetailsTabAboutProduct")} {...a11yProps(0)} />
           <Tab label={t("cardDetailsTabCharacteristics")} {...a11yProps(1)} />
           <Tab label={t("cardDetailsTabReviews")} {...a11yProps(2)} />
-        </Tabs>
+        </CustomTabsProductDetails>
       </Box>
 
       <CustomTabPanel value={detailsTab} index={0}>

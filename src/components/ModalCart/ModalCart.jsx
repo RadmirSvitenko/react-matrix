@@ -25,6 +25,7 @@ import {
   ButtonToPayment,
   ButtonToPaymentBox,
   ModalCustomDialog,
+  ModalCustomDialogAction,
   ModalCustomDialogContent,
   ModalcartActionInfo,
   ModalcartBrand,
@@ -145,7 +146,16 @@ const ModalCart = ({ open, onClose }) => {
                   color: theme.palette.colorViolet.main,
                 }}
               >
-                ${notebook.price}
+                {t("modalcartOneProductPrice")}: ${notebook.price}
+              </ModalcartInfo>
+
+              <ModalcartInfo
+                sx={{
+                  color: theme.palette.colorViolet.main,
+                }}
+              >
+                {t("modalcartByQuantityProductPrice")}: $
+                {notebook.price * quantity}
               </ModalcartInfo>
             </ModalcartInfoBox>
 
@@ -177,19 +187,12 @@ const ModalCart = ({ open, onClose }) => {
                   />
                 </IconButton>
               </ModalcartFunction>
-
-              <ModalcartInfo
-                sx={{
-                  color: theme.palette.colorViolet.main,
-                }}
-              >
-                ${notebook.price * quantity}
-              </ModalcartInfo>
             </ModalcartFucntionBox>
           </ModalcartProductContainer>
         ))}
       </ModalCustomDialogContent>
-      <DialogActions>
+
+      <ModalCustomDialogAction>
         <PaymentBox>
           <Button
             onClick={() => navigate("/payment")}
@@ -214,7 +217,7 @@ const ModalCart = ({ open, onClose }) => {
             )}
           </ModalcartActionInfo>
         </Grid>
-      </DialogActions>
+      </ModalCustomDialogAction>
     </ModalCustomDialog>
   );
 };

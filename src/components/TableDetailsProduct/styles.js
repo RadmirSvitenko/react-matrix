@@ -20,6 +20,15 @@ export const CharacteristicsTitle = styled(Box)(() => ({
   fontWeight: "800",
   width: "100%",
   textAlign: "center",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "22px",
+    padding: "0px",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+    padding: "0px",
+  },
 }));
 
 export const CharacteristicsInfoBox = styled(Box)(() => ({
@@ -34,6 +43,14 @@ export const CharacteristicsInfoBox = styled(Box)(() => ({
   padding: "50px",
   background: "#f5f5f5",
   borderRadius: "25px",
+  [theme.breakpoints.down("md")]: {
+    padding: "0px",
+    width: "100%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    padding: "0px",
+    width: "100%",
+  },
 }));
 
 export const CharacteristicsInfo = styled(Box)(() => ({
@@ -42,6 +59,12 @@ export const CharacteristicsInfo = styled(Box)(() => ({
   letterSpacing: "2px",
   color: "#000",
   display: "flex",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "16px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "12px",
+  },
 }));
 
 export const CharacteristicsDescriptionTitle = styled(Box)(() => ({
@@ -54,4 +77,12 @@ export const CharacteristicsDescriptionTitle = styled(Box)(() => ({
   fontWeight: "bold",
   margin: "10px 0px",
   color: theme.palette.colorViolet.main,
+  [theme.breakpoints.down("md")]: {
+    fontSize: "20px",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "14px",
+    fontWeight: "bold",
+  },
 }));
