@@ -60,9 +60,15 @@ const Catalog = () => {
     dispatch(getProducts({ page: currentPage }));
   }, [dispatch, currentPage]);
 
+  const getTotatQuantityCart = async () => {
+    const cartData = await dispatch(getUserCart());
+    console.log("testTotalHeaderQuantity: ", cartData);
+  };
+
   const handleAddNotebooksToCart = async (notebook, id) => {
     console.log("resultAddCatalog", id);
     await dispatch(postProductDetails({ notebook, id }));
+    getTotatQuantityCart();
   };
 
   const handleSwitchPageCatalog = (e, value) => {

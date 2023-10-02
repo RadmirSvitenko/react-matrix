@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   CatalogSearch,
   HeaderContainer,
@@ -9,14 +9,9 @@ import {
   Avatar,
   Badge,
   Box,
-  Button,
   Divider,
   IconButton,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Menu,
   MenuItem,
   SwipeableDrawer,
@@ -24,22 +19,14 @@ import {
 } from "@mui/material";
 import {
   Close,
-  Inbox,
   LanguageOutlined,
-  Mail,
   MenuRounded,
   Search,
   ShoppingCartRounded,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import Logotype from "assets/images/logotype.png";
-import { Link } from "react-router-dom";
 import theme from "theme";
-import TitleMatrixHeader from "titles/TitleMatrixHeader";
-import { Transition } from "@react-spring/web";
-import Authentification from "components/Authentification/Authentification";
-import AccountLogInButton from "mini_components/AccountLogInButton/AccountLogInButton";
-import AccountIconButton from "mini_components/AccountIconButton/AccountIconButton";
 import ModalCart from "components/ModalCart/ModalCart";
 import { getProducts, searchProducts } from "reducers/catalogSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,17 +52,12 @@ const HeaderCatalog = () => {
   const { i18n } = useTranslation();
   const { t } = useTranslation();
 
-  const getTotatQuantityCart = useCallback(async () => {
+  const getTotatQuantityCart = async () => {
     const cartData = await dispatch(getUserCart());
     console.log("testTotalHeaderQuantity: ", cartData);
-  }, [dispatch]);
+  };
 
-  console.log("HeaderuserCart: ", userCart);
-
-  const totalQuantity = userCart.reduce(
-    (acc, { quantity }) => acc + quantity,
-    0
-  );
+  let totalQuantity = userCart.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const handleOpenMobileMenu = (anchor, open) => (event) => {
     setMobileDrawer({ ...mobileDrawer, [anchor]: open });
@@ -122,6 +104,8 @@ const HeaderCatalog = () => {
     });
   };
 
+  //* Drawer */
+
   const list = (anchor) => (
     <Box
       sx={{ width: "250px" }}
@@ -148,9 +132,11 @@ const HeaderCatalog = () => {
     </Box>
   );
 
+  //* Drawer */
+
   useEffect(() => {
     getTotatQuantityCart();
-  }, [getTotatQuantityCart]);
+  }, []);
 
   return (
     <HeaderContainer>
@@ -215,13 +201,7 @@ const HeaderCatalog = () => {
 
         <HeaderIconsBox>
           <IconButton onClick={toggleModalCart}>
-            <Badge
-              color="success"
-              badgeContent={userCart.reduce(
-                (acc, { quantity }) => acc + quantity,
-                0
-              )}
-            >
+            <Badge color="success" badgeContent={totalQuantity}>
               <ShoppingCartRounded
                 fontSize="large"
                 sx={{

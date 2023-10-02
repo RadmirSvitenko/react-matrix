@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -52,11 +53,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { postProductDetails } from "reducers/productDetailsSlice";
+import LoadingPage from "mini_components/LoadingPage/LoadingPage";
 
 const ModalCart = ({ open, onClose }) => {
   const [cart, setCart] = useState([]);
 
   const userCart = useSelector((state) => state.cartSlice.userCart);
+  const isLoadingPage = useSelector((state) => state.cartSlice.isLoadingPage);
 
   console.log("cart: ", cart);
 
@@ -173,7 +176,16 @@ const ModalCart = ({ open, onClose }) => {
                   />
                 </IconButton>
 
-                {quantity}
+                {isLoadingPage ? (
+                  <CircularProgress
+                    size={20}
+                    sx={{
+                      color: "#fff",
+                    }}
+                  />
+                ) : (
+                  quantity
+                )}
 
                 <IconButton
                   onClick={() =>
