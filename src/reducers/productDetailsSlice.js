@@ -6,6 +6,7 @@ const initialState = {
   isLoadingPage: false,
   error: false,
   detailsCard: null,
+  comments: {},
 };
 
 export const getProductDetails = createAsyncThunk(
@@ -30,16 +31,19 @@ export const postProductDetails = createAsyncThunk(
 
 export const getProductDetailsCommentaries = createAsyncThunk(
   "productsDetailsCommentaries/get",
-  async (id) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/${id}/comments/`);
+  async (params) => {
+    const response = await API_NOTEBOOKS.get(`notebooks/${params.id}/comments`);
     return response.data;
   }
 );
 
 export const postProductDetailsCommentaries = createAsyncThunk(
   "productsDetailsCommentaries/post",
-  async (id) => {
-    const response = await API_NOTEBOOKS.post(`notebooks/${id}/comments/`);
+  async (params) => {
+    const response = await API_NOTEBOOKS.post(
+      `notebooks/${params.id}/comments/`,
+      JSON.stringify(params.test)
+    );
     return response.data;
   }
 );
@@ -56,6 +60,7 @@ const productDetailsSlice = createSlice({
     builder.addCase(getProductDetails.fulfilled, (state, action) => {
       state.isLoadingPage = false;
       state.detailsCard = action.payload;
+      state.comments = action.payload;
     });
 
     builder.addCase(getProductDetails.rejected, (state, action) => {

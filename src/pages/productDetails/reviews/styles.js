@@ -29,13 +29,14 @@ export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
 export const ReviewsContainer = styled(Grid)(() => ({
   width: "100%",
   display: "flex",
+  flexWrap: "wrap",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
 }));
 
 export const ReviewsFieldBox = styled(Grid)(() => ({
-  width: "500px",
+  width: "100%",
   height: "300px",
   display: "flex",
   justifyContent: "center",

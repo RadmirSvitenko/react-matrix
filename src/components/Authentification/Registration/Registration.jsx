@@ -19,6 +19,9 @@ import {
 import theme from "theme";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { getTokenFromCookies } from "cookies";
+import { setTokenFromCookies } from "cookies";
+import { API_NOTEBOOKS } from "requester";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,10 +30,21 @@ const Authorization = () => {
 
   const { t } = useTranslation();
 
+  // const token = getTokenFromCookies();
+
   const handleShowPassword = () => setShowPassword((show) => !show);
 
-  const authData = (d) => {
+  const authData = async (d) => {
     console.log(d);
+
+    const response = await API_NOTEBOOKS.post("signup/", {
+      username: d.username,
+      password: d.password,
+      password2: d.password2,
+      email: d.email,
+    });
+
+    // setTokenFromCookies(response.data.token);
   };
 
   return (
@@ -89,7 +103,7 @@ const Authorization = () => {
       />
 
       <RegistrationInput
-        {...register("password")}
+        {...register("password2")}
         type={showPassword ? "text" : "password"}
         label={t("regPasswordRepeat")}
         variant="outlined"

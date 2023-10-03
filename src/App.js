@@ -17,14 +17,13 @@ import ProductDetails from "pages/productDetails/ProductDetails";
 import { getTokenFromCookies } from "cookies";
 import Payment from "pages/payment/Payment";
 import BlockedAccess from "pages/blockedAccessAuth/BlockedAccess";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 function App() {
-  const token = getTokenFromCookies();
-
-  // useEffect(() => {
-  //   getTokenFromCookies();
-  // }, [getTokenFromCookies]);
+  let token = getTokenFromCookies();
+  console.log("token: ", token);
+  useEffect(() => {
+    token = getTokenFromCookies();
+  }, [token, getTokenFromCookies]);
 
   return (
     <Provider store={store}>
@@ -35,7 +34,9 @@ function App() {
             <Route path="/" element={<Presentation />} />
             <Route path={"/access-auth"} element={<BlockedAccess />} />
 
-            <Route element={token ? <MainLayout /> : <BlockedAccess />}>
+            <Route
+              element={token !== undefined ? <MainLayout /> : <BlockedAccess />}
+            >
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/payment" element={<Payment />} />

@@ -23,8 +23,6 @@ import {
   postDeleteProductModalcart,
 } from "reducers/cartSlice";
 import {
-  ButtonToPayment,
-  ButtonToPaymentBox,
   ModalCustomDialog,
   ModalCustomDialogAction,
   ModalCustomDialogContent,

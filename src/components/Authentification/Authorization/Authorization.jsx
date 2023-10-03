@@ -16,26 +16,35 @@ import { setTokenFromCookies } from "cookies";
 import { ErrorMessage } from "@hookform/error-message";
 import { getTokenFromCookies } from "cookies";
 import Catalog from "pages/catalog/Catalog";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Authorization = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
-
-  const token = getTokenFromCookies();
 
   const handleShowPassword = () => setShowPassword((show) => !show);
 
   const authData = async (d) => {
-    console.log(d);
-
+    console.log("d", d);
     const response = await API_NOTEBOOKS.post("login/", {
       password: d.password,
       username: d.username,
     });
 
-    setTokenFromCookies(response.data.token);
+    await setTokenFromCookies(response.data.token);
+    await tokenTesting();
+  };
+
+  const tokenTesting = async () => {
+    const token = getTokenFromCookies();
+    console.log("token: ", token);
+    if (token) {
+      navigate("/catalog");
+      console.log("Работает");
+    }
   };
 
   return (
@@ -105,9 +114,10 @@ const Authorization = () => {
             transition: "0.5s",
           },
         }}
-        // href={"/catalog"}
         variant="contained"
         type="submit"
+        // href={token ? "/catalog" : "/catalog"}
+        // onClick={() => tokenTesting()}
       >
         {t("buttonAuth")}
       </AuthButton>

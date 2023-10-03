@@ -106,15 +106,23 @@ const HeaderCatalog = () => {
 
   //* Drawer */
 
-  const list = (anchor) => (
-    <Box
-      sx={{ width: "250px" }}
-      role="presentation"
-      onKeyDown={handleOpenMobileMenu(anchor, false)}
-      onClick={handleOpenMobileMenu(anchor, false)}
-    >
-      <List>
-        <Box display={"flex"} justifyContent={"space-between"}>
+  //* Drawer */
+
+  useEffect(() => {
+    getTotatQuantityCart();
+  }, []);
+
+  return (
+    <HeaderContainer>
+      <HeaderToolkit>
+        <Box onClick={handleToUpPage}>
+          <img width="80px" height="80px" src={Logotype} alt="Logotype" />
+        </Box>
+
+        <Box
+          display={[theme.breakpoints.down("sm")] ? "none" : "flex"}
+          justifyContent={"space-between"}
+        >
           <IconButton>
             <Avatar
               sizes="medium"
@@ -127,44 +135,6 @@ const HeaderCatalog = () => {
             </Avatar>
           </IconButton>
         </Box>
-      </List>
-      <Divider />
-    </Box>
-  );
-
-  //* Drawer */
-
-  useEffect(() => {
-    getTotatQuantityCart();
-  }, []);
-
-  return (
-    <HeaderContainer>
-      <HeaderToolkit>
-        {["left"].map((anchor) => (
-          <Fragment key={anchor}>
-            {[theme.breakpoints.down("sm")] ? (
-              <IconButton onClick={handleOpenMobileMenu((anchor, true))}>
-                <MenuRounded fontSize="large" />
-              </IconButton>
-            ) : [theme.breakpoints.down("md")] ? (
-              <Box onClick={handleToUpPage}>
-                <img width="80px" height="80px" src={Logotype} alt="Logotype" />
-              </Box>
-            ) : (
-              false
-            )}
-
-            <SwipeableDrawer
-              anchor={anchor}
-              open={mobileDrawer[anchor]}
-              onClose={handleOpenMobileMenu(anchor, false)}
-              onOpen={handleOpenMobileMenu(anchor, true)}
-            >
-              {list(anchor)}
-            </SwipeableDrawer>
-          </Fragment>
-        ))}
 
         <Box
           sx={{

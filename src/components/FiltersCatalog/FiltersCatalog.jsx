@@ -31,8 +31,6 @@ const FiltersCatalog = ({ setCurrentPage }) => {
 
   const { t } = useTranslation();
 
-  // const handleFilterPrice = async () => {};
-
   const handleChangeFilterPrice = async (event, newValue) => {
     setFilterPrice(newValue);
   };
@@ -52,7 +50,7 @@ const FiltersCatalog = ({ setCurrentPage }) => {
     const { name, checked } = event.target;
     console.log("checked: ", checked);
     console.log("name: ", name);
-    await dispatch(getProducts({ page: 1, brand: name }));
+    await dispatch(getProducts({ page: 1, brand: name, limit: 400 }));
     setCurrentPage(1);
     setFilterChecked(name);
   };
