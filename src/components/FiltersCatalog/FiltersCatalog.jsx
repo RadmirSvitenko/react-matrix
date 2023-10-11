@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { getProducts } from "reducers/catalogSlice";
 
-const FiltersCatalog = ({ setCurrentPage }) => {
+const FiltersCatalog = ({ currentPage, setCurrentPage }) => {
   const [filterPrice, setFilterPrice] = useState([100, 3000]);
   const [filterChecked, setFilterChecked] = useState("");
   console.log("filtersChecked: ", filterChecked);
@@ -50,8 +50,8 @@ const FiltersCatalog = ({ setCurrentPage }) => {
     const { name, checked } = event.target;
     console.log("checked: ", checked);
     console.log("name: ", name);
-    await dispatch(getProducts({ page: 1, brand: name, limit: 400 }));
-    setCurrentPage(1);
+    await dispatch(getProducts({ page: currentPage, brand: name, limit: 400 }));
+    // setCurrentPage(1);
     setFilterChecked(name);
   };
 

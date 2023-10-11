@@ -16,9 +16,14 @@ import { useTranslation } from "react-i18next";
 import FilterBlocksPresentation from "components/FilterBlocksPresentation/FilterBlocksPresentation";
 import OverviewPresentation from "components/OverviewPresentation/OverviewPresentation";
 import Authentification from "components/Authentification/Authentification";
+import LoadingPage from "mini_components/LoadingPage/LoadingPage";
 
 const Presentation = () => {
   const { t } = useTranslation();
+
+  if (!NewProducts || !TopSales) {
+    return <LoadingPage />;
+  }
 
   return (
     <PresentationMainContainer container>

@@ -18,11 +18,17 @@ import {
   ModalcartProductContainer,
   ModalcartTitle,
 } from "components/ModalCart/styles";
+import LoadingPage from "mini_components/LoadingPage/LoadingPage";
 
 const PaymentStepOne = () => {
   const userCart = useSelector((state) => state.cartSlice.userCart);
+  const isLoadingPage = useSelector((state) => state.cartSlice.isLoadingPage);
 
   const { t } = useTranslation();
+
+  if (isLoadingPage) {
+    return <LoadingPage />;
+  }
 
   return (
     <PaymentStepOneContainer>

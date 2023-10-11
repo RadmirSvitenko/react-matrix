@@ -1,10 +1,13 @@
-import { Button, Grid, TextareaAutosize } from "@mui/material";
+import { Box, Button, Grid, TextField, TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
-export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
-  width: "320px",
-  maxWidth: "500px",
+export const CustomTextareaReviews = styled(TextField)(() => ({
+  "& .MuiOutlinedInput-root": {
+    color: "#fff",
+  },
+  width: "500px",
+  height: "auto",
   fontFamily: theme.fonts.valeraRound,
   fontSize: "18px",
   fontWeight: "500",
@@ -13,7 +16,7 @@ export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
   borderRadius: "20px",
   color: "#fff",
   background: "#232323",
-  outline: "2px solid theme.palette.colorViolet.main ",
+  outline: "2px solid theme.palette.colorViolet.main",
   boxShadow: "0px 2px 24px theme.palette.colorViolet",
 
   "&:focus": {
@@ -23,6 +26,10 @@ export const CustomTextareaReviews = styled(TextareaAutosize)(() => ({
 
   "&:focus-visible": {
     outline: "0",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    width: "300px",
   },
 }));
 
@@ -42,7 +49,10 @@ export const ReviewsFieldBox = styled(Grid)(() => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  outline: "2px solid #000",
+  [theme.breakpoints.down("sm")]: {
+    width: "300px",
+    margin: "0px",
+  },
 }));
 
 export const ReviewsButton = styled(Button)(() => ({
@@ -58,10 +68,30 @@ export const ReviewsButton = styled(Button)(() => ({
 
 export const ReviewsAllCommentsBox = styled(Grid)(() => ({
   width: "500px",
+  height: "auto",
+  maxWidth: "500px",
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  flexWrap: "wrap",
   flexDirection: "column",
-  outline: "2px solid #000",
-  margin: "100px 0px",
+  padding: "20px",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  [theme.breakpoints.down("sm")]: {
+    width: "300px",
+    padding: "0px",
+  },
+}));
+
+export const ReviewsCommentBox = styled(Box)(() => ({
+  width: "280px",
+  height: "auto",
+  minHeight: "200px",
+  maxWidth: "300px",
+  display: "flex",
+  flexWrap: "wrap",
+  padding: "20px",
+  outline: "1px solid #000",
+  margin: "30px 0px",
+  borderRadius: "20px",
+  overflowX: "hidden",
 }));

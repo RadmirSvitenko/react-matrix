@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CustomTextareaReviews,
   ReviewsAllCommentsBox,
   ReviewsButton,
+  ReviewsCommentBox,
   ReviewsContainer,
   ReviewsFieldBox,
 } from "./styles";
@@ -17,38 +18,43 @@ import {
 import { useParams } from "react-router-dom";
 
 const Reviews = ({ notebook }) => {
-  const [testComment, setTestComment] = useState("this is test comment");
+  const [valueCurrentComment, setValueCurrentComment] = useState("");
+  console.log("valueCurrentComment: ", valueCurrentComment);
 
   const { t } = useTranslation();
-  const [allReviews, setAllReviews] = useState();
 
   const comments = useSelector((state) => state.detailsProduct.comments);
+
   console.log("comments: ", comments);
 
   const dispatch = useDispatch();
 
-  // const handleCurrentComment = (e) => {
-  //   setAllReviews(e.target.value);
-  //   console.log(e.target.value);
-  // };
+  const handleCurrentComment = (e) => {
+    setValueCurrentComment(e.target.value);
+    console.log(e.target.value);
+  };
 
-  const handleReviewsSubmit = async (event) => {
+  const handleReviewsSubmit = (event) => {
     event.preventDefault();
-    await dispatch(getProductDetailsCommentaries());
   };
 
-  const handlePostComments = async (id, test) => {
-    await dispatch(postProductDetailsCommentaries({ id: id, test: test }));
-    // handleCurrentComment();
+  const handlePostComments = async (id, comment) => {
+    await dispatch(
+      postProductDetailsCommentaries({ id: id, comment: comment }),
+      handleGetComments(id)
+    );
   };
 
-  const handleGetComments = async (id) => {
-    await dispatch(getProductDetailsCommentaries({ id: id }));
-  };
+  const handleGetComments = useCallback(
+    async (id) => {
+      await dispatch(getProductDetailsCommentaries({ id: id }));
+    },
+    [dispatch]
+  );
 
-  useEffect(() => {
-    handleGetComments();
-  }, []);
+  // useEffect(() => {
+  //   handleGetComments(notebook.id);
+  // }, [handleGetComments]);
 
   return (
     <ReviewsContainer>
@@ -57,23 +63,30 @@ const Reviews = ({ notebook }) => {
       <ReviewsFieldBox>
         <form onSubmit={handleReviewsSubmit}>
           <CustomTextareaReviews
+            multiline="textarea"
+            rows={6}
             aria-label="reviews"
             minRows={3}
+            onChange={handleCurrentComment}
             placeholder={t("textareaLeaveReviewField")}
           />
-
-          <ReviewsButton
-            type="submit"
-            variant="contained"
-            onClick={() => handlePostComments(notebook.id, testComment)}
-          >
-            {t("submitReview")}
-          </ReviewsButton>
         </form>
+
+        <ReviewsButton
+          type="submit"
+          variant="contained"
+          onClick={() => handlePostComments(notebook.id, valueCurrentComment)}
+        >
+          {t("submitReview")}
+        </ReviewsButton>
       </ReviewsFieldBox>
 
       <ReviewsAllCommentsBox>
-        <Box>{allReviews}</Box>
+        {comments.results?.map(({ content }) => (
+          <ReviewsCommentBox>
+            <p>{content}</p>
+          </ReviewsCommentBox>
+        ))}
       </ReviewsAllCommentsBox>
     </ReviewsContainer>
   );

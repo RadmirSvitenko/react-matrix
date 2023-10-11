@@ -13,7 +13,7 @@ import {
   CatalogProductTitle,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "reducers/catalogSlice";
+import { getProducts, setRatingNotebook } from "reducers/catalogSlice";
 import {
   Box,
   Button,
@@ -38,6 +38,8 @@ import { getUserCart } from "reducers/cartSlice";
 
 const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [ratingValue, setRatingValue] = React.useState(2);
+  console.log("ratingValue: ", ratingValue);
 
   const token = getTokenFromCookies();
   const { t } = useTranslation();
@@ -71,6 +73,10 @@ const Catalog = () => {
     getTotatQuantityCart();
   };
 
+  // const postRatingForProduct = async (notebook, id) => {
+  //   await dispatch(setRatingNotebook({ notebook, id, rating: ratingValue }));
+  // };
+
   const handleSwitchPageCatalog = (e, value) => {
     setCurrentPage(value);
   };
@@ -84,7 +90,10 @@ const Catalog = () => {
       <HeaderCatalog />
 
       <CatalogProductContainer>
-        <FiltersCatalog setCurrentPage={setCurrentPage} />
+        <FiltersCatalog
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
 
         <CatalogProductList>
           <TitleCatalogProducts />
@@ -100,7 +109,14 @@ const Catalog = () => {
               <CatalogProductInfo>
                 <CatalogProductTitle>{item.title}</CatalogProductTitle>
                 <Grid display={"flex"} justifyContent={"space-around"}>
-                  <Rating readOnly value={item.avg_rating || 3} />
+                  <Rating
+                    // onClick={() => postRatingForProduct(item, item.id)}
+                    // value={item.avg_rating}
+                    // onChange={(event, newValue) => {
+                    //   setRatingValue(newValue);
+                    // }}
+                    value={5}
+                  />
                   <CatalogProductBrand>{item.brand}</CatalogProductBrand>
                 </Grid>
 

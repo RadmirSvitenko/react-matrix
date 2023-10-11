@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { API_DUMMY_PRODUCTS, API_NOTEBOOKS } from "requester";
+import { API_NOTEBOOKS } from "requester";
 
 const initialState = {
   isLoading: false,
   isLoadingPage: false,
   error: false,
   detailsCard: null,
-  comments: {},
+  comments: [],
 };
 
 export const getProductDetails = createAsyncThunk(
@@ -32,7 +32,10 @@ export const postProductDetails = createAsyncThunk(
 export const getProductDetailsCommentaries = createAsyncThunk(
   "productsDetailsCommentaries/get",
   async (params) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/${params.id}/comments`);
+    const response = await API_NOTEBOOKS.get(
+      `notebooks/${params.id}/comments/`,
+      { params: params }
+    );
     return response.data;
   }
 );
@@ -42,9 +45,17 @@ export const postProductDetailsCommentaries = createAsyncThunk(
   async (params) => {
     const response = await API_NOTEBOOKS.post(
       `notebooks/${params.id}/comments/`,
-      JSON.stringify(params.test)
+      {
+        method: "POST",
+        content: JSON.stringify(params.comment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      console.log("params.comment", params.comment)
     );
-    return response.data;
+    const data = await response.JSON();
+    return data;
   }
 );
 
@@ -64,6 +75,23 @@ const productDetailsSlice = createSlice({
     });
 
     builder.addCase(getProductDetails.rejected, (state, action) => {
+      state.error = action.error;
+      state.isLoading = false;
+    });
+
+    builder.addCase(getProductDetailsCommentaries.pending, (state) => {
+      state.isLoadingPage = true;
+    });
+
+    builder.addCase(
+      getProductDetailsCommentaries.fulfilled,
+      (state, action) => {
+        state.isLoadingPage = false;
+        state.comments = action.payload;
+      }
+    );
+
+    builder.addCase(getProductDetailsCommentaries.rejected, (state, action) => {
       state.error = action.error;
       state.isLoading = false;
     });

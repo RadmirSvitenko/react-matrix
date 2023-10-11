@@ -19,6 +19,7 @@ import {
 import TitleNewProducts from "titles/TitleNewProducts";
 import TitleTopSales from "titles/TitleTopSales";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "mini_components/LoadingPage/LoadingPage";
 // import PropTypes from "prop-types";
 
 const TopSales = () => {
@@ -50,6 +51,10 @@ const TopSales = () => {
   useEffect(() => {
     getTopSales();
   }, [getTopSales]);
+
+  if (!TopSalesMain) {
+    return <LoadingPage />;
+  }
 
   return (
     <PresentationTopSalesBox>

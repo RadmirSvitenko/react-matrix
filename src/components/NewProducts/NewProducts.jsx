@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import TitleNewProducts from "titles/TitleNewProducts";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "mini_components/LoadingPage/LoadingPage";
 
 const NewProducts = () => {
   const [newProducts, setNewProducts] = useState([]);
@@ -44,6 +45,10 @@ const NewProducts = () => {
   useEffect(() => {
     getNewProducts();
   }, [getNewProducts]);
+
+  if (!newProductsMain) {
+    return <LoadingPage />;
+  }
 
   return (
     <PresentationNewProductsBox>

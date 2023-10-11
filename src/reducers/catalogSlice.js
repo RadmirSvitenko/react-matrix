@@ -26,6 +26,19 @@ export const searchProducts = createAsyncThunk(
   }
 );
 
+export const setRatingNotebook = createAsyncThunk(
+  "productsList/rating",
+  async (params) => {
+    const response = await API_NOTEBOOKS.post(
+      `notebooks/${params.id}/rating/${params.rating}/`,
+      {
+        params,
+      }
+    );
+    return response.data;
+  }
+);
+
 const catalogSlice = createSlice({
   name: "catalogSlice",
   initialState,

@@ -37,6 +37,7 @@ const AboutProduct = ({ notebook }) => {
 
   const handleAddNotebooksToCart = async () => {
     await dispatch(postProductDetails({ notebook: notebook, id: notebook.id }));
+    dispatch(getUserCart());
   };
 
   return (

@@ -2,7 +2,7 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import styled from "styled-components";
 import theme from "theme";
 
-export const PaymentStepOneContainer = styled(Grid)(() => ({
+export const PaymentStepOneContainer = styled(Box)(() => ({
   margin: "50px 0px",
   width: "100%",
   height: "100%",
@@ -10,9 +10,12 @@ export const PaymentStepOneContainer = styled(Grid)(() => ({
   flexWrap: "wrap",
   justifyContent: "space-evenly",
   alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+  },
 }));
 
-export const PaymentStepOneFieldBox = styled(Grid)(() => ({
+export const PaymentStepOneFieldBox = styled("Box")(() => ({
   width: "40%",
   height: "100%",
   display: "flex",
@@ -24,9 +27,13 @@ export const PaymentStepOneFieldBox = styled(Grid)(() => ({
   outline: "3px solid orange",
   borderRadius: "30px",
   background: "#151515",
+  [theme.breakpoints.down("md")]: {
+    width: "80%",
+    margin: "20px 0px",
+  },
 }));
 
-export const PaymentStepOneCartBox = styled(Grid)(() => ({
+export const PaymentStepOneCartBox = styled(Box)(() => ({
   width: "40%",
   height: "100%",
   display: "flex",
@@ -36,6 +43,10 @@ export const PaymentStepOneCartBox = styled(Grid)(() => ({
   justifyContent: "center",
   outline: "3px solid orange",
   borderRadius: "30px",
+  [theme.breakpoints.down("md")]: {
+    width: "80%",
+    margin: "20px 0px",
+  },
 }));
 
 export const PaymentStepOneCartTitle = styled(Box)(() => ({
