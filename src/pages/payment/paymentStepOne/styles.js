@@ -5,21 +5,22 @@ import theme from "theme";
 export const PaymentStepOneContainer = styled(Box)(() => ({
   margin: "50px 0px",
   width: "100%",
-  height: "100%",
+  height: "auto",
+  minHeight: "100%",
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-evenly",
   alignItems: "center",
-  [theme.breakpoints.down("md")]: {
-    display: "block",
+  [theme.breakpoints.down("sm")]: {
+    margin: "0px",
   },
 }));
 
-export const PaymentStepOneFieldBox = styled("Box")(() => ({
-  width: "40%",
+export const PaymentStepOneFieldBox = styled(Box)(() => ({
+  width: "500px",
   height: "100%",
   display: "flex",
-  padding: "0px 50px",
+  padding: "20px 50px",
   flexDirection: "column",
   flexWrap: "wrap",
   justifyContent: "space-evenly",
@@ -27,14 +28,14 @@ export const PaymentStepOneFieldBox = styled("Box")(() => ({
   outline: "3px solid orange",
   borderRadius: "30px",
   background: "#151515",
-  [theme.breakpoints.down("md")]: {
-    width: "80%",
-    margin: "20px 0px",
+  [theme.breakpoints.down("lg")]: {
+    marginBottom: "50px",
+    padding: "20px",
   },
 }));
 
 export const PaymentStepOneCartBox = styled(Box)(() => ({
-  width: "40%",
+  width: "500px",
   height: "100%",
   display: "flex",
   alignItems: "center",
@@ -43,9 +44,8 @@ export const PaymentStepOneCartBox = styled(Box)(() => ({
   justifyContent: "center",
   outline: "3px solid orange",
   borderRadius: "30px",
-  [theme.breakpoints.down("md")]: {
-    width: "80%",
-    margin: "20px 0px",
+  [theme.breakpoints.down("sm")]: {
+    padding: "30px 0px",
   },
 }));
 
@@ -57,6 +57,10 @@ export const PaymentStepOneCartTitle = styled(Box)(() => ({
   width: "100%",
   justifyContent: "center",
   textTransform: "uppercase",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+    margin: "10px 0px",
+  },
 }));
 
 export const PaymentFieldContactInfo = styled(TextField)(() => ({

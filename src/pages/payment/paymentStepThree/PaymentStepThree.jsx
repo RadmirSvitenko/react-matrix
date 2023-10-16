@@ -1,7 +1,69 @@
-import React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PaymentStepThree = () => {
-  return <div>PaymentStepThree</div>;
-};
+export default function ScrollDialog() {
+  const [open, setOpen] = useState(true);
+  const [scroll, setScroll] = useState("body");
 
-export default PaymentStepThree;
+  const navigate = useNavigate();
+
+  const handleCloseFinished = () => {
+    setOpen(false);
+    alert("Покупка окончена!");
+  };
+
+  const handleCloseRefuse = () => {
+    setOpen(false);
+    navigate("/catalog");
+  };
+
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        onClose={handleCloseFinished}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+        <DialogContent dividers={scroll === "paper"}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            {[...new Array(50)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+              )
+              .join("\n")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseRefuse}>Cancel</Button>
+          <Button onClick={handleCloseFinished}>Subscribe</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}

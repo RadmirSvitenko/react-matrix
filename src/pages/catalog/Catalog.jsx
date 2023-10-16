@@ -38,7 +38,8 @@ import { getUserCart } from "reducers/cartSlice";
 
 const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [ratingValue, setRatingValue] = React.useState(2);
+
+  const [ratingValue, setRatingValue] = useState(2);
   console.log("ratingValue: ", ratingValue);
 
   const token = getTokenFromCookies();

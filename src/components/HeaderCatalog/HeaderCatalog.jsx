@@ -78,7 +78,7 @@ const HeaderCatalog = () => {
   const handleSearchNotebooks = async (e) => {
     setSearchValue(e.target.value);
     console.log(e.target.value);
-    await dispatch(searchProducts(searchValue));
+    await dispatch(searchProducts({ searchValue: searchValue, limit: 400 }));
   };
 
   const handleSubmit = async (event) => {

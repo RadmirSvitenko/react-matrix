@@ -13,7 +13,7 @@ const initialState = {
 export const getProducts = createAsyncThunk(
   "productsList/get",
   async (params) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/`, { params });
+    const response = await API_NOTEBOOKS.get(`notebooks/`, { params: params });
     return response.data;
   }
 );
@@ -21,7 +21,9 @@ export const getProducts = createAsyncThunk(
 export const searchProducts = createAsyncThunk(
   "productsList/search",
   async (params) => {
-    const response = await API_NOTEBOOKS.get(`notebooks/?search=`, { params });
+    const response = await API_NOTEBOOKS.get(`notebooks/?search=`, {
+      params: params,
+    });
     return response.data;
   }
 );

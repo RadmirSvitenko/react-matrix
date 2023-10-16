@@ -66,7 +66,14 @@ const Payment = () => {
       <HeaderCatalog />
 
       <StepperContainer>
-        <Stepper activeStep={activeStep}>
+        <Stepper
+          activeStep={activeStep}
+          sx={{
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          }}
+        >
           {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};

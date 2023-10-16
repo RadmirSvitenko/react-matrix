@@ -1,6 +1,7 @@
 import { ExpandMore, Inbox, Mail } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Checkbox,
   Divider,
   Grid,
@@ -41,6 +42,7 @@ const FiltersCatalog = ({ currentPage, setCurrentPage }) => {
         page: 1,
         min_price: filterPrice[0],
         max_price: filterPrice[1],
+        limit: 400,
       })
     );
     setCurrentPage(1);
@@ -51,8 +53,12 @@ const FiltersCatalog = ({ currentPage, setCurrentPage }) => {
     console.log("checked: ", checked);
     console.log("name: ", name);
     await dispatch(getProducts({ page: currentPage, brand: name, limit: 400 }));
-    // setCurrentPage(1);
+    setCurrentPage(1);
     setFilterChecked(name);
+  };
+
+  const handleGetProducts = async () => {
+    await dispatch(getProducts({ page: 1 }));
   };
 
   return (
@@ -169,6 +175,16 @@ const FiltersCatalog = ({ currentPage, setCurrentPage }) => {
                 color: theme.palette.colorOrange.main,
               }}
             />
+          </FilterVariand>
+        </FilterVariandBox>
+
+        <Divider />
+
+        <FilterVariandBox>
+          <FilterVariand>
+            <Button variant="contained" onClick={() => handleGetProducts()}>
+              Reset filters
+            </Button>
           </FilterVariand>
         </FilterVariandBox>
       </Box>

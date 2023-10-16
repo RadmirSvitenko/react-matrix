@@ -10,9 +10,9 @@ const PaymentStepTwo = () => {
   const { t } = useTranslation();
   return (
     <PaymentStepTwoContainer>
-      <img src={visaCard} alt="visaCard" />
       <PaymentStepTwoFieldBox>
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="text"
           variant="outlined"
@@ -23,6 +23,7 @@ const PaymentStepTwo = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="text"
           variant="outlined"
@@ -32,6 +33,7 @@ const PaymentStepTwo = () => {
           }}
         />
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="number"
           variant="outlined"
@@ -42,6 +44,7 @@ const PaymentStepTwo = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="email"
           variant="outlined"
@@ -52,6 +55,7 @@ const PaymentStepTwo = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="number"
           variant="outlined"
@@ -61,6 +65,8 @@ const PaymentStepTwo = () => {
           }}
         />
       </PaymentStepTwoFieldBox>
+
+      <img src={visaCard} alt="visaCard" width={"300px"} />
     </PaymentStepTwoContainer>
   );
 };

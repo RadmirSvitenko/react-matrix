@@ -34,6 +34,7 @@ const PaymentStepOne = () => {
     <PaymentStepOneContainer>
       <PaymentStepOneFieldBox>
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="text"
           variant="outlined"
@@ -44,6 +45,7 @@ const PaymentStepOne = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="text"
           variant="outlined"
@@ -53,6 +55,7 @@ const PaymentStepOne = () => {
           }}
         />
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="number"
           variant="outlined"
@@ -63,6 +66,7 @@ const PaymentStepOne = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="email"
           variant="outlined"
@@ -73,6 +77,7 @@ const PaymentStepOne = () => {
         />
 
         <PaymentFieldContactInfo
+          margin="dense"
           required
           type="number"
           variant="outlined"
