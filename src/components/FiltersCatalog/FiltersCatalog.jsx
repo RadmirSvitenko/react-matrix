@@ -22,12 +22,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { getProducts } from "reducers/catalogSlice";
 
-const FiltersCatalog = ({ currentPage, setCurrentPage }) => {
-  const [filterPrice, setFilterPrice] = useState([100, 3000]);
-  const [filterChecked, setFilterChecked] = useState("");
-  console.log("filtersChecked: ", filterChecked);
-  console.log("filterPrice: ", filterPrice);
-
+const FiltersCatalog = ({
+  currentPage,
+  setCurrentPage,
+  filterChecked,
+  filterPrice,
+  setFilterPrice,
+  setFilterChecked,
+}) => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();

@@ -38,6 +38,10 @@ import { getUserCart } from "reducers/cartSlice";
 
 const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [filterChecked, setFilterChecked] = useState("");
+  const [filterPrice, setFilterPrice] = useState([100, 3000]);
+  console.log("filterChecked: ", filterChecked);
+  console.log("filterPrice: ", filterPrice);
 
   const [ratingValue, setRatingValue] = useState(2);
   console.log("ratingValue: ", ratingValue);
@@ -94,6 +98,10 @@ const Catalog = () => {
         <FiltersCatalog
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          filterChecked={filterChecked}
+          filterPrice={filterPrice}
+          setFilterPrice={setFilterPrice}
+          setFilterChecked={setFilterChecked}
         />
 
         <CatalogProductList>

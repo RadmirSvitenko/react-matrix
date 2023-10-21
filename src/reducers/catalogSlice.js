@@ -49,7 +49,8 @@ const catalogSlice = createSlice({
     builder.addCase(getProducts.pending, (state) => {
       state.isLoadingPage = true;
     });
-    builder.addCase(getProducts.fulfilled, (state, action) => {
+    builder.addCase(getProducts.fulfilled, (state, action, params) => {
+      console.log("action: ", action);
       state.isLoadingPage = false;
       state.catalogList = action.payload.results;
       state.count = action.payload.count;
