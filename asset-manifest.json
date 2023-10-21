@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-matrix/static/css/main.54cce796.css",
+    "main.js": "/react-matrix/static/js/main.dccc8768.js",
+    "static/media/filterBlock1.jpg": "/react-matrix/static/media/filterBlock1.759ae20ac7b85eeb82c3.jpg",
+    "static/media/filterBlock2.jpg": "/react-matrix/static/media/filterBlock2.9c98958915b17af15c5f.jpg",
+    "static/media/present-bg.jpg": "/react-matrix/static/media/present-bg.248b64a40c12e0a8da47.jpg",
+    "static/media/payment-visa.webp": "/react-matrix/static/media/payment-visa.71bb629772ea36f3eb33.webp",
+    "static/media/auth-bg.jpg": "/react-matrix/static/media/auth-bg.e8556cda2a77fc47f1dd.jpg",
+    "static/media/filterBlock3.jpg": "/react-matrix/static/media/filterBlock3.6a643c28c77fb54e8274.jpg",
+    "static/media/logotype.png": "/react-matrix/static/media/logotype.b28f4359917d006d07d1.png",
+    "index.html": "/react-matrix/index.html",
+    "main.54cce796.css.map": "/react-matrix/static/css/main.54cce796.css.map",
+    "main.dccc8768.js.map": "/react-matrix/static/js/main.dccc8768.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54cce796.css",
+    "static/js/main.dccc8768.js"
+  ]
+}
